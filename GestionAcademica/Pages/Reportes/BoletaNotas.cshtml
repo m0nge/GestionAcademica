@@ -1,0 +1,917 @@
+﻿@page
+@model GestionAcademica.Pages.Reportes.BoletaNotasModel
+
+@{
+    ViewData["Title"] = $"Boleta de Notas - {Model.Estudiante?.NombreCompleto}";
+    Layout = Model.EsPDF ? null : "_Layout";
+}
+
+@if (!Model.EsPDF)
+{
+    <!-- Hero Header para vista web -->
+    <div class="boleta-hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <div class="hero-content">
+                        <div class="hero-badge">
+                            <i class="fas fa-file-alt me-2"></i>
+                            Boleta Oficial
+                        </div>
+                        <h1 class="hero-title">
+                            <i class="fas fa-graduation-cap me-3"></i>
+                            Boleta de Notas
+                        </h1>
+                        <p class="hero-subtitle">
+                            Reporte académico completo de <strong>@Model.Estudiante?.NombreCompleto</strong>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-end">
+                    <a asp-page="./Index" class="btn btn-back">
+                        <i class="fas fa-arrow-left me-2"></i>
+                        Volver a Reportes
+                    </a>
+                    <button onclick="window.print()" class="btn btn-print ms-2">
+                        <i class="fas fa-print me-2"></i>
+                        Imprimir
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Contenido de la Boleta -->
+<div class="@(Model.EsPDF ? "boleta-pdf" : "container mt-4")">
+
+    @if (Model.EsPDF)
+    {
+        <!-- Header para PDF -->
+        <div class="pdf-header">
+            <div class="row">
+                <div class="col-8">
+                    <h1>Universidad KJD</h1>
+                    <h2>BOLETA DE CALIFICACIONES</h2>
+                    <p>Período Académico 2025</p>
+                </div>
+            </div>
+        </div>
+    }
+
+    <!-- Información del Estudiante -->
+    <div class="student-info-card">
+        <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-6">
+                <div class="student-details">
+                    <h3 class="student-name">@Model.Estudiante?.NombreCompleto</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="label">Carnet:</span>
+                            <span class="value">@Model.Estudiante?.Carnet</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Carrera:</span>
+                            <span class="value">@Model.Estudiante?.Carrera?.Nombre</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Facultad:</span>
+                            <span class="value">@Model.Estudiante?.Carrera?.Facultad?.Nombre</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Email:</span>
+                            <span class="value">@Model.Estudiante?.Email</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Fecha de Ingreso:</span>
+                            <span class="value">@Model.Estudiante?.FechaIngreso.ToString("dd/MM/yyyy")</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Fecha de Emisión:</span>
+                            <span class="value">@DateTime.Now.ToString("dd/MM/yyyy HH:mm")</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br><br><br><br><br><br>
+            <div class="col-md-4">
+                <div class="academic-summary">
+                    <h5><i class="fas fa-chart-line me-2"></i>Resumen Académico</h5>
+                    <div class="summary-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">@Model.Estadisticas.PromedioGeneral.ToString("F2")</div>
+                            <div class="stat-label">Promedio General</div>
+                        </div>
+                        <div class="stat-row">
+                            <div class="stat-small">
+                                <span class="number">@Model.Estadisticas.TotalMaterias</span>
+                                <span class="label">Materias</span>
+                            </div>
+                            <div class="stat-small">
+                                <span class="number">@Model.Estadisticas.MateriasAprobadas</span>
+                                <span class="label">Aprobadas</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Estadísticas Detalladas -->
+    <div class="statistics-section">
+        <div class="row g-3">
+            <div class="col-md-3">
+                <div class="stat-card stat-total">
+                    <div class="stat-content">
+                        <div class="stat-number">@Model.Estadisticas.TotalMaterias</div>
+                        <div class="stat-label">Total Materias</div>
+                    </div>
+                    <div class="stat-icon"><i class="fas fa-book"></i></div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card stat-approved">
+                    <div class="stat-content">
+                        <div class="stat-number">@Model.Estadisticas.MateriasAprobadas</div>
+                        <div class="stat-label">Aprobadas</div>
+                    </div>
+                    <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card stat-progress">
+                    <div class="stat-content">
+                        <div class="stat-number">@Model.Estadisticas.MateriasEnCurso</div>
+                        <div class="stat-label">En Curso</div>
+                    </div>
+                    <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card stat-failed">
+                    <div class="stat-content">
+                        <div class="stat-number">@Model.Estadisticas.MateriasReprobadas</div>
+                        <div class="stat-label">Reprobadas</div>
+                    </div>
+                    <div class="stat-icon"><i class="fas fa-times-circle"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Materias y Calificaciones -->
+    <div class="grades-section">
+        <div class="section-header">
+            <h4><i class="fas fa-list-alt me-2"></i>Detalle de Calificaciones por Materia</h4>
+        </div>
+
+        @if (Model.MateriasConCalificaciones.Any())
+        {
+            @foreach (var materiaConCalif in Model.MateriasConCalificaciones)
+            {
+                <div class="materia-block">
+                    <div class="materia-header">
+                        <div class="materia-info">
+                            <h5 class="materia-nombre">
+                                <span class="materia-codigo">[@materiaConCalif.Materia.Codigo]</span>
+                                @materiaConCalif.Materia.Nombre
+                            </h5>
+                            <div class="materia-details">
+                                <span class="docente">
+                                    <i class="fas fa-user me-1"></i>
+                                    Prof. @materiaConCalif.Materia.Docente?.NombreCompleto
+                                </span>
+                                <span class="creditos">
+                                    <i class="fas fa-star me-1"></i>
+                                    @materiaConCalif.Materia.Creditos créditos
+                                </span>
+                                <span class="periodo">
+                                    <i class="fas fa-calendar me-1"></i>
+                                    @materiaConCalif.Materia.Periodo
+                                </span>
+                            </div>
+                        </div>
+                        <div class="materia-result">
+                            <div class="nota-final">@materiaConCalif.NotaFinal.ToString("F2")</div>
+                            <div class="estado-materia estado-@materiaConCalif.EstadoMateria.ToLower().Replace(" ", "-")">
+                                @materiaConCalif.EstadoMateria
+                            </div>
+                            <div class="progreso">@materiaConCalif.PorcentajeCompleto.ToString("F0")% completado</div>
+                        </div>
+                    </div>
+
+                    @if (materiaConCalif.AsignacionesConCalificaciones.Any())
+                    {
+                        <div class="asignaciones-table">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Evaluación</th>
+                                        <th>Tipo</th>
+                                        <th>Porcentaje</th>
+                                        <th>Nota Máxima</th>
+                                        <th>Nota Obtenida</th>
+                                        <th>Equivalente</th>
+                                        <th>Fecha</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var asignacionConCalif in materiaConCalif.AsignacionesConCalificaciones)
+                                    {
+                                        <tr class="@(asignacionConCalif.TieneCalificacion ? "calificada" : "pendiente")">
+                                            <td class="asignacion-nombre">@asignacionConCalif.Asignacion.Nombre</td>
+                                            <td>
+                                                <span class="tipo-badge">@asignacionConCalif.Asignacion.TipoAsignacion?.Nombre</span>
+                                            </td>
+                                            <td class="text-center">@asignacionConCalif.Asignacion.Porcentaje.ToString("F1")%</td>
+                                            <td class="text-center">@asignacionConCalif.Asignacion.NotaMaxima</td>
+                                            <td class="text-center nota-obtenida">
+                                                @if (asignacionConCalif.TieneCalificacion)
+                                                {
+                                                    <span class="nota-valor">@asignacionConCalif.Calificacion!.Nota</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="nota-pendiente">--</span>
+                                                }
+                                            </td>
+                                            <td class="text-center">
+                                                @if (asignacionConCalif.TieneCalificacion)
+                                                {
+                                                    var equivalente = asignacionConCalif.Calificacion!.Nota / asignacionConCalif.Asignacion.NotaMaxima * 10;
+                                                    <span class="nota-equivalente">@equivalente.ToString("F1")</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="nota-pendiente">--</span>
+                                                }
+                                            </td>
+                                            <td class="text-center">
+                                                @if (asignacionConCalif.TieneCalificacion)
+                                                {
+                                                    @asignacionConCalif.Calificacion!.FechaCalificacion.ToString("dd/MM")
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-muted">Pendiente</span>
+                                                }
+                                            </td>
+                                            <td class="text-center">
+                                                @if (asignacionConCalif.TieneCalificacion)
+                                                {
+                                                    var equivalente = asignacionConCalif.Calificacion!.Nota / asignacionConCalif.Asignacion.NotaMaxima * 10;
+                                                    if (equivalente >= 6)
+                                                    {
+                                                        <span class="badge bg-success">Aprobada</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="badge bg-danger">Reprobada</span>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-warning">Pendiente</span>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="no-asignaciones">
+                            <i class="fas fa-info-circle me-2"></i>
+                            No hay evaluaciones registradas para esta materia.
+                        </div>
+                    }
+                </div>
+            }
+        }
+        else
+        {
+            <div class="empty-state">
+                <div class="empty-icon">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <h5>No hay materias registradas</h5>
+                <p>Este estudiante no tiene materias o calificaciones registradas en el sistema.</p>
+            </div>
+        }
+    </div>
+
+    <!-- Footer de la Boleta -->
+    <div class="boleta-footer">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="footer-info">
+                    <h6>Información Adicional</h6>
+                    <ul>
+                        <li>Las calificaciones están expresadas en escala de 0 a 10</li>
+                        <li>Nota mínima de aprobación: 6.0</li>
+                        <li>Promedio calculado con materias completas</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="signatures">
+                    <div class="signature-line">
+                        <div class="line"></div>
+                        <div class="label">Coordinador Académico</div>
+                    </div>
+                    <div class="signature-line">
+                        <div class="line"></div>
+                        <div class="label">Sello Institucional</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-date">
+            <p>Documento generado el @DateTime.Now.ToString("dd 'de' MMMM 'de' yyyy") a las @DateTime.Now.ToString("HH:mm") horas</p>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Hero Section */
+    .boleta-hero {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        color: white;
+        padding: 3rem 0;
+        margin-top: -2rem;
+        border-radius: 0 0 30px 30px;
+    }
+
+    .hero-badge {
+        display: inline-block;
+        padding: 0.5rem 1.5rem;
+        background: rgba(255,255,255,0.2);
+        border: 1px solid rgba(255,255,255,0.3);
+        border-radius: 50px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        line-height: 1.6;
+    }
+
+    .btn-back, .btn-print {
+        background: rgba(255,255,255,0.2);
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255,255,255,0.3);
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 15px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+        .btn-back:hover, .btn-print:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+            color: white;
+        }
+
+    /* PDF Styles */
+    .boleta-pdf {
+        padding: 2rem;
+        font-family: Arial, sans-serif;
+        color: #333;
+    }
+
+    .pdf-header {
+        border-bottom: 3px solid #28a745;
+        padding-bottom: 1rem;
+        margin-bottom: 2rem;
+    }
+
+        .pdf-header h1 {
+            color: #28a745;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .pdf-header h2 {
+            color: #666;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+    .logo-placeholder {
+        text-align: center;
+        border: 2px solid #ddd;
+        padding: 1rem;
+        border-radius: 10px;
+    }
+
+    /* Student Info Card */
+    .student-info-card {
+        background: white;
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        margin-bottom: 2rem;
+        border: 2px solid #e8f5e8;
+    }
+
+    .student-avatar {
+        width: 100px;
+        height: 100px;
+        background: linear-gradient(45deg, #28a745, #20c997);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 2.5rem;
+        margin: 0 auto;
+    }
+
+    .student-name {
+        color: #28a745;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+    }
+
+    .info-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.8rem;
+    }
+
+    .info-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #f1f3f4;
+    }
+
+        .info-item .label {
+            font-weight: 600;
+            color: #6c757d;
+        }
+
+        .info-item .value {
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+    .academic-summary {
+        background: #f8f9fa;
+        border-radius: 15px;
+        padding: 1.5rem;
+        text-align: center;
+    }
+
+        .academic-summary h5 {
+            color: #28a745;
+            margin-bottom: 1rem;
+        }
+
+    .stat-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #28a745;
+        line-height: 1;
+    }
+
+    .stat-label {
+        font-size: 0.9rem;
+        color: #6c757d;
+        font-weight: 500;
+    }
+
+    .stat-row {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 1rem;
+    }
+
+    .stat-small {
+        text-align: center;
+    }
+
+        .stat-small .number {
+            display: block;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #28a745;
+        }
+
+        .stat-small .label {
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+
+    /* Statistics Section */
+    .statistics-section {
+        margin-bottom: 2rem;
+    }
+
+    .stat-card {
+        background: white;
+        border-radius: 15px;
+        padding: 1.5rem;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        border-left: 4px solid var(--accent-color);
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+    .stat-total {
+        --accent-color: #007bff;
+    }
+
+    .stat-approved {
+        --accent-color: #28a745;
+    }
+
+    .stat-progress {
+        --accent-color: #ffc107;
+    }
+
+    .stat-failed {
+        --accent-color: #dc3545;
+    }
+
+    .stat-content .stat-number {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--accent-color);
+        line-height: 1;
+    }
+
+    .stat-content .stat-label {
+        font-size: 0.9rem;
+        color: #7f8c8d;
+        font-weight: 500;
+    }
+
+    .stat-icon {
+        font-size: 2rem;
+        color: var(--accent-color);
+        opacity: 0.3;
+    }
+
+    /* Grades Section */
+    .grades-section {
+        background: white;
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        margin-bottom: 2rem;
+    }
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid #f1f3f4;
+    }
+
+        .section-header h4 {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+    /* Materia Blocks */
+    .materia-block {
+        border: 2px solid #f1f3f4;
+        border-radius: 15px;
+        margin-bottom: 2rem;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+
+        .materia-block:hover {
+            border-color: #28a745;
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.1);
+        }
+
+    .materia-header {
+        background: linear-gradient(45deg, #28a745, #20c997);
+        color: white;
+        padding: 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .materia-codigo {
+        background: rgba(255,255,255,0.2);
+        padding: 0.3rem 0.8rem;
+        border-radius: 15px;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+
+    .materia-nombre {
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .materia-details {
+        display: flex;
+        gap: 1rem;
+        font-size: 0.9rem;
+        opacity: 0.9;
+    }
+
+    .materia-result {
+        text-align: center;
+    }
+
+    .nota-final {
+        font-size: 2rem;
+        font-weight: 700;
+        background: rgba(255,255,255,0.2);
+        padding: 0.5rem 1rem;
+        border-radius: 10px;
+        margin-bottom: 0.5rem;
+    }
+
+    .estado-materia {
+        padding: 0.3rem 0.8rem;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-bottom: 0.3rem;
+    }
+
+    .estado-aprobada {
+        background: rgba(40, 167, 69, 0.2);
+        color: #28a745;
+    }
+
+    .estado-reprobada {
+        background: rgba(220, 53, 69, 0.2);
+        color: #dc3545;
+    }
+
+    .estado-en-curso {
+        background: rgba(255, 193, 7, 0.2);
+        color: #ffc107;
+    }
+
+    .progreso {
+        font-size: 0.8rem;
+        opacity: 0.8;
+    }
+
+    /* Tables */
+    .asignaciones-table {
+        background: #f8f9fa;
+    }
+
+        .asignaciones-table .table {
+            margin-bottom: 0;
+        }
+
+        .asignaciones-table th {
+            background: #e9ecef;
+            border: none;
+            font-weight: 600;
+            color: #2c3e50;
+            padding: 1rem 0.8rem;
+            font-size: 0.9rem;
+        }
+
+        .asignaciones-table td {
+            padding: 0.8rem;
+            border: 1px solid #dee2e6;
+            vertical-align: middle;
+        }
+
+        .asignaciones-table tr.calificada {
+            background: rgba(40, 167, 69, 0.05);
+        }
+
+        .asignaciones-table tr.pendiente {
+            background: rgba(255, 193, 7, 0.05);
+        }
+
+    .tipo-badge {
+        background: #6c757d;
+        color: white;
+        padding: 0.2rem 0.6rem;
+        border-radius: 10px;
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
+
+    .nota-valor {
+        font-weight: 700;
+        color: #28a745;
+    }
+
+    .nota-equivalente {
+        font-weight: 600;
+        color: #007bff;
+    }
+
+    .nota-pendiente {
+        color: #6c757d;
+        font-style: italic;
+    }
+
+    .no-asignaciones {
+        padding: 2rem;
+        text-align: center;
+        color: #6c757d;
+        background: #f8f9fa;
+    }
+
+    /* Footer */
+    .boleta-footer {
+        background: #f8f9fa;
+        border-radius: 15px;
+        padding: 2rem;
+        margin-top: 2rem;
+        border-top: 3px solid #28a745;
+    }
+
+    .footer-info h6 {
+        color: #28a745;
+        margin-bottom: 1rem;
+    }
+
+    .footer-info ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .footer-info li {
+        padding: 0.3rem 0;
+        color: #6c757d;
+    }
+
+        .footer-info li:before {
+            content: "• ";
+            color: #28a745;
+            font-weight: bold;
+        }
+
+    .signatures {
+        text-align: center;
+    }
+
+    .signature-line {
+        margin-bottom: 2rem;
+    }
+
+        .signature-line .line {
+            height: 2px;
+            background: #dee2e6;
+            margin-bottom: 0.5rem;
+        }
+
+        .signature-line .label {
+            font-size: 0.9rem;
+            color: #6c757d;
+            font-weight: 600;
+        }
+
+    .footer-date {
+        text-align: center;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid #dee2e6;
+    }
+
+        .footer-date p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+    /* Empty State */
+    .empty-state {
+        text-align: center;
+        padding: 4rem 2rem;
+        color: #7f8c8d;
+    }
+
+    .empty-icon {
+        font-size: 4rem;
+        color: #28a745;
+        margin-bottom: 2rem;
+    }
+
+    /* Print Styles */
+    @@media print {
+        .boleta-hero, .btn-back, .btn-print {
+            display: none !important;
+        }
+
+        .container {
+            max-width: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        .materia-block {
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        .grades-section {
+            box-shadow: none;
+        }
+    }
+
+    /* Responsive */
+    @@media (max-width: 768px) {
+        .hero-title {
+            font-size: 2rem;
+        }
+
+        .info-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .materia-header {
+            flex-direction: column;
+            text-align: center;
+            gap: 1rem;
+        }
+
+        .materia-details {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .asignaciones-table {
+            font-size: 0.8rem;
+        }
+    }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // Función para imprimir la boleta
+    function imprimirBoleta() {
+        window.print();
+    }
+
+    // Auto-abrir ventana de impresión si es PDF
+    @if (Model.EsPDF)
+    {
+            <text>
+                window.addEventListener('load', function() {
+                    setTimeout(function() {
+                        window.print();
+                    }, 1000);
+                });
+            </text>
+    }
+
+    // Función para generar PDF
+    function generarPDF() {
+        const estudianteId = @Model.EstudianteId;
+        window.open(`/Reportes/BoletaNotas?estudianteId=${estudianteId}&formato=pdf`, '_blank');
+    }
+
+    // Mejorar la experiencia de impresión
+    window.addEventListener('beforeprint', function() {
+        // Ocultar elementos que no deben imprimirse
+        const elements = document.querySelectorAll('.btn-back, .btn-print, .boleta-hero');
+        elements.forEach(el => {
+            el.style.display = 'none';
+        });
+    });
+
+    window.addEventListener('afterprint', function() {
+        // Restaurar elementos después de imprimir
+        const elements = document.querySelectorAll('.btn-back, .btn-print, .boleta-hero');
+        elements.forEach(el => {
+            el.style.display = '';
+        });
+    });
+</script>

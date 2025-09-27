@@ -1,0 +1,828 @@
+﻿@page
+@model GestionAcademica.Pages.Materias.EstudiantesModel
+@{
+    ViewData["Title"] = $"Estudiantes - {Model.Materia.Codigo}";
+}
+
+<div class="container-fluid">
+    <!-- Header Section Compacto -->
+    <div class="estudiantes-hero-compact">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-9">
+                    <div class="hero-content-compact">
+                        <div class="materia-info">
+                            <h1 class="materia-title">
+                                <i class="fas fa-book me-2"></i>
+                                @Model.Materia.Codigo - @Model.Materia.Nombre
+                            </h1>
+                            <div class="materia-details">
+                                <span class="detail-item">
+                                    <i class="fas fa-graduation-cap me-1"></i>
+                                    @Model.Materia.Carrera?.Nombre
+                                </span>
+                                <span class="detail-item">
+                                    <i class="fas fa-chalkboard-teacher me-1"></i>
+                                    @Model.Materia.Docente?.NombreCompleto
+                                </span>
+                                <span class="detail-item">
+                                    <i class="fas fa-star me-1"></i>
+                                    @Model.Materia.Creditos créditos
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 text-end">
+                    <a asp-page="./Index" class="btn btn-back-compact">
+                        <i class="fas fa-arrow-left me-1"></i>
+                        Volver
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alert Messages -->
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="container mt-3">
+            <div class="alert alert-danger alert-dismissible fade show alert-compact">
+                <i class="fas fa-exclamation-triangle me-2"></i>
+                @TempData["ErrorMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        </div>
+    }
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="container mt-3">
+            <div class="alert alert-success alert-dismissible fade show alert-compact">
+                <i class="fas fa-check-circle me-2"></i>
+                @TempData["SuccessMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        </div>
+    }
+
+    <!-- Statistics Compactas -->
+    <div class="container mt-4">
+        <div class="stats-row">
+            <div class="stat-item inscritos">
+                <div class="stat-icon">
+                    <i class="fas fa-user-check"></i>
+                </div>
+                <div class="stat-text">
+                    <span class="stat-number">@Model.EstudiantesInscritos.Count</span>
+                    <span class="stat-label">Inscritos</span>
+                </div>
+            </div>
+            <div class="stat-item disponibles">
+                <div class="stat-icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <div class="stat-text">
+                    <span class="stat-number">@Model.EstudiantesDisponibles.Count</span>
+                    <span class="stat-label">Disponibles</span>
+                </div>
+            </div>
+            <div class="stat-item total">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-text">
+                    <span class="stat-number">@(Model.EstudiantesInscritos.Count + Model.EstudiantesDisponibles.Count)</span>
+                    <span class="stat-label">Total</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Barra de Búsqueda -->
+        <div class="search-section">
+            <div class="search-box">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="searchInput" class="search-input" placeholder="Buscar estudiantes por nombre, apellido o carnet...">
+                <div class="search-actions">
+                    <button type="button" id="clearSearch" class="btn-clear">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs para alternar entre listas -->
+        <div class="tabs-section">
+            <div class="tabs-nav">
+                <button class="tab-btn active" data-tab="inscritos">
+                    <i class="fas fa-user-check me-2"></i>
+                    Inscritos (@Model.EstudiantesInscritos.Count)
+                </button>
+                <button class="tab-btn" data-tab="disponibles">
+                    <i class="fas fa-user-plus me-2"></i>
+                    Disponibles (@Model.EstudiantesDisponibles.Count)
+                </button>
+            </div>
+        </div>
+
+        <!-- Lista de Estudiantes Inscritos -->
+        <div class="tab-content active" id="tab-inscritos">
+            @if (Model.EstudiantesInscritos.Any())
+            {
+                <div class="students-compact-list" id="inscritosList">
+                    @foreach (var estudiante in Model.EstudiantesInscritos)
+                    {
+                        <div class="student-row inscrito" data-search="@estudiante.NombreCompleto.ToLower() @estudiante.Carnet.ToLower()">
+                            <div class="student-avatar-sm">
+                                @estudiante.Nombres.Substring(0, 1)@estudiante.Apellidos.Substring(0, 1)
+                            </div>
+                            <div class="student-info-sm">
+                                <div class="student-name-sm">@estudiante.NombreCompleto</div>
+                                <div class="student-details-sm">
+                                    <span class="carnet-sm">@estudiante.Carnet</span>
+                                    <span class="email-sm">@estudiante.Email</span>
+                                </div>
+                            </div>
+                            <div class="student-actions-sm">
+                                <form method="post" asp-page-handler="Remover" class="d-inline">
+                                    <input type="hidden" name="materiaId" value="@Model.Materia.MateriaID" />
+                                    <input type="hidden" name="estudianteId" value="@estudiante.EstudianteID" />
+                                    <button type="submit" class="btn-action-sm btn-remove-sm"
+                                            onclick="return confirm('¿Remover a @estudiante.NombreCompleto?')"
+                                            title="Remover">
+                                        <i class="fas fa-user-minus"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="no-results" id="noResultsInscritos" style="display: none;">
+                    <i class="fas fa-search me-2"></i>
+                    No se encontraron estudiantes inscritos
+                </div>
+            }
+            else
+            {
+                <div class="empty-state-sm">
+                    <i class="fas fa-user-friends"></i>
+                    <span>No hay estudiantes inscritos aún</span>
+                </div>
+            }
+        </div>
+        <!-- Simulación de Análisis Predictivo Único -->
+        <div class="container mt-4">
+            <h5 class="text-secondary mb-2"><i class="fas fa-chart-line me-2"></i>Análisis Predictivo de Inscripción</h5>
+            <div class="predictive-single-card">
+                <div class="predictive-title">Esta materia</div>
+                <div class="predictive-bar">
+                    <div class="predictive-fill" id="predictiveFill"></div>
+                </div>
+                <div class="predictive-label" id="predictiveLabel"></div>
+            </div>
+        </div>
+
+        <style>
+            .predictive-single-card {
+                background: white;
+                border-radius: 12px;
+                padding: 1rem;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            }
+
+            .predictive-title {
+                font-weight: 600;
+                color: #2c3e50;
+                margin-bottom: 0.5rem;
+            }
+
+            .predictive-bar {
+                background: #f1f3f4;
+                border-radius: 8px;
+                height: 20px;
+                overflow: hidden;
+                margin-bottom: 0.5rem;
+            }
+
+            .predictive-fill {
+                width: 0%;
+                background: linear-gradient(90deg, #28a745, #20c997);
+                height: 100%;
+                transition: width 0.8s ease-in-out;
+                border-radius: 8px 0 0 8px;
+            }
+
+            .predictive-label {
+                font-size: 0.85rem;
+                color: #6c757d;
+                text-align: right;
+            }
+        </style>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Función para calcular porcentaje basado en estudiantes
+                function calcularProbabilidad() {
+                    const inscritos = @Model.EstudiantesInscritos.Count; // número de inscritos
+                    const disponibles = @Model.EstudiantesDisponibles.Count; // número de disponibles
+                    const total = inscritos + disponibles;
+
+                    // Porcentaje aleatorio simulado alrededor de la ocupación
+                    let base = total > 0 ? (inscritos / total) * 100 : 0;
+                    // Agregar pequeña variación aleatoria +/-10%
+                    const variacion = Math.floor(Math.random() * 21) - 10;
+                    let porcentaje = Math.min(Math.max(base + variacion, 0), 100);
+                    return Math.round(porcentaje);
+                }
+
+                function actualizarPredictivo() {
+                    const porcentaje = calcularProbabilidad();
+                    const fill = document.getElementById('predictiveFill');
+                    const label = document.getElementById('predictiveLabel');
+
+                    fill.style.width = porcentaje + '%';
+                    label.textContent = porcentaje + '% probabilidad de llenarse';
+                }
+
+                actualizarPredictivo();
+
+                // Opcional: cada vez que agregues un estudiante podrías llamar actualizarPredictivo()
+            });
+        </script>
+
+
+        <!-- Lista de Estudiantes Disponibles -->
+        <div class="tab-content" id="tab-disponibles">
+            @if (Model.EstudiantesDisponibles.Any())
+            {
+                <div class="students-compact-list" id="disponiblesList">
+                    @foreach (var estudiante in Model.EstudiantesDisponibles)
+                    {
+                        <div class="student-row disponible" data-search="@estudiante.NombreCompleto.ToLower() @estudiante.Carnet.ToLower()">
+                            <div class="student-avatar-sm">
+                                @estudiante.Nombres.Substring(0, 1)@estudiante.Apellidos.Substring(0, 1)
+                            </div>
+                            <div class="student-info-sm">
+                                <div class="student-name-sm">@estudiante.NombreCompleto</div>
+                                <div class="student-details-sm">
+                                    <span class="carnet-sm">@estudiante.Carnet</span>
+                                    <span class="email-sm">@estudiante.Email</span>
+                                </div>
+                            </div>
+                            <div class="student-actions-sm">
+                                <form method="post" asp-page-handler="Inscribir" class="d-inline">
+                                    <input type="hidden" name="materiaId" value="@Model.Materia.MateriaID" />
+                                    <input type="hidden" name="estudianteId" value="@estudiante.EstudianteID" />
+                                    <button type="submit" class="btn-action-sm btn-add-sm"
+                                            onclick="return confirm('¿Inscribir a @estudiante.NombreCompleto?')"
+                                            title="Inscribir">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="no-results" id="noResultsDisponibles" style="display: none;">
+                    <i class="fas fa-search me-2"></i>
+                    No se encontraron estudiantes disponibles
+                </div>
+            }
+            else
+            {
+                <div class="empty-state-sm">
+                    <i class="fas fa-search"></i>
+                    <span>No hay estudiantes disponibles para inscribir</span>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Header Compacto */
+    .estudiantes-hero-compact {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        color: white;
+        padding: 1.5rem 0;
+        margin-top: -1rem;
+        border-radius: 0 0 20px 20px;
+    }
+
+    .hero-content-compact {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .materia-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin: 0 0 0.5rem 0;
+    }
+
+    .materia-details {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        font-size: 0.9rem;
+        opacity: 0.9;
+    }
+
+    .detail-item {
+        display: flex;
+        align-items: center;
+        background: rgba(255,255,255,0.1);
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+    }
+
+    .btn-back-compact {
+        background: rgba(255,255,255,0.2);
+        border: 1px solid rgba(255,255,255,0.3);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 10px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-size: 0.9rem;
+    }
+
+        .btn-back-compact:hover {
+            background: rgba(255,255,255,0.3);
+            color: white;
+        }
+
+    /* Alertas Compactas */
+    .alert-compact {
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+        border-radius: 10px;
+    }
+
+    /* Estadísticas Compactas */
+    .stats-row {
+        display: flex;
+        gap: 1rem;
+        background: white;
+        padding: 1.5rem;
+        border-radius: 15px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        margin-bottom: 1.5rem;
+    }
+
+    .stat-item {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+    }
+
+        .stat-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .stat-item.inscritos {
+            background: rgba(40, 167, 69, 0.1);
+            border-left: 3px solid #28a745;
+        }
+
+        .stat-item.disponibles {
+            background: rgba(0, 123, 255, 0.1);
+            border-left: 3px solid #007bff;
+        }
+
+        .stat-item.total {
+            background: rgba(255, 193, 7, 0.1);
+            border-left: 3px solid #ffc107;
+        }
+
+    .stat-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.1rem;
+    }
+
+    .stat-item.inscritos .stat-icon {
+        background: #28a745;
+    }
+
+    .stat-item.disponibles .stat-icon {
+        background: #007bff;
+    }
+
+    .stat-item.total .stat-icon {
+        background: #ffc107;
+    }
+
+    .stat-text {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .stat-number {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #2c3e50;
+        line-height: 1;
+    }
+
+    .stat-label {
+        font-size: 0.8rem;
+        color: #6c757d;
+        font-weight: 500;
+    }
+
+    /* Búsqueda */
+    .search-section {
+        margin-bottom: 1.5rem;
+    }
+
+    .search-box {
+        position: relative;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        border: 2px solid #f1f3f4;
+        transition: all 0.3s ease;
+    }
+
+        .search-box:focus-within {
+            border-color: #007bff;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.15);
+        }
+
+    .search-icon {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #6c757d;
+        font-size: 1rem;
+    }
+
+    .search-input {
+        width: 100%;
+        border: none;
+        padding: 1rem 1rem 1rem 3rem;
+        font-size: 1rem;
+        background: transparent;
+        outline: none;
+        border-radius: 12px;
+    }
+
+        .search-input::placeholder {
+            color: #adb5bd;
+        }
+
+    .search-actions {
+        position: absolute;
+        right: 0.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .btn-clear {
+        background: #f8f9fa;
+        border: none;
+        width: 30px;
+        height: 30px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #6c757d;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+        .btn-clear:hover {
+            background: #e9ecef;
+            color: #495057;
+        }
+
+    /* Tabs */
+    .tabs-section {
+        margin-bottom: 1.5rem;
+    }
+
+    .tabs-nav {
+        display: flex;
+        background: white;
+        border-radius: 12px;
+        padding: 0.5rem;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        gap: 0.5rem;
+    }
+
+    .tab-btn {
+        flex: 1;
+        background: transparent;
+        border: none;
+        padding: 0.75rem 1rem;
+        border-radius: 8px;
+        font-weight: 600;
+        color: #6c757d;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+        .tab-btn:hover {
+            background: #f8f9fa;
+            color: #495057;
+        }
+
+        .tab-btn.active {
+            background: #007bff;
+            color: white;
+            box-shadow: 0 2px 8px rgba(0, 123, 255, 0.25);
+        }
+
+    /* Contenido de Tabs */
+    .tab-content {
+        display: none;
+    }
+
+        .tab-content.active {
+            display: block;
+        }
+
+    /* Lista Compacta de Estudiantes */
+    .students-compact-list {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        overflow: hidden;
+    }
+
+    .student-row {
+        display: flex;
+        align-items: center;
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid #f8f9fa;
+        transition: all 0.3s ease;
+        gap: 1rem;
+    }
+
+        .student-row:last-child {
+            border-bottom: none;
+        }
+
+        .student-row:hover {
+            background: #f8f9fa;
+        }
+
+        .student-row.inscrito {
+            border-left: 3px solid #28a745;
+        }
+
+        .student-row.disponible {
+            border-left: 3px solid #007bff;
+        }
+
+    .student-avatar-sm {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: 0.9rem;
+        flex-shrink: 0;
+    }
+
+    .student-info-sm {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .student-name-sm {
+        font-weight: 600;
+        color: #2c3e50;
+        font-size: 1rem;
+        margin-bottom: 0.25rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .student-details-sm {
+        display: flex;
+        gap: 1rem;
+        font-size: 0.85rem;
+        color: #6c757d;
+    }
+
+    .carnet-sm, .email-sm {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .student-actions-sm {
+        flex-shrink: 0;
+    }
+
+    .btn-action-sm {
+        width: 36px;
+        height: 36px;
+        border: none;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .btn-add-sm {
+        background: #007bff;
+        color: white;
+    }
+
+        .btn-add-sm:hover {
+            background: #0056b3;
+            transform: scale(1.05);
+        }
+
+    .btn-remove-sm {
+        background: #dc3545;
+        color: white;
+    }
+
+        .btn-remove-sm:hover {
+            background: #c82333;
+            transform: scale(1.05);
+        }
+
+    /* Estados Vacíos */
+    .empty-state-sm {
+        text-align: center;
+        padding: 3rem 2rem;
+        color: #6c757d;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+
+        .empty-state-sm i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: block;
+            opacity: 0.5;
+        }
+
+    .no-results {
+        text-align: center;
+        padding: 2rem;
+        color: #6c757d;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        font-style: italic;
+    }
+
+
+    {
+        flex-direction: column;
+    }
+
+    .tabs-nav {
+        flex-direction: column;
+    }
+
+    .materia-details {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .student-details-sm {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .btn-back-compact {
+        width: 100%;
+        text-align: center;
+        margin-top: 1rem;
+    }
+
+    .hero-content-compact {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Funcionalidad de tabs
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const targetTab = this.dataset.tab;
+
+                // Remover active de todos los tabs
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+
+                // Activar tab actual
+                this.classList.add('active');
+                document.getElementById(`tab-${targetTab}`).classList.add('active');
+
+                // Limpiar búsqueda cuando cambie de tab
+                document.getElementById('searchInput').value = '';
+                filterStudents('');
+            });
+        });
+
+        // Funcionalidad de búsqueda
+        const searchInput = document.getElementById('searchInput');
+        const clearBtn = document.getElementById('clearSearch');
+
+        searchInput.addEventListener('input', function() {
+            filterStudents(this.value.toLowerCase());
+        });
+
+        clearBtn.addEventListener('click', function() {
+            searchInput.value = '';
+            filterStudents('');
+            searchInput.focus();
+        });
+
+        function filterStudents(searchTerm) {
+            // Filtrar estudiantes inscritos
+            const inscritosList = document.getElementById('inscritosList');
+            const noResultsInscritos = document.getElementById('noResultsInscritos');
+            if (inscritosList) {
+                const inscritosRows = inscritosList.querySelectorAll('.student-row');
+                let visibleInscritos = 0;
+
+                inscritosRows.forEach(row => {
+                    const searchData = row.dataset.search;
+                    if (searchData.includes(searchTerm)) {
+                        row.style.display = 'flex';
+                        visibleInscritos++;
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+
+                if (noResultsInscritos) {
+                    noResultsInscritos.style.display = visibleInscritos === 0 && searchTerm !== '' ? 'block' : 'none';
+                }
+            }
+
+            // Filtrar estudiantes disponibles
+            const disponiblesList = document.getElementById('disponiblesList');
+            const noResultsDisponibles = document.getElementById('noResultsDisponibles');
+            if (disponiblesList) {
+                const disponiblesRows = disponiblesList.querySelectorAll('.student-row');
+                let visibleDisponibles = 0;
+
+                disponiblesRows.forEach(row => {
+                    const searchData = row.dataset.search;
+                    if (searchData.includes(searchTerm)) {
+                        row.style.display = 'flex';
+                        visibleDisponibles++;
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+
+                if (noResultsDisponibles) {
+                    noResultsDisponibles.style.display = visibleDisponibles === 0 && searchTerm !== '' ? 'block' : 'none';
+                }
+            }
+        }
+
+        // Animaciones suaves para las interacciones
+        document.querySelectorAll('.btn-action-sm').forEach(btn => {
+            btn.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.1)';
+            });
+
+            btn.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+    });
+</script>

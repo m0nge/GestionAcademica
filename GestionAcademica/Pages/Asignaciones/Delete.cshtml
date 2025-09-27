@@ -1,0 +1,495 @@
+﻿@page
+@model GestionAcademica.Pages.Asignaciones.DeleteModel
+
+@{
+    ViewData["Title"] = $"Eliminar Asignación - {Model.Asignacion?.Nombre}";
+}
+
+<!-- Hero Header -->
+<div class="delete-hero">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        @Model.Materia?.Codigo
+                    </div>
+                    <h1 class="hero-title">
+                        <i class="fas fa-trash me-3"></i>
+                        Eliminar Asignación
+                    </h1>
+                    <p class="hero-subtitle">
+                        ¿Estás seguro de eliminar <strong>@Model.Asignacion?.Nombre</strong>?
+                        <span class="warning-text">
+                            <i class="fas fa-warning me-1"></i>
+                            Esta acción no se puede deshacer
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 text-end">
+                <a asp-page="./Index" asp-route-materiaId="@Model.MateriaId" class="btn btn-back">
+                    <i class="fas fa-arrow-left me-2"></i>
+                    Volver a Asignaciones
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Mensajes -->
+@if (TempData["ErrorMessage"] != null)
+{
+        <div class="container mt-4">
+            <div class="alert alert-danger alert-dismissible fade show">
+                <i class="fas fa-exclamation-triangle me-2"></i>
+            @TempData["ErrorMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        </div>
+}
+
+<!-- Alerta de Calificaciones -->
+@if (Model.TieneCalificaciones)
+{
+        <div class="container mt-4">
+            <div class="alert alert-warning">
+                <h5><i class="fas fa-exclamation-triangle me-2"></i>Advertencia Importante</h5>
+                <p class="mb-2">
+                    Esta asignación tiene <strong>@Model.TotalCalificaciones calificación(es)</strong> registrada(s).
+                </p>
+                <p class="mb-0">
+                    <i class="fas fa-info-circle me-1"></i>
+                    Al eliminar esta asignación, también se eliminarán <strong>todas las calificaciones asociadas</strong>.
+                </p>
+            </div>
+        </div>
+}
+
+<!-- Información de la Asignación -->
+<div class="container mt-4">
+    <div class="delete-card">
+        <div class="delete-header">
+            <div class="asignacion-info">
+                <h3 class="asignacion-nombre">
+                    <i class="fas fa-@(GetTipoIcon(Model.Asignacion?.TipoAsignacion?.Nombre)) me-2"></i>
+                    @Model.Asignacion?.Nombre
+                </h3>
+                <p class="asignacion-tipo">@Model.Asignacion?.TipoAsignacion?.Nombre</p>
+            </div>
+            <div class="porcentaje-badge">
+                @Model.Asignacion?.Porcentaje.ToString("F1")%
+            </div>
+        </div>
+
+        <div class="delete-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="info-section">
+                        <h5><i class="fas fa-info-circle me-2"></i>Detalles de la Asignación</h5>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="label">Materia:</span>
+                                <span class="value">@Model.Materia?.Nombre</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Código:</span>
+                                <span class="value">@Model.Materia?.Codigo</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Docente:</span>
+                                <span class="value">@Model.Materia?.Docente?.NombreCompleto</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Porcentaje:</span>
+                                <span class="value">@Model.Asignacion?.Porcentaje.ToString("F1")%</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Nota Máxima:</span>
+                                <span class="value">@Model.Asignacion?.NotaMaxima pts</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Estado:</span>
+                                <span class="value">
+                                    @if (Model.Asignacion?.Activa == true)
+                                    {
+                                            <span class="badge bg-success">Activa</span>
+                                    }
+                                    else
+                                    {
+                                            <span class="badge bg-warning">Inactiva</span>
+                                    }
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="info-section">
+                        <h5><i class="fas fa-calendar me-2"></i>Fechas Importantes</h5>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="label">Fecha de Creación:</span>
+                                <span class="value">@Model.Asignacion?.FechaCreacion.ToString("dd/MM/yyyy HH:mm")</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Fecha de Vencimiento:</span>
+                                <span class="value">@Model.Asignacion?.FechaVencimiento.ToString("dd/MM/yyyy HH:mm")</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Días Restantes:</span>
+                                <span class="value">
+                                    @{
+                                        var diasRestantes = (Model.Asignacion?.FechaVencimiento - DateTime.Now)?.Days ?? 0;
+                                        if (diasRestantes < 0)
+                                        {
+                                                    <span class="text-danger">Vencida (@Math.Abs(diasRestantes) días)</span>
+                                        }
+                                        else if (diasRestantes == 0)
+                                        {
+                                                    <span class="text-warning">Vence hoy</span>
+                                        }
+                                        else if (diasRestantes <= 3)
+                                        {
+                                                    <span class="text-warning">@diasRestantes días</span>
+                                        }
+                                        else
+                                        {
+                                                    <span class="text-success">@diasRestantes días</span>
+                                        }
+                                    }
+                                </span>
+                            </div>
+                        </div>
+
+                        @if (!string.IsNullOrEmpty(Model.Asignacion?.Descripcion))
+                        {
+                                <div class="mt-3">
+                                    <h6><i class="fas fa-align-left me-2"></i>Descripción</h6>
+                                    <p class="descripcion-text">@Model.Asignacion.Descripcion</p>
+                                </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            @if (Model.TieneCalificaciones)
+            {
+                    <div class="calificaciones-warning">
+                        <h5><i class="fas fa-users me-2"></i>Impacto en Calificaciones</h5>
+                        <div class="warning-content">
+                            <p>
+                                <i class="fas fa-exclamation-circle me-2"></i>
+                                Se eliminarán <strong>@Model.TotalCalificaciones calificación(es)</strong> de estudiantes.
+                            </p>
+                            <p class="mb-0">
+                                <i class="fas fa-lightbulb me-2"></i>
+                                <strong>Recomendación:</strong> Si solo quieres ocultar la asignación, considera desactivarla en lugar de eliminarla.
+                            </p>
+                        </div>
+                    </div>
+            }
+        </div>
+
+        <!-- Acciones -->
+        <div class="delete-actions">
+            <form method="post">
+                <input type="hidden" asp-for="Asignacion.AsignacionID" />
+                <button type="submit" class="btn btn-delete-confirm" 
+                        onclick="return confirm('¿Estás COMPLETAMENTE SEGURO de eliminar esta asignación? Esta acción NO SE PUEDE DESHACER.')">
+                    <i class="fas fa-trash me-2"></i>
+                    Sí, Eliminar Definitivamente
+                </button>
+                <a asp-page="./Index" asp-route-materiaId="@Model.MateriaId" class="btn btn-cancel">
+                    <i class="fas fa-times me-2"></i>
+                    Cancelar
+                </a>
+                <a asp-page="./Edit" asp-route-id="@Model.Asignacion?.AsignacionID" asp-route-materiaId="@Model.MateriaId" class="btn btn-edit-alternative">
+                    <i class="fas fa-edit me-2"></i>
+                    Mejor Editar
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
+
+@functions {
+    string GetTipoIcon(string tipoNombre)
+    {
+        return tipoNombre switch
+        {
+            "Examen Parcial" => "file-alt",
+            "Examen Final" => "graduation-cap",
+            "Tarea" => "tasks",
+            "Proyecto" => "project-diagram",
+            "Quiz" => "question-circle",
+            "Laboratorio" => "flask",
+            "Participación" => "hand-paper",
+            "Ensayo" => "pen-fancy",
+            "Presentación" => "presentation",
+            "Investigación" => "search",
+            _ => "clipboard"
+        };
+    }
+}
+
+<style>
+    /* Hero Section */
+    .delete-hero {
+        background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        color: white;
+        padding: 3rem 0;
+        margin-top: -2rem;
+        border-radius: 0 0 30px 30px;
+    }
+
+    .hero-badge {
+        display: inline-block;
+        padding: 0.5rem 1.5rem;
+        background: rgba(255,255,255,0.2);
+        border: 1px solid rgba(255,255,255,0.3);
+        border-radius: 50px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        line-height: 1.6;
+    }
+
+    .warning-text {
+        display: block;
+        margin-top: 0.5rem;
+        font-weight: 600;
+    }
+
+    .btn-back {
+        background: rgba(255,255,255,0.2);
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255,255,255,0.3);
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 15px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .btn-back:hover {
+        background: rgba(255,255,255,0.3);
+        transform: translateY(-2px);
+        color: white;
+    }
+
+    /* Delete Card */
+    .delete-card {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        margin-bottom: 3rem;
+        overflow: hidden;
+        border: 2px solid #fee;
+    }
+
+    .delete-header {
+        background: linear-gradient(45deg, #e74c3c, #c0392b);
+        color: white;
+        padding: 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .asignacion-nombre {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+
+    .asignacion-tipo {
+        opacity: 0.9;
+        margin-bottom: 0;
+    }
+
+    .porcentaje-badge {
+        background: rgba(255,255,255,0.2);
+        padding: 1rem 1.5rem;
+        border-radius: 15px;
+        font-size: 1.3rem;
+        font-weight: 700;
+    }
+
+    .delete-body {
+        padding: 2rem;
+    }
+
+    .info-section {
+        background: #f8f9fa;
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        height: 100%;
+    }
+
+    .info-section h5, .info-section h6 {
+        color: #2c3e50;
+        margin-bottom: 1rem;
+        font-weight: 600;
+    }
+
+    .info-grid {
+        display: grid;
+        gap: 0.8rem;
+    }
+
+    .info-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .info-item:last-child {
+        border-bottom: none;
+    }
+
+    .label {
+        font-weight: 600;
+        color: #6c757d;
+    }
+
+    .value {
+        font-weight: 500;
+        color: #2c3e50;
+    }
+
+    .descripcion-text {
+        background: white;
+        padding: 1rem;
+        border-radius: 10px;
+        color: #6c757d;
+        line-height: 1.6;
+        margin-bottom: 0;
+    }
+
+    .calificaciones-warning {
+        background: #fff3cd;
+        border: 2px solid #ffeaa7;
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .calificaciones-warning h5 {
+        color: #856404;
+        margin-bottom: 1rem;
+    }
+
+    .warning-content p {
+        color: #856404;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Action Buttons */
+    .delete-actions {
+        padding: 2rem;
+        background: #f8f9fa;
+        text-align: center;
+        border-top: 2px solid #f1f3f4;
+    }
+
+    .btn-delete-confirm {
+        background: linear-gradient(45deg, #e74c3c, #c0392b);
+        color: white;
+        border: none;
+        padding: 1rem 2.5rem;
+        border-radius: 15px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        margin-right: 1rem;
+        margin-bottom: 0.5rem;
+        transition: all 0.3s ease;
+    }
+
+    .btn-delete-confirm:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(231, 76, 60, 0.3);
+        color: white;
+    }
+
+    .btn-cancel {
+        background: #6c757d;
+        color: white;
+        border: none;
+        padding: 1rem 2.5rem;
+        border-radius: 15px;
+        font-weight: 600;
+        text-decoration: none;
+        margin-right: 1rem;
+        margin-bottom: 0.5rem;
+        transition: all 0.3s ease;
+    }
+
+    .btn-cancel:hover {
+        background: #5a6268;
+        transform: translateY(-2px);
+        color: white;
+    }
+
+    .btn-edit-alternative {
+        background: #17a2b8;
+        color: white;
+        border: none;
+        padding: 1rem 2.5rem;
+        border-radius: 15px;
+        font-weight: 600;
+        text-decoration: none;
+        margin-bottom: 0.5rem;
+        transition: all 0.3s ease;
+    }
+
+    .btn-edit-alternative:hover {
+        background: #138496;
+        transform: translateY(-2px);
+        color: white;
+    }
+
+    /* Responsive */
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .delete-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .porcentaje-badge {
+        margin-top: 1rem;
+    }
+
+    .delete-actions {
+        flex-direction: column;
+    }
+
+    .btn-delete-confirm,
+    .btn-cancel,
+    .btn-edit-alternative {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

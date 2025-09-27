@@ -1,0 +1,509 @@
+﻿@page
+@model GestionAcademica.Pages.Materias.EditModel
+
+@{
+    ViewData["Title"] = "Editar Materia";
+}
+
+<!-- Header Section -->
+<div class="edit-hero">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <i class="fas fa-edit me-2"></i>
+                        Editar Materia
+                    </div>
+                    <h1 class="hero-title">
+                        <i class="fas fa-book-reader me-3"></i>
+                        Editar: @Model.Materia.Codigo - @Model.Materia.Nombre
+                    </h1>
+                    <p class="hero-subtitle">
+                        Modifica los datos de la materia y la asignación del docente responsable.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 text-end">
+                <a asp-page="./Index" class="btn btn-back">
+                    <i class="fas fa-arrow-left me-2"></i>
+                    Volver a Materias
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Formulario -->
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="form-container">
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                    <input type="hidden" asp-for="Materia.MateriaID" />
+
+                    <div class="row g-4">
+                        <!-- Información básica -->
+                        <div class="col-12">
+                            <div class="form-section">
+                                <h4 class="section-title">
+                                    <i class="fas fa-info-circle me-2"></i>
+                                    Información Básica
+                                </h4>
+
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label asp-for="Materia.Codigo" class="form-label">
+                                                <i class="fas fa-hashtag me-2"></i>Código de la Materia
+                                            </label>
+                                            <input asp-for="Materia.Codigo" class="form-control"
+                                                   placeholder="Ej: MAT101" maxlength="10" style="text-transform: uppercase;">
+                                            <span asp-validation-for="Materia.Codigo" class="text-danger"></span>
+                                            <div class="form-text">Código único para identificar la materia</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label asp-for="Materia.Nombre" class="form-label">
+                                                <i class="fas fa-book me-2"></i>Nombre de la Materia
+                                            </label>
+                                            <input asp-for="Materia.Nombre" class="form-control"
+                                                   placeholder="Ej: Matemáticas Avanzadas" maxlength="100">
+                                            <span asp-validation-for="Materia.Nombre" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Materia.Creditos" class="form-label">
+                                                <i class="fas fa-star me-2"></i>Créditos
+                                            </label>
+                                            <input asp-for="Materia.Creditos" class="form-control"
+                                                   type="number" min="1" max="10">
+                                            <span asp-validation-for="Materia.Creditos" class="text-danger"></span>
+                                            <div class="form-text">Número de créditos de la materia (1-10)</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Materia.Periodo" class="form-label">
+                                                <i class="fas fa-calendar me-2"></i>Período
+                                            </label>
+                                            <input asp-for="Materia.Periodo" class="form-control"
+                                                   placeholder="Ej: 2024-1" maxlength="20">
+                                            <span asp-validation-for="Materia.Periodo" class="text-danger"></span>
+                                            <div class="form-text">Período académico</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Asignación académica -->
+                        <div class="col-12">
+                            <div class="form-section">
+                                <h4 class="section-title">
+                                    <i class="fas fa-university me-2"></i>
+                                    Asignación Académica
+                                </h4>
+
+                                <div class="row g-3">
+                                    <!-- Facultad (solo lectura) -->
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="form-label">
+                                                <i class="fas fa-building me-2"></i>Facultad Actual
+                                            </label>
+                                            <div class="alert alert-info mb-3">
+                                                <i class="fas fa-info-circle me-2"></i>
+                                                <strong>@(Model.Materia.Carrera?.Facultad?.Nombre ?? "Sin asignar")</strong>
+                                                <br>
+                                                <small>Los docentes mostrados pertenecen a esta facultad. Para cambiar de facultad, contacta al administrador.</small>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Carrera -->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Materia.CarreraID" class="form-label">
+                                                <i class="fas fa-graduation-cap me-2"></i>Carrera
+                                            </label>
+                                            <select asp-for="Materia.CarreraID" asp-items="Model.CarrerasDisponibles"
+                                                    class="form-select" required>
+                                                <option value="">-- Seleccionar Carrera --</option>
+                                            </select>
+                                            <span asp-validation-for="Materia.CarreraID" class="text-danger"></span>
+                                            <div class="form-text">Carrera a la que pertenece la materia</div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Docente (filtrado por facultad) -->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Materia.DocenteID" class="form-label">
+                                                <i class="fas fa-chalkboard-teacher me-2"></i>Docente Responsable
+                                            </label>
+                                            <select asp-for="Materia.DocenteID" asp-items="Model.DocentesDisponibles"
+                                                    class="form-select" required>
+                                                <option value="">-- Seleccionar Docente --</option>
+                                            </select>
+                                            <span asp-validation-for="Materia.DocenteID" class="text-danger"></span>
+                                            <div class="form-text">Solo se muestran docentes de la facultad actual</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Información del docente actual -->
+                                @if (Model.Materia.Docente != null)
+                                {
+                                    <div class="alert alert-light border-start border-4 border-primary mt-3">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-shrink-0">
+                                                <div class="avatar-circle bg-primary">
+                                                    @Model.Materia.Docente.Nombres.Substring(0, 1)@Model.Materia.Docente.Apellidos.Substring(0, 1)
+                                                </div>
+                                            </div>
+                                            <div class="flex-grow-1 ms-3">
+                                                <h6 class="mb-1">
+                                                    <i class="fas fa-user-tie me-2 text-primary"></i>
+                                                    Docente Actual: @Model.Materia.Docente.NombreCompleto
+                                                </h6>
+                                                <small class="text-muted">
+                                                    <i class="fas fa-envelope me-1"></i> @Model.Materia.Docente.Email
+                                                    @if (!string.IsNullOrEmpty(Model.Materia.Docente.Telefono))
+                                                    {
+                                                        <span class="ms-3">
+                                                            <i class="fas fa-phone me-1"></i> @Model.Materia.Docente.Telefono
+                                                        </span>
+                                                    }
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+                        <!-- Estado -->
+                        <div class="col-12">
+                            <div class="form-section">
+                                <h4 class="section-title">
+                                    <i class="fas fa-toggle-on me-2"></i>
+                                    Estado de la Materia
+                                </h4>
+
+                                <div class="form-group">
+                                    <div class="form-check form-switch">
+                                        <input asp-for="Materia.Activa" class="form-check-input" type="checkbox"
+                                               id="activaSwitch" style="transform: scale(1.5);">
+                                        <label class="form-check-label ms-3" for="activaSwitch">
+                                            <i class="fas fa-power-off me-2"></i>
+                                            <span id="estadoTexto">@(Model.Materia.Activa ? "Materia Activa" : "Materia Inactiva")</span>
+                                        </label>
+                                    </div>
+                                    <div class="form-text">Las materias inactivas no aparecerán disponibles para nuevas asignaciones</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Botones de acción -->
+                        <div class="col-12">
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-save">
+                                    <i class="fas fa-save me-2"></i>
+                                    Guardar Cambios
+                                </button>
+                                <a asp-page="./Index" class="btn btn-cancel">
+                                    <i class="fas fa-times me-2"></i>
+                                    Cancelar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Hero Section */
+    .edit-hero {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        color: white;
+        padding: 3rem 0;
+        margin-top: -2rem;
+        border-radius: 0 0 30px 30px;
+    }
+
+    .hero-badge {
+        display: inline-block;
+        padding: 0.5rem 1.5rem;
+        background: rgba(255,255,255,0.2);
+        border: 1px solid rgba(255,255,255,0.3);
+        border-radius: 50px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        line-height: 1.2;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        line-height: 1.6;
+    }
+
+    .btn-back {
+        background: rgba(255,255,255,0.2);
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255,255,255,0.3);
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 15px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+        .btn-back:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+            color: white;
+        }
+
+    /* Formulario */
+    .form-container {
+        background: white;
+        border-radius: 20px;
+        padding: 3rem;
+        box-shadow: 0 15px 50px rgba(0,0,0,0.1);
+        border: 1px solid #f0f0f0;
+    }
+
+    .form-section {
+        background: #f8f9fa;
+        border-radius: 15px;
+        padding: 2rem;
+        border-left: 4px solid #4facfe;
+    }
+
+    .section-title {
+        color: #2c3e50;
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #e9ecef;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+    }
+
+        .form-label i {
+            color: #4facfe;
+            width: 20px;
+        }
+
+    .form-control, .form-select {
+        border: 2px solid #e9ecef;
+        border-radius: 12px;
+        padding: 0.8rem 1rem;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #4facfe;
+            box-shadow: 0 0 0 0.25rem rgba(79, 172, 254, 0.15);
+        }
+
+    .form-check-input:checked {
+        background-color: #27ae60;
+        border-color: #27ae60;
+    }
+
+    .form-check-input:focus {
+        border-color: #4facfe;
+        box-shadow: 0 0 0 0.25rem rgba(79, 172, 254, 0.25);
+    }
+
+    .form-text {
+        font-size: 0.85rem;
+        color: #6c757d;
+        margin-top: 0.25rem;
+    }
+
+    .text-danger {
+        font-size: 0.85rem;
+        margin-top: 0.25rem;
+    }
+
+    /* Avatar circle para mostrar docente actual */
+    .avatar-circle {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: 0.8rem;
+    }
+
+    /* Botones de acción */
+    .form-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        padding-top: 2rem;
+        border-top: 2px solid #e9ecef;
+        margin-top: 2rem;
+    }
+
+    .btn-save {
+        background: linear-gradient(45deg, #4facfe, #00f2fe);
+        border: none;
+        color: white;
+        padding: 1rem 2.5rem;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 25px rgba(79, 172, 254, 0.3);
+    }
+
+        .btn-save:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(79, 172, 254, 0.4);
+        }
+
+    .btn-cancel {
+        background: #6c757d;
+        border: none;
+        color: white;
+        padding: 1rem 2.5rem;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+        .btn-cancel:hover {
+            background: #5a6268;
+            transform: translateY(-3px);
+            color: white;
+        }
+
+    /* Responsive */
+    @@media (max-width: 768px) {
+        .hero-title
+
+    {
+        font-size: 1.8rem;
+    }
+
+    .form-container {
+        padding: 2rem;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .btn-save, .btn-cancel {
+        width: 100%;
+    }
+
+    }
+
+    /* Animaciones */
+    .form-container {
+        animation: slideInUp 0.6s ease-out;
+    }
+
+    @@keyframes slideInUp {
+        from
+
+    {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Convertir código a mayúsculas automáticamente
+        const codigoInput = document.querySelector('input[name="Materia.Codigo"]');
+        if (codigoInput) {
+            codigoInput.addEventListener('input', function() {
+                this.value = this.value.toUpperCase();
+            });
+        }
+
+        // Cambiar texto del estado cuando se cambia el switch
+        const activaSwitch = document.getElementById('activaSwitch');
+        const estadoTexto = document.getElementById('estadoTexto');
+
+        if (activaSwitch && estadoTexto) {
+            activaSwitch.addEventListener('change', function() {
+                estadoTexto.textContent = this.checked ? 'Materia Activa' : 'Materia Inactiva';
+            });
+        }
+
+        // Validación en tiempo real
+        const form = document.querySelector('form');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                const codigo = document.querySelector('input[name="Materia.Codigo"]').value;
+                const nombre = document.querySelector('input[name="Materia.Nombre"]').value;
+                const carrera = document.querySelector('select[name="Materia.CarreraID"]').value;
+                const docente = document.querySelector('select[name="Materia.DocenteID"]').value;
+
+                if (!codigo || !nombre || !carrera || !docente) {
+                    e.preventDefault();
+                    alert('Por favor completa todos los campos obligatorios:\n- Código\n- Nombre\n- Carrera\n- Docente');
+                    return false;
+                }
+            });
+        }
+    });
+</script>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

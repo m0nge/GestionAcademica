@@ -1,0 +1,50 @@
+[
+  {
+    "ContainingType": "GestionAcademica.Controllers.ValidationController",
+    "Method": "CarnetExists",
+    "RelativePath": "api/Validation/carnet-exists",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "carnet",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GestionAcademica.Controllers.ValidationController",
+    "Method": "EmailExists",
+    "RelativePath": "api/Validation/email-exists",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GestionAcademica.Controllers.ValidationController",
+    "Method": "TelefonoExists",
+    "RelativePath": "api/Validation/telefono-exists",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "telefono",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

@@ -1,0 +1,1521 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\gestionacademica.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\gestionacademica.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\login.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\login.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\services\\twofactorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\services\\twofactorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\services\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\services\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\twofactor.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\twofactor.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\twofactor.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\twofactor.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\models\\docente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\models\\docente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\services\\itwofactorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\services\\itwofactorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\logout.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\logout.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\home\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\home\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\docentes\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\docentes\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\controllers\\validationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\controllers\\validationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\models\\gestionacademicacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\models\\gestionacademicacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\dotnet\\sdk\\9.0.304\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.PackageDependencyResolution.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\materias\\estudiantes.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\materias\\estudiantes.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\reportes\\boletanotas.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\reportes\\boletanotas.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\1\\.nuget\\packages\\select.htmltopdf\\23.1.0\\readme.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\1\\.nuget\\packages\\epplus\\7.0.0\\readme.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\1\\.nuget\\packages\\select.htmltopdf\\25.2.0\\readme.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\1\\.nuget\\packages\\epplus\\8.1.0\\readme.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\reportes\\boletanotas.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\reportes\\boletanotas.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\materias\\details.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\materias\\details.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\reportes\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\reportes\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\reportes\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\reportes\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\models\\inscripcion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\models\\inscripcion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\calificaciones\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\calificaciones\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\calificaciones\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\calificaciones\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\configuracion\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\configuracion\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\configuracion\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\configuracion\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\models\\calificacion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\models\\calificacion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\models\\tipoasignacion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\models\\tipoasignacion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\asignaciones\\delete.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\asignaciones\\delete.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\asignaciones\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\asignaciones\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\asignaciones\\edit.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\asignaciones\\edit.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\asignaciones\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\asignaciones\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\asignaciones\\create.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\asignaciones\\create.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\asignaciones\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\asignaciones\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\asignaciones\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\asignaciones\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\asignaciones\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\asignaciones\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\models\\estudiantemateria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\models\\estudiantemateria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\materias\\estudiantes.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\materias\\estudiantes.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\docentes\\delete.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\docentes\\delete.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\docentes\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\docentes\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\docentes\\edit.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\docentes\\edit.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\docentes\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\docentes\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\docentes\\details.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\docentes\\details.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\docentes\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\docentes\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\docentes\\create.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\docentes\\create.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\docentes\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\docentes\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\docentes\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\docentes\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\models\\facultad.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\models\\facultad.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\models\\carreramateria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\models\\carreramateria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\models\\carrera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\models\\carrera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\materias\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\materias\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\materias\\delete.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\materias\\delete.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\materias\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\materias\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\materias\\edit.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\materias\\edit.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\materias\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\materias\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\materias\\create.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\materias\\create.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\materias\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\materias\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\materias\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\materias\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\materias\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\materias\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\privacy.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\privacy.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\error.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\error.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\migrations\\20250816183359_agregarmateriasytareas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\migrations\\20250816183359_agregarmateriasytareas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\models\\asignacion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\models\\asignacion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\models\\materia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\models\\materia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\migrations\\20250816173418_agregarroldocente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\migrations\\20250816173418_agregarroldocente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\estudiantes\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\estudiantes\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\logout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\logout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\estudiantes\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\estudiantes\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\estudiantes\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\estudiantes\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\estudiantes\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\estudiantes\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\models\\estudiante.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\models\\estudiante.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\models\\estudiantevalidationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\models\\estudiantevalidationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\models\\yearrangeattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\models\\yearrangeattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\data\\identitydbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\data\\identitydbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\estudiantes\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\estudiantes\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\estudiantes\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\estudiantes\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\estudiantes\\details.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\estudiantes\\details.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\estudiantes\\edit.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\estudiantes\\edit.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\estudiantes\\delete.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\estudiantes\\delete.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\pages\\estudiantes\\create.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\pages\\estudiantes\\create.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|c:\\users\\1\\downloads\\gestionacademicafinal (1)\\gestionacademica\\gestionacademica\\migrations\\20250827023604_add2faandsecurityfields.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EB782F8-A295-449C-B58E-B393D1B9E1FD}|GestionAcademica\\GestionAcademica.csproj|solutionrelative:gestionacademica\\migrations\\20250827023604_add2faandsecurityfields.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 82,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "EmailService.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Services\\EmailService.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Services\\EmailService.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Services\\EmailService.cs",
+              "RelativeToolTip": "GestionAcademica\\Services\\EmailService.cs",
+              "ViewState": "AgIAAFgAAAAAAAAAAAAgwH0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-27T02:50:55.194Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "TwoFactor.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\TwoFactor.cshtml.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\TwoFactor.cshtml.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\TwoFactor.cshtml.cs",
+              "RelativeToolTip": "GestionAcademica\\Pages\\TwoFactor.cshtml.cs",
+              "ViewState": "AgIAAJ0AAAAAAAAAAAAkwKgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-27T02:40:14.63Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "TwoFactor.cshtml",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\TwoFactor.cshtml",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\TwoFactor.cshtml",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\TwoFactor.cshtml",
+              "RelativeToolTip": "GestionAcademica\\Pages\\TwoFactor.cshtml",
+              "ViewState": "AgIAAI4AAAAAAAAAAAAQwJwAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-27T02:39:32.01Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 93,
+              "Title": "20250827023604_Add2FAAndSecurityFields.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Migrations\\20250827023604_Add2FAAndSecurityFields.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Migrations\\20250827023604_Add2FAAndSecurityFields.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Migrations\\20250827023604_Add2FAAndSecurityFields.cs",
+              "RelativeToolTip": "GestionAcademica\\Migrations\\20250827023604_Add2FAAndSecurityFields.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-27T02:36:05.256Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TwoFactorService.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Services\\TwoFactorService.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Services\\TwoFactorService.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Services\\TwoFactorService.cs",
+              "RelativeToolTip": "GestionAcademica\\Services\\TwoFactorService.cs",
+              "ViewState": "AgIAACIAAAAAAAAAAAAcwDEAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-27T02:19:37.796Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ITwoFactorService.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Services\\ITwoFactorService.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Services\\ITwoFactorService.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Services\\ITwoFactorService.cs",
+              "RelativeToolTip": "GestionAcademica\\Services\\ITwoFactorService.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-27T02:12:43.741Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Microsoft.PackageDependencyResolution.targets",
+              "DocumentMoniker": "C:\\Program Files\\dotnet\\sdk\\9.0.304\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.PackageDependencyResolution.targets",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Program Files\\dotnet\\sdk\\9.0.304\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.PackageDependencyResolution.targets",
+              "ToolTip": "C:\\Program Files\\dotnet\\sdk\\9.0.304\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.PackageDependencyResolution.targets",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Program Files\\dotnet\\sdk\\9.0.304\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.PackageDependencyResolution.targets",
+              "ViewState": "AgIAAPkAAAAAAAAAAAAswAsBAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
+              "WhenOpened": "2025-08-27T01:27:26.162Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "readme.txt",
+              "DocumentMoniker": "C:\\Users\\1\\.nuget\\packages\\epplus\\7.0.0\\readme.txt",
+              "RelativeDocumentMoniker": "..\\..\\..\\.nuget\\packages\\epplus\\7.0.0\\readme.txt",
+              "ToolTip": "C:\\Users\\1\\.nuget\\packages\\epplus\\7.0.0\\readme.txt",
+              "RelativeToolTip": "..\\..\\..\\.nuget\\packages\\epplus\\7.0.0\\readme.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2025-08-20T05:32:48.045Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "readme.txt",
+              "DocumentMoniker": "C:\\Users\\1\\.nuget\\packages\\select.htmltopdf\\25.2.0\\readme.txt",
+              "RelativeDocumentMoniker": "..\\..\\..\\.nuget\\packages\\select.htmltopdf\\25.2.0\\readme.txt",
+              "ToolTip": "C:\\Users\\1\\.nuget\\packages\\select.htmltopdf\\25.2.0\\readme.txt",
+              "RelativeToolTip": "..\\..\\..\\.nuget\\packages\\select.htmltopdf\\25.2.0\\readme.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2025-08-20T05:31:53.126Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "readme.txt",
+              "DocumentMoniker": "C:\\Users\\1\\.nuget\\packages\\epplus\\8.1.0\\readme.txt",
+              "RelativeDocumentMoniker": "..\\..\\..\\.nuget\\packages\\epplus\\8.1.0\\readme.txt",
+              "ToolTip": "C:\\Users\\1\\.nuget\\packages\\epplus\\8.1.0\\readme.txt",
+              "RelativeToolTip": "..\\..\\..\\.nuget\\packages\\epplus\\8.1.0\\readme.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2025-08-20T04:49:18.922Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "BoletaNotas.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Reportes\\BoletaNotas.cshtml.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Reportes\\BoletaNotas.cshtml.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Reportes\\BoletaNotas.cshtml.cs",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Reportes\\BoletaNotas.cshtml.cs",
+              "ViewState": "AgIAAMQAAAAAAAAAAAAIwOMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-19T16:26:46.688Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "BoletaNotas.cshtml",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Reportes\\BoletaNotas.cshtml",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Reportes\\BoletaNotas.cshtml",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Reportes\\BoletaNotas.cshtml",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Reportes\\BoletaNotas.cshtml",
+              "ViewState": "AgIAAJ0AAAAAAAAAAAAmwLAAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-19T16:26:30.526Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Estudiantes.cshtml",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Materias\\Estudiantes.cshtml",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Materias\\Estudiantes.cshtml",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Materias\\Estudiantes.cshtml",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Materias\\Estudiantes.cshtml",
+              "ViewState": "AgIAAGkAAAAAAAAAAAAYwHkAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-17T18:30:47.007Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "readme.txt",
+              "DocumentMoniker": "C:\\Users\\1\\.nuget\\packages\\select.htmltopdf\\23.1.0\\readme.txt",
+              "RelativeDocumentMoniker": "..\\..\\..\\.nuget\\packages\\select.htmltopdf\\23.1.0\\readme.txt",
+              "ToolTip": "C:\\Users\\1\\.nuget\\packages\\select.htmltopdf\\23.1.0\\readme.txt",
+              "RelativeToolTip": "..\\..\\..\\.nuget\\packages\\select.htmltopdf\\23.1.0\\readme.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2025-08-20T05:33:11.187Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "Details.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Materias\\Details.cshtml.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Materias\\Details.cshtml.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Materias\\Details.cshtml.cs",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Materias\\Details.cshtml.cs",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAIwEAAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-21T01:59:55.864Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "Index.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Reportes\\Index.cshtml.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Reportes\\Index.cshtml.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Reportes\\Index.cshtml.cs",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Reportes\\Index.cshtml.cs",
+              "ViewState": "AgIAAK8BAAAAAAAAAAAUwMgBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-19T15:57:01.839Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Reportes\\Index.cshtml",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Reportes\\Index.cshtml",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Reportes\\Index.cshtml",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Reportes\\Index.cshtml",
+              "ViewState": "AgIAADMDAAAAAAAAAAD4vz0DAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-19T15:56:44.668Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "Inscripcion.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Models\\Inscripcion.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Models\\Inscripcion.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Models\\Inscripcion.cs",
+              "RelativeToolTip": "GestionAcademica\\Models\\Inscripcion.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAIwA4AAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-19T06:45:50.73Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "Index.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Calificaciones\\Index.cshtml.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Calificaciones\\Index.cshtml.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Calificaciones\\Index.cshtml.cs",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Calificaciones\\Index.cshtml.cs",
+              "ViewState": "AgIAADQAAAAAAAAAAADwv0YAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-19T06:40:50.887Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Calificaciones\\Index.cshtml",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Calificaciones\\Index.cshtml",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Calificaciones\\Index.cshtml",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Calificaciones\\Index.cshtml",
+              "ViewState": "AgIAADECAAAAAAAAAAAUwEoCAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-19T06:40:40.834Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "Index.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Configuracion\\Index.cshtml.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Configuracion\\Index.cshtml.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Configuracion\\Index.cshtml.cs",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Configuracion\\Index.cshtml.cs",
+              "ViewState": "AgIAAGcAAAAAAAAAAAAUwIAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-19T06:20:33.361Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Configuracion\\Index.cshtml",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Configuracion\\Index.cshtml",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Configuracion\\Index.cshtml",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Configuracion\\Index.cshtml",
+              "ViewState": "AgIAAMkBAAAAAAAAAAAUwM4BAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-19T06:20:18.261Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "Calificacion.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Models\\Calificacion.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Models\\Calificacion.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Models\\Calificacion.cs",
+              "RelativeToolTip": "GestionAcademica\\Models\\Calificacion.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAUwCAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-19T05:26:52.706Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "TipoAsignacion.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Models\\TipoAsignacion.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Models\\TipoAsignacion.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Models\\TipoAsignacion.cs",
+              "RelativeToolTip": "GestionAcademica\\Models\\TipoAsignacion.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-19T04:56:19.847Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "Delete.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Asignaciones\\Delete.cshtml.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Asignaciones\\Delete.cshtml.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Asignaciones\\Delete.cshtml.cs",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Asignaciones\\Delete.cshtml.cs",
+              "ViewState": "AgIAAHQAAAAAAAAAAAAUwI0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-19T04:45:30.264Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Asignaciones\\Delete.cshtml",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Asignaciones\\Delete.cshtml",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Asignaciones\\Delete.cshtml",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Asignaciones\\Delete.cshtml",
+              "ViewState": "AgIAANUBAAAAAAAAAAAUwO4BAABkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-19T04:45:22.071Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "Edit.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Asignaciones\\Edit.cshtml.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Asignaciones\\Edit.cshtml.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Asignaciones\\Edit.cshtml.cs",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Asignaciones\\Edit.cshtml.cs",
+              "ViewState": "AgIAAIsAAAAAAAAAAAAUwKQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-19T04:44:51.014Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Asignaciones\\Edit.cshtml",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Asignaciones\\Edit.cshtml",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Asignaciones\\Edit.cshtml",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Asignaciones\\Edit.cshtml",
+              "ViewState": "AgIAALkBAAAAAAAAAAAUwNIBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-19T04:44:41.556Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "Create.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Asignaciones\\Create.cshtml.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Asignaciones\\Create.cshtml.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Asignaciones\\Create.cshtml.cs",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Asignaciones\\Create.cshtml.cs",
+              "ViewState": "AgIAAH8AAAAAAAAAAAAUwJgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-19T04:44:08.251Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Asignaciones\\Create.cshtml",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Asignaciones\\Create.cshtml",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Asignaciones\\Create.cshtml",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Asignaciones\\Create.cshtml",
+              "ViewState": "AgIAAG8BAAAAAAAAAAAUwIgBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-19T04:43:56.111Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "Index.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Asignaciones\\Index.cshtml.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Asignaciones\\Index.cshtml.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Asignaciones\\Index.cshtml.cs",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Asignaciones\\Index.cshtml.cs",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAUwGQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-19T04:43:35.143Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Asignaciones\\Index.cshtml",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Asignaciones\\Index.cshtml",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Asignaciones\\Index.cshtml",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Asignaciones\\Index.cshtml",
+              "ViewState": "AgIAAOEBAAAAAAAAAAAUwPoBAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-19T04:43:13.92Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "EstudianteMateria.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Models\\EstudianteMateria.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Models\\EstudianteMateria.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Models\\EstudianteMateria.cs",
+              "RelativeToolTip": "GestionAcademica\\Models\\EstudianteMateria.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAiwCwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-17T18:32:57.509Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "Estudiantes.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Materias\\Estudiantes.cshtml.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Materias\\Estudiantes.cshtml.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Materias\\Estudiantes.cshtml.cs",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Materias\\Estudiantes.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADIAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-17T18:31:03.788Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "Delete.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Docentes\\Delete.cshtml.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Docentes\\Delete.cshtml.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Docentes\\Delete.cshtml.cs",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Docentes\\Delete.cshtml.cs",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAiwF0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-17T17:29:13.73Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Docentes\\Delete.cshtml",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Docentes\\Delete.cshtml",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Docentes\\Delete.cshtml",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Docentes\\Delete.cshtml",
+              "ViewState": "AgIAAJ8BAAAAAAAAAAAmwKkBAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-17T17:29:01.386Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "Edit.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Docentes\\Edit.cshtml.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Docentes\\Edit.cshtml.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Docentes\\Edit.cshtml.cs",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Docentes\\Edit.cshtml.cs",
+              "ViewState": "AgIAAMgAAAAAAAAAAAA7wN0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-17T17:12:55.243Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Docentes\\Edit.cshtml",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Docentes\\Edit.cshtml",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Docentes\\Edit.cshtml",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Docentes\\Edit.cshtml",
+              "ViewState": "AgIAAH8CAAAAAAAAAAD4v48CAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-17T17:12:43.06Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "Details.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Docentes\\Details.cshtml.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Docentes\\Details.cshtml.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Docentes\\Details.cshtml.cs",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Docentes\\Details.cshtml.cs",
+              "ViewState": "AgIAADkAAAAAAAAAAAAUwFkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-17T17:07:26.937Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Docentes\\Details.cshtml",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Docentes\\Details.cshtml",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Docentes\\Details.cshtml",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Docentes\\Details.cshtml",
+              "ViewState": "AgIAAKwBAAAAAAAAAAAUwP4BAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-17T17:07:11.279Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "Create.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Docentes\\Create.cshtml.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Docentes\\Create.cshtml.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Docentes\\Create.cshtml.cs",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Docentes\\Create.cshtml.cs",
+              "ViewState": "AgIAAIUAAAAAAAAAAAAswJsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-17T15:39:17.095Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Docentes\\Create.cshtml",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Docentes\\Create.cshtml",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Docentes\\Create.cshtml",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Docentes\\Create.cshtml",
+              "ViewState": "AgIAAJkBAAAAAAAAAAAjwKsBAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-17T15:39:05.305Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "Index.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Docentes\\Index.cshtml.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Docentes\\Index.cshtml.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Docentes\\Index.cshtml.cs",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Docentes\\Index.cshtml.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAAAAEoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-17T15:35:47.128Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Docentes\\Index.cshtml",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Docentes\\Index.cshtml",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Docentes\\Index.cshtml",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Docentes\\Index.cshtml",
+              "ViewState": "AgIAACwCAAAAAAAAAAAjwDoCAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-17T15:35:32.707Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "Facultad.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Models\\Facultad.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Models\\Facultad.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Models\\Facultad.cs",
+              "RelativeToolTip": "GestionAcademica\\Models\\Facultad.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-17T14:25:13.343Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
+              "Title": "CarreraMateria.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Models\\CarreraMateria.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Models\\CarreraMateria.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Models\\CarreraMateria.cs",
+              "RelativeToolTip": "GestionAcademica\\Models\\CarreraMateria.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAcwEIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-17T01:00:07.856Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 58,
+              "Title": "Carrera.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Models\\Carrera.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Models\\Carrera.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Models\\Carrera.cs",
+              "RelativeToolTip": "GestionAcademica\\Models\\Carrera.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAmwDwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-17T00:59:38.317Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 59,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Materias\\Details.cshtml",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Materias\\Details.cshtml",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Materias\\Details.cshtml",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Materias\\Details.cshtml",
+              "ViewState": "AgIAALQCAAAAAAAAAAD4v8wCAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-16T19:44:13.889Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 60,
+              "Title": "Delete.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Materias\\Delete.cshtml.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Materias\\Delete.cshtml.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Materias\\Delete.cshtml.cs",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Materias\\Delete.cshtml.cs",
+              "ViewState": "AgIAAEoAAAAAAAAAAAAcwGgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-16T19:42:29.295Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 61,
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Materias\\Delete.cshtml",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Materias\\Delete.cshtml",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Materias\\Delete.cshtml",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Materias\\Delete.cshtml",
+              "ViewState": "AgIAAKYBAAAAAAAAAIBJwLQBAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-16T19:42:15.552Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 62,
+              "Title": "Edit.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Materias\\Edit.cshtml.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Materias\\Edit.cshtml.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Materias\\Edit.cshtml.cs",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Materias\\Edit.cshtml.cs",
+              "ViewState": "AgIAAJsAAAAAAAAAAAAjwLAAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-16T19:36:18.887Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 63,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Materias\\Edit.cshtml",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Materias\\Edit.cshtml",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Materias\\Edit.cshtml",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Materias\\Edit.cshtml",
+              "ViewState": "AgIAAOQBAAAAAAAAAAAAwPwBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-16T19:36:06.279Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 64,
+              "Title": "Create.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Materias\\Create.cshtml.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Materias\\Create.cshtml.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Materias\\Create.cshtml.cs",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Materias\\Create.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-16T18:52:09.672Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 65,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Materias\\Create.cshtml",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Materias\\Create.cshtml",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Materias\\Create.cshtml",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Materias\\Create.cshtml",
+              "ViewState": "AgIAALMBAAAAAAAAAAAAwMsBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-16T18:51:54.588Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 66,
+              "Title": "Index.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Materias\\Index.cshtml.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Materias\\Index.cshtml.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Materias\\Index.cshtml.cs",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Materias\\Index.cshtml.cs",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAIwE8AAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-16T18:46:28.889Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 67,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Materias\\Index.cshtml",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Materias\\Index.cshtml",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Materias\\Index.cshtml",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Materias\\Index.cshtml",
+              "ViewState": "AgIAAKIAAAAAAAAAAAAAAK8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-16T18:46:07.429Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 68,
+              "Title": "Privacy.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Privacy.cshtml.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Privacy.cshtml.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Privacy.cshtml.cs",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Privacy.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-16T18:37:14.128Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Privacy.cshtml",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Privacy.cshtml",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Privacy.cshtml",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Privacy.cshtml",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Privacy.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-16T18:37:14.033Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 69,
+              "Title": "Error.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Error.cshtml.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Error.cshtml.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Error.cshtml.cs",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Error.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-16T18:37:13.6Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Error.cshtml",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Error.cshtml",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Error.cshtml",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Error.cshtml",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Error.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-16T18:37:13.482Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 70,
+              "Title": "20250816183359_AgregarMateriasYTareas.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Migrations\\20250816183359_AgregarMateriasYTareas.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Migrations\\20250816183359_AgregarMateriasYTareas.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Migrations\\20250816183359_AgregarMateriasYTareas.cs",
+              "RelativeToolTip": "GestionAcademica\\Migrations\\20250816183359_AgregarMateriasYTareas.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-16T18:33:59.28Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 71,
+              "Title": "Asignacion.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Models\\Asignacion.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Models\\Asignacion.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Models\\Asignacion.cs",
+              "RelativeToolTip": "GestionAcademica\\Models\\Asignacion.cs",
+              "ViewState": "AgIAAEYAAAAAAAAAAAAswFwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-16T18:32:31.249Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 72,
+              "Title": "Materia.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Models\\Materia.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Models\\Materia.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Models\\Materia.cs",
+              "RelativeToolTip": "GestionAcademica\\Models\\Materia.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-16T18:31:59.601Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 73,
+              "Title": "20250816173418_AgregarRolDocente.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Migrations\\20250816173418_AgregarRolDocente.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Migrations\\20250816173418_AgregarRolDocente.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Migrations\\20250816173418_AgregarRolDocente.cs",
+              "RelativeToolTip": "GestionAcademica\\Migrations\\20250816173418_AgregarRolDocente.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-16T17:34:19.21Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 74,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Estudiantes\\Create.cshtml",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Estudiantes\\Create.cshtml",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Estudiantes\\Create.cshtml",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Estudiantes\\Create.cshtml",
+              "ViewState": "AgIAAPACAAAAAAAAAAAwwCUEAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-14T02:45:56.289Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 75,
+              "Title": "Logout.cshtml",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Logout.cshtml",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Logout.cshtml",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Logout.cshtml",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Logout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-14T23:30:46.062Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Login.cshtml",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Login.cshtml",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Login.cshtml",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Login.cshtml",
+              "ViewState": "AgIAAJgAAAAAAAAAAAAIwKkAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-14T23:24:54.008Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Logout.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Logout.cshtml.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Logout.cshtml.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Logout.cshtml.cs",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Logout.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-14T23:31:06.36Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 76,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Estudiantes\\Index.cshtml",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Estudiantes\\Index.cshtml",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Estudiantes\\Index.cshtml",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Estudiantes\\Index.cshtml",
+              "ViewState": "AgIAAL4GAAAAAAAAAAAAANsGAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-14T02:46:00.129Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 77,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Estudiantes\\Details.cshtml",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Estudiantes\\Details.cshtml",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Estudiantes\\Details.cshtml",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Estudiantes\\Details.cshtml",
+              "ViewState": "AgIAAAoBAAAAAAAAAAAwwA8BAABVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-14T02:45:58.847Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 78,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Estudiantes\\Edit.cshtml",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Estudiantes\\Edit.cshtml",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Estudiantes\\Edit.cshtml",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Estudiantes\\Edit.cshtml",
+              "ViewState": "AgIAAGMEAAAAAAAAAIBJwHoEAABHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-14T02:45:58.255Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Login.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Login.cshtml.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Login.cshtml.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Login.cshtml.cs",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Login.cshtml.cs",
+              "ViewState": "AgIAAEsAAAAAAAAAAAD4v18AAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-14T23:27:47.732Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 79,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\_ViewImports.cshtml",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\_ViewImports.cshtml",
+              "RelativeToolTip": "GestionAcademica\\Pages\\_ViewImports.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-14T03:06:42.338Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Docente.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Models\\Docente.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Models\\Docente.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Models\\Docente.cs",
+              "RelativeToolTip": "GestionAcademica\\Models\\Docente.cs",
+              "ViewState": "AgIAADQAAAAAAAAAAAAAwD4AAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-14T23:33:57.192Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Home\\Index.cshtml",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Home\\Index.cshtml",
+              "ViewState": "AgIAAJ4AAAAAAAAAAAAuwLsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-14T13:15:58.627Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Program.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Program.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Program.cs",
+              "RelativeToolTip": "GestionAcademica\\Program.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAQwCUAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-14T01:47:46.4Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "GestionAcademicaContext.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Models\\GestionAcademicaContext.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Models\\GestionAcademicaContext.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Models\\GestionAcademicaContext.cs",
+              "RelativeToolTip": "GestionAcademica\\Models\\GestionAcademicaContext.cs",
+              "ViewState": "AgIAAPgAAAAAAAAAAAAuwBUBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-14T01:43:12.191Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Index.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Home\\Index.cshtml.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Home\\Index.cshtml.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Home\\Index.cshtml.cs",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Home\\Index.cshtml.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAuwC0AAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-14T23:52:25.033Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 80,
+              "Title": "_ViewStart.cshtml",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\_ViewStart.cshtml",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\_ViewStart.cshtml",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\_ViewStart.cshtml",
+              "RelativeToolTip": "GestionAcademica\\Pages\\_ViewStart.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-14T03:06:25.333Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 81,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAOQBAAAAAAAAAAAjwPwBAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-14T03:05:59.102Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "ValidationController.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Controllers\\ValidationController.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Controllers\\ValidationController.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Controllers\\ValidationController.cs",
+              "RelativeToolTip": "GestionAcademica\\Controllers\\ValidationController.cs",
+              "ViewState": "AgIAADQAAAAAAAAAAAAqwEcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-14T22:39:01.377Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 82,
+              "Title": "Estudiante.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Models\\Estudiante.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Models\\Estudiante.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Models\\Estudiante.cs",
+              "RelativeToolTip": "GestionAcademica\\Models\\Estudiante.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAuwEoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-14T01:40:34.162Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "GestionAcademica.csproj",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\GestionAcademica.csproj",
+              "RelativeDocumentMoniker": "GestionAcademica\\GestionAcademica.csproj",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\GestionAcademica.csproj",
+              "RelativeToolTip": "GestionAcademica\\GestionAcademica.csproj",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA8AAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-08-14T02:25:17.121Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 83,
+              "Title": "EstudianteValidationService.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Models\\EstudianteValidationService.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Models\\EstudianteValidationService.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Models\\EstudianteValidationService.cs",
+              "RelativeToolTip": "GestionAcademica\\Models\\EstudianteValidationService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-14T22:07:53.937Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 84,
+              "Title": "YearRangeAttribute.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Models\\YearRangeAttribute.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Models\\YearRangeAttribute.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Models\\YearRangeAttribute.cs",
+              "RelativeToolTip": "GestionAcademica\\Models\\YearRangeAttribute.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAIBJwA0AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-14T13:32:40.447Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 85,
+              "Title": "IdentityDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Data\\IdentityDbContext.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Data\\IdentityDbContext.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Data\\IdentityDbContext.cs",
+              "RelativeToolTip": "GestionAcademica\\Data\\IdentityDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-14T03:27:25.267Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 86,
+              "Title": "_ValidationScriptsPartial.cshtml",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Shared\\_ValidationScriptsPartial.cshtml",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Shared\\_ValidationScriptsPartial.cshtml",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-14T03:27:37.837Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 87,
+              "Title": "Index.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Estudiantes\\Index.cshtml.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Estudiantes\\Index.cshtml.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Estudiantes\\Index.cshtml.cs",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Estudiantes\\Index.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADAAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-14T02:46:00.42Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 88,
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Estudiantes\\Delete.cshtml",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Estudiantes\\Delete.cshtml",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Estudiantes\\Delete.cshtml",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Estudiantes\\Delete.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-14T02:45:59.436Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 89,
+              "Title": "Details.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Estudiantes\\Details.cshtml.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Estudiantes\\Details.cshtml.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Estudiantes\\Details.cshtml.cs",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Estudiantes\\Details.cshtml.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAwwEQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-14T02:45:59.14Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 90,
+              "Title": "Edit.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Estudiantes\\Edit.cshtml.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Estudiantes\\Edit.cshtml.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Estudiantes\\Edit.cshtml.cs",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Estudiantes\\Edit.cshtml.cs",
+              "ViewState": "AgIAAIQAAAAAAAAAAIAwwKEAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-14T02:45:58.524Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\appsettings.json",
+              "RelativeDocumentMoniker": "GestionAcademica\\appsettings.json",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\appsettings.json",
+              "RelativeToolTip": "GestionAcademica\\appsettings.json",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAIwA0AAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-08-14T01:34:59.613Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 91,
+              "Title": "Delete.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Estudiantes\\Delete.cshtml.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Estudiantes\\Delete.cshtml.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Estudiantes\\Delete.cshtml.cs",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Estudiantes\\Delete.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-14T02:45:59.693Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 92,
+              "Title": "Create.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Estudiantes\\Create.cshtml.cs",
+              "RelativeDocumentMoniker": "GestionAcademica\\Pages\\Estudiantes\\Create.cshtml.cs",
+              "ToolTip": "C:\\Users\\1\\Downloads\\GestionAcademicaFinal (1)\\GestionAcademica\\GestionAcademica\\Pages\\Estudiantes\\Create.cshtml.cs",
+              "RelativeToolTip": "GestionAcademica\\Pages\\Estudiantes\\Create.cshtml.cs",
+              "ViewState": "AgIAAHIAAAAAAAAAAAAswKcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-14T02:45:57.885Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

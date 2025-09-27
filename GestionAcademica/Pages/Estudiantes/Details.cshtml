@@ -1,0 +1,1589 @@
+﻿@page
+@model GestionAcademica.Pages.Estudiantes.DetailsModel
+@{
+    ViewData["Title"] = $"Detalles - {Model.Estudiante.Nombres} {Model.Estudiante.Apellidos}";
+}
+
+<!-- Hero Header -->
+<div class="details-hero-enhanced">
+    <div class="hero-bg-pattern"></div>
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <div class="hero-content-enhanced">
+                    <div class="hero-breadcrumb">
+                        <a asp-page="./Index" class="breadcrumb-link">
+                            <i class="fas fa-users me-2"></i>
+                            Estudiantes
+                        </a>
+                        <i class="fas fa-chevron-right mx-3"></i>
+                        <span class="breadcrumb-current">Detalles del Estudiante</span>
+                    </div>
+                    <h1 class="hero-title-enhanced">
+                        <i class="fas fa-user-graduate me-3"></i>
+                        @Model.Estudiante.Nombres @Model.Estudiante.Apellidos
+                    </h1>
+                    <p class="hero-subtitle-enhanced">
+                        Información completa del estudiante registrado en el sistema académico.
+                        <span class="student-id">ID: <strong>@Model.Estudiante.EstudianteID</strong></span>
+                    </p>
+                    <div class="hero-status">
+                        @if (Model.Estudiante.Activo)
+                        {
+                            <div class="status-badge-hero active">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Estudiante Activo</span>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="status-badge-hero inactive">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <span>Estudiante Inactivo</span>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 text-center">
+                <div class="student-avatar-hero">
+                    <div class="avatar-container">
+                        <div class="avatar-main">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="avatar-ring"></div>
+                        <div class="avatar-pulse"></div>
+                    </div>
+                    <div class="avatar-info">
+                        <h4>@Model.Estudiante.Carnet</h4>
+                        <p>Carnet Estudiantil</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Información Principal -->
+<div class="container mt-5">
+    <div class="row">
+        <!-- Información Personal -->
+        <div class="col-lg-8">
+            <div class="info-card-enhanced">
+                <div class="card-header-enhanced">
+                    <div class="header-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="header-content">
+                        <h3>Información Personal</h3>
+                        <p>Datos personales y de contacto del estudiante</p>
+                    </div>
+                </div>
+
+                <div class="card-body-enhanced">
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-id-card"></i>
+                            </div>
+                            <div class="info-content">
+                                <label>Carnet Estudiantil</label>
+                                <value>@Model.Estudiante.Carnet</value>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="info-content">
+                                <label>Nombres Completos</label>
+                                <value>@Model.Estudiante.Nombres</value>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="info-content">
+                                <label>Apellidos Completos</label>
+                                <value>@Model.Estudiante.Apellidos</value>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="info-content">
+                                <label>Correo Electrónico</label>
+                                <value class="email-value">
+                                    <a href="mailto:@Model.Estudiante.Email">@Model.Estudiante.Email</a>
+                                </value>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="info-content">
+                                <label>Número de Teléfono</label>
+                                <value class="phone-value">
+                                    <a href="tel:@Model.Estudiante.Telefono">@Model.Estudiante.Telefono</a>
+                                </value>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="info-content">
+                                <label>Fecha de Nacimiento</label>
+                                <value>
+                                    @Model.Estudiante.FechaNacimiento?.ToString("dddd, dd 'de' MMMM 'de' yyyy", new System.Globalization.CultureInfo("es-ES"))
+                                    @if (Model.Estudiante.FechaNacimiento.HasValue)
+                                    {
+                                        var edad = DateTime.Now.Year - Model.Estudiante.FechaNacimiento.Value.Year;
+                                        if (DateTime.Now.DayOfYear < Model.Estudiante.FechaNacimiento.Value.DayOfYear) edad--;
+                                        <span class="age-badge">@edad años</span>
+                                    }
+                                </value>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Información Académica -->
+        <div class="col-lg-4">
+            <div class="academic-card-enhanced">
+                <div class="academic-header">
+                    <div class="academic-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Información Académica</h3>
+                </div>
+
+                <div class="academic-body">
+                    <div class="academic-item">
+                        <div class="academic-label">
+                            <i class="fas fa-calendar-plus me-2"></i>
+                            Fecha de Ingreso
+                        </div>
+                        <div class="academic-value">
+                            @Model.Estudiante.FechaIngreso.ToString("dd/MM/yyyy")
+                        </div>
+                        <div class="academic-detail">
+                            @{
+                                var diasEnSistema = (DateTime.Now - Model.Estudiante.FechaIngreso).Days;
+                                var añosEnSistema = Math.Round(diasEnSistema / 365.0, 1);
+                            }
+                            <small>Hace @diasEnSistema días (@añosEnSistema años)</small>
+                        </div>
+                    </div>
+
+                    <div class="academic-item">
+                        <div class="academic-label">
+                            <i class="fas fa-toggle-on me-2"></i>
+                            Estado Actual
+                        </div>
+                        <div class="academic-value">
+                            @if (Model.Estudiante.Activo)
+                            {
+                                <span class="status-active">
+                                    <i class="fas fa-check-circle me-2"></i>
+                                    Activo
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="status-inactive">
+                                    <i class="fas fa-times-circle me-2"></i>
+                                    Inactivo
+                                </span>
+                            }
+                        </div>
+                        <div class="academic-detail">
+                            @if (Model.Estudiante.Activo)
+                            {
+                                <small>Puede acceder al sistema y inscribirse en materias</small>
+                            }
+                            else
+                            {
+                                <small>No puede acceder al sistema ni inscribirse</small>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="academic-item">
+                        <div class="academic-label">
+                            <i class="fas fa-hashtag me-2"></i>
+                            ID del Sistema
+                        </div>
+                        <div class="academic-value">
+                            <code>#@Model.Estudiante.EstudianteID</code>
+                        </div>
+                        <div class="academic-detail">
+                            <small>Identificador único en la base de datos</small>
+                        </div>
+                    </div>
+                    <!-- Agregar después del último academic-item (ID del Sistema) -->
+                    <div class="academic-item">
+                        <div class="academic-label">
+                            <i class="fas fa-building me-2"></i>
+                            Facultad
+                        </div>
+                        <div class="academic-value">
+                            @if (Model.Estudiante.Carrera?.Facultad != null)
+                            {
+                                <span class="faculty-name">@Model.Estudiante.Carrera.Facultad.Nombre</span>
+                            }
+                            else
+                            {
+                                <span class="text-muted">No asignada</span>
+                            }
+                        </div>
+                        <div class="academic-detail">
+                            @if (Model.Estudiante.Carrera?.Facultad != null)
+                            {
+                                <small>Facultad a la que pertenece la carrera del estudiante</small>
+                            }
+                            else
+                            {
+                                <small>El estudiante no tiene carrera asignada</small>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="academic-item">
+                        <div class="academic-label">
+                            <i class="fas fa-graduation-cap me-2"></i>
+                            Carrera
+                        </div>
+                        <div class="academic-value">
+                            @if (Model.Estudiante.Carrera != null)
+                            {
+                                <span class="career-name">@Model.Estudiante.Carrera.Nombre</span>
+                                <div class="career-badges">
+                                    <span class="badge-code">@Model.Estudiante.Carrera.Codigo</span>
+                                    <span class="badge-duration">@Model.Estudiante.Carrera.DuracionAnios años</span>
+                                    @if (Model.Estudiante.Carrera.Activa)
+                                    {
+                                        <span class="badge-status active">Activa</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge-status inactive">Inactiva</span>
+                                    }
+                                </div>
+                            }
+                            else
+                            {
+                                <span class="text-muted">No asignada</span>
+                            }
+                        </div>
+                        <div class="academic-detail">
+                            @if (Model.Estudiante.Carrera?.Descripcion != null && !string.IsNullOrWhiteSpace(Model.Estudiante.Carrera.Descripcion))
+                            {
+                                <small>@Model.Estudiante.Carrera.Descripcion</small>
+                            }
+                            else if (Model.Estudiante.Carrera != null)
+                            {
+                                <small>Carrera del estudiante en el sistema académico</small>
+                            }
+                            else
+                            {
+                                <small>Es necesario asignar una carrera al estudiante</small>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Acciones Rápidas -->
+            <div class="quick-actions-enhanced">
+                <div class="actions-header">
+                    <h4>
+                        <i class="fas fa-bolt me-2"></i>
+                        Acciones Rápidas
+                    </h4>
+                </div>
+                <div class="actions-grid">
+                    <a asp-page="./Edit" asp-route-id="@Model.Estudiante.EstudianteID" class="action-quick edit">
+                        <div class="action-icon">
+                            <i class="fas fa-edit"></i>
+                        </div>
+                        <div class="action-content">
+                            <span class="action-title">Editar</span>
+                            <span class="action-desc">Modificar información</span>
+                        </div>
+                    </a>
+
+                    <button class="action-quick contact" onclick="contactStudent()">
+                        <div class="action-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="action-content">
+                            <span class="action-title">Contactar</span>
+                            <span class="action-desc">Enviar correo</span>
+                        </div>
+                    </button>
+
+                    <button class="action-quick print" onclick="printDetails()">
+                        <div class="action-icon">
+                            <i class="fas fa-print"></i>
+                        </div>
+                        <div class="action-content">
+                            <span class="action-title">Imprimir</span>
+                            <span class="action-desc">Generar reporte</span>
+                        </div>
+                    </button>
+
+                    <button class="action-quick toggle" onclick="toggleStatus()">
+                        <div class="action-icon">
+                            @if (Model.Estudiante.Activo)
+                            {
+                                <i class="fas fa-user-slash"></i>
+                            }
+                            else
+                            {
+                                <i class="fas fa-user-check"></i>
+                            }
+                        </div>
+                        <div class="action-content">
+                            @if (Model.Estudiante.Activo)
+                            {
+                                <span class="action-title">Desactivar</span>
+                                <span class="action-desc">Suspender estudiante</span>
+                            }
+                            else
+                            {
+                                <span class="action-title">Activar</span>
+                                <span class="action-desc">Habilitar estudiante</span>
+                            }
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Navegación -->
+<div class="container mt-4">
+    <div class="navigation-enhanced">
+        <div class="nav-content">
+            <a asp-page="./Index" class="nav-btn secondary">
+                <i class="fas fa-arrow-left me-2"></i>
+                <span>Volver a la Lista</span>
+            </a>
+
+            <div class="nav-actions">
+                <a asp-page="./Edit" asp-route-id="@Model.Estudiante.EstudianteID" class="nav-btn primary">
+                    <i class="fas fa-edit me-2"></i>
+                    <span>Editar Estudiante</span>
+                </a>
+
+                <button class="nav-btn danger" onclick="confirmDelete()">
+                    <i class="fas fa-trash me-2"></i>
+                    <span>Eliminar</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Confirmación de Eliminación -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content delete-modal-enhanced">
+            <div class="modal-body text-center">
+                <div class="delete-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <h3>¿Eliminar Estudiante?</h3>
+                <p>¿Estás seguro de que deseas eliminar a <strong>@Model.Estudiante.Nombres @Model.Estudiante.Apellidos</strong>?</p>
+                <p class="warning-text">Esta acción eliminará permanentemente todos los datos del estudiante y no se puede deshacer.</p>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-2"></i>
+                        Cancelar
+                    </button>
+                    <form method="post" style="display: inline;">
+                        <input type="hidden" name="id" value="@Model.Estudiante.EstudianteID">
+                        <button type="submit" class="btn btn-danger" formaction="/Estudiantes/Delete">
+                            <i class="fas fa-trash me-2"></i>
+                            Eliminar Definitivamente
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Contacto -->
+<div class="modal fade" id="contactModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content contact-modal-enhanced">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-envelope me-2"></i>
+                    Contactar Estudiante
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="contact-options">
+                    <a href="mailto:@Model.Estudiante.Email" class="contact-option">
+                        <div class="contact-icon email">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-info">
+                            <h6>Enviar Email</h6>
+                            <p>@Model.Estudiante.Email</p>
+                        </div>
+                    </a>
+
+                    <a href="tel:@Model.Estudiante.Telefono" class="contact-option">
+                        <div class="contact-icon phone">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-info">
+                            <h6>Llamar</h6>
+                            <p>@Model.Estudiante.Telefono</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Variables CSS */
+    :root {
+        --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --secondary-gradient: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
+        --success-gradient: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+        --warning-gradient: linear-gradient(45deg, #ffd89b 0%, #19547b 100%);
+        --danger-gradient: linear-gradient(45deg, #ff6b6b 0%, #ffa726 100%);
+        --shadow-soft: 0 10px 40px rgba(0,0,0,0.1);
+        --shadow-hover: 0 20px 60px rgba(0,0,0,0.15);
+        --border-radius: 20px;
+        --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Hero Section */
+    .details-hero-enhanced {
+        background: var(--primary-gradient);
+        color: white;
+        padding: 4rem 0;
+        margin-top: -2rem;
+        border-radius: 0 0 40px 40px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero-bg-pattern {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 40% 80%, rgba(255,255,255,0.1) 0%, transparent 50%);
+        animation: patternMove 20s linear infinite;
+    }
+
+    @@keyframes patternMove {
+        0% {
+            transform: translateX(0) translateY(0);
+        }
+
+        100% {
+            transform: translateX(-100px) translateY(-100px);
+        }
+    }
+
+    .hero-content-enhanced {
+        position: relative;
+        z-index: 2;
+    }
+
+    .hero-breadcrumb {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        font-size: 1rem;
+        animation: fadeInUp 0.6s ease-out;
+    }
+
+    .breadcrumb-link {
+        color: rgba(255,255,255,0.9);
+        text-decoration: none;
+        transition: var(--transition);
+    }
+
+        .breadcrumb-link:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+    .breadcrumb-current {
+        color: rgba(255,255,255,0.7);
+    }
+
+    .hero-title-enhanced {
+        font-size: 3rem;
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        animation: fadeInUp 0.6s ease-out 0.2s both;
+        text-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        line-height: 1.2;
+    }
+
+    .hero-subtitle-enhanced {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        opacity: 0.95;
+        line-height: 1.7;
+        animation: fadeInUp 0.6s ease-out 0.4s both;
+    }
+
+    .student-id {
+        display: block;
+        margin-top: 0.5rem;
+        font-size: 1rem;
+        opacity: 0.8;
+    }
+
+    .hero-status {
+        animation: fadeInUp 0.6s ease-out 0.6s both;
+    }
+
+    .status-badge-hero {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.8rem;
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255,255,255,0.3);
+    }
+
+        .status-badge-hero.active {
+            background: rgba(39, 174, 96, 0.2);
+            color: #4facfe;
+        }
+
+        .status-badge-hero.inactive {
+            background: rgba(231, 76, 60, 0.2);
+            color: #ff6b6b;
+        }
+
+    /* Avatar Hero */
+    .student-avatar-hero {
+        position: relative;
+        z-index: 2;
+        animation: fadeInUp 0.6s ease-out 0.8s both;
+    }
+
+    .avatar-container {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        margin: 0 auto 2rem auto;
+    }
+
+    .avatar-main {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.15);
+        backdrop-filter: blur(15px);
+        border: 3px solid rgba(255,255,255,0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4rem;
+        color: white;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+        animation: float 3s ease-in-out infinite;
+    }
+
+    .avatar-ring {
+        width: 180px;
+        height: 180px;
+        border: 2px solid rgba(255,255,255,0.2);
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: rotate 10s linear infinite;
+    }
+
+    .avatar-pulse {
+        width: 200px;
+        height: 200px;
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: pulse 2s ease-in-out infinite;
+    }
+
+    .avatar-info {
+        text-align: center;
+    }
+
+        .avatar-info h4 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .avatar-info p {
+            opacity: 0.8;
+            font-size: 1rem;
+        }
+
+    @@keyframes float {
+        0%, 100% {
+            transform: translate(-50%, -50%) translateY(0px);
+        }
+
+        50% {
+            transform: translate(-50%, -50%) translateY(-10px);
+        }
+    }
+
+    @@keyframes rotate {
+        0% {
+            transform: translate(-50%, -50%) rotate(0deg);
+        }
+
+        100% {
+            transform: translate(-50%, -50%) rotate(360deg);
+        }
+    }
+
+    @@keyframes pulse {
+        0%, 100% {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 0.1;
+        }
+
+        50% {
+            transform: translate(-50%, -50%) scale(1.1);
+            opacity: 0.3;
+        }
+    }
+
+    @@keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Información Card */
+    .info-card-enhanced {
+        background: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow-soft);
+        overflow: hidden;
+        border: 1px solid rgba(0,0,0,0.05);
+        margin-bottom: 2rem;
+        animation: slideInLeft 0.6s ease-out;
+    }
+
+    .card-header-enhanced {
+        background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+        padding: 2rem;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .header-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 18px;
+        background: var(--primary-gradient);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    }
+
+    .header-content h3 {
+        margin: 0 0 0.5rem 0;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #2c3e50;
+    }
+
+    .header-content p {
+        margin: 0;
+        color: #6c757d;
+        font-size: 1rem;
+    }
+
+    .card-body-enhanced {
+        padding: 2.5rem;
+    }
+
+    .info-grid {
+        display: grid;
+        gap: 2rem;
+    }
+
+    .info-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 1.5rem;
+        padding: 1.5rem;
+        background: linear-gradient(145deg, #f8f9fa, #ffffff);
+        border-radius: 15px;
+        border: 2px solid transparent;
+        transition: var(--transition);
+        position: relative;
+        overflow: hidden;
+    }
+
+        .info-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--primary-gradient);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 1;
+        }
+
+        .info-item:hover {
+            border-color: #667eea;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+            .info-item:hover::before {
+                opacity: 0.05;
+            }
+
+    .info-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+        background: var(--primary-gradient);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.2rem;
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        position: relative;
+        z-index: 2;
+        flex-shrink: 0;
+    }
+
+    .info-content {
+        flex: 1;
+        position: relative;
+        z-index: 2;
+    }
+
+        .info-content label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #6c757d;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-content value {
+            display: block;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2c3e50;
+            line-height: 1.4;
+        }
+
+    .email-value a,
+    .phone-value a {
+        color: #667eea;
+        text-decoration: none;
+        transition: var(--transition);
+    }
+
+        .email-value a:hover,
+        .phone-value a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+    .age-badge {
+        display: inline-block;
+        margin-left: 1rem;
+        padding: 0.3rem 0.8rem;
+        background: var(--success-gradient);
+        color: white;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 700;
+    }
+
+    /* Academic Card */
+    .academic-card-enhanced {
+        background: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow-soft);
+        overflow: hidden;
+        border: 1px solid rgba(0,0,0,0.05);
+        margin-bottom: 2rem;
+        animation: slideInRight 0.6s ease-out;
+    }
+
+    .academic-header {
+        background: linear-gradient(145deg, #667eea, #764ba2);
+        color: white;
+        padding: 2rem;
+        text-align: center;
+    }
+
+    .academic-icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1rem auto;
+        font-size: 2rem;
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255,255,255,0.3);
+    }
+
+    .academic-header h3 {
+        margin: 0;
+        font-size: 1.3rem;
+        font-weight: 700;
+    }
+
+    .academic-body {
+        padding: 2rem;
+    }
+
+    .academic-item {
+        padding: 1.5rem 0;
+        border-bottom: 1px solid #f8f9fa;
+    }
+
+        .academic-item:last-child {
+            border-bottom: none;
+        }
+
+    .academic-label {
+        display: flex;
+        align-items: center;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #6c757d;
+        margin-bottom: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .academic-value {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #2c3e50;
+        margin-bottom: 0.5rem;
+    }
+
+    .academic-detail {
+        font-size: 0.85rem;
+        color: #6c757d;
+        font-style: italic;
+    }
+
+    .status-active {
+        color: #27ae60;
+        font-weight: 700;
+    }
+
+    .status-inactive {
+        color: #e74c3c;
+        font-weight: 700;
+    }
+
+    .academic-value code {
+        background: #f8f9fa;
+        padding: 0.3rem 0.6rem;
+        border-radius: 6px;
+        font-family: 'Courier New', monospace;
+        color: #667eea;
+        border: 1px solid #e9ecef;
+    }
+
+    /* Quick Actions */
+    .quick-actions-enhanced {
+        background: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow-soft);
+        overflow: hidden;
+        border: 1px solid rgba(0,0,0,0.05);
+        animation: slideInRight 0.6s ease-out 0.2s both;
+    }
+
+    .actions-header {
+        background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+        padding: 1.5rem 2rem;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+        .actions-header h4 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+    .actions-grid {
+        padding: 1.5rem;
+        display: grid;
+        gap: 1rem;
+    }
+
+    .action-quick {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem 1.2rem;
+        border: 2px solid #f8f9fa;
+        border-radius: 12px;
+        background: white;
+        transition: var(--transition);
+        text-decoration: none;
+        color: inherit;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .action-quick::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .action-quick:hover::before {
+            left: 100%;
+        }
+
+        .action-quick.edit:hover {
+            border-color: #ffc107;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 193, 7, 0.3);
+        }
+
+        .action-quick.contact:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .action-quick.print:hover {
+            border-color: #6c757d;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(108, 117, 125, 0.3);
+        }
+
+        .action-quick.toggle:hover {
+            border-color: #e74c3c;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.3);
+        }
+
+    .action-icon {
+        width: 45px;
+        height: 45px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        transition: var(--transition);
+    }
+
+    .action-quick.edit .action-icon {
+        background: rgba(255, 193, 7, 0.1);
+        color: #ffc107;
+    }
+
+    .action-quick.contact .action-icon {
+        background: rgba(102, 126, 234, 0.1);
+        color: #667eea;
+    }
+
+    .action-quick.print .action-icon {
+        background: rgba(108, 117, 125, 0.1);
+        color: #6c757d;
+    }
+
+    .action-quick.toggle .action-icon {
+        background: rgba(231, 76, 60, 0.1);
+        color: #e74c3c;
+    }
+
+    .action-content {
+        flex: 1;
+    }
+
+    .action-title {
+        display: block;
+        font-weight: 700;
+        font-size: 1rem;
+        color: #2c3e50;
+        margin-bottom: 0.2rem;
+    }
+
+    .action-desc {
+        display: block;
+        font-size: 0.85rem;
+        color: #6c757d;
+    }
+
+    /* Navigation */
+    .navigation-enhanced {
+        background: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow-soft);
+        overflow: hidden;
+        border: 1px solid rgba(0,0,0,0.05);
+        margin-bottom: 3rem;
+        animation: slideInUp 0.6s ease-out 0.4s both;
+    }
+
+    .nav-content {
+        padding: 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .nav-actions {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .nav-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 1rem 2rem;
+        border-radius: 12px;
+        font-weight: 600;
+        transition: var(--transition);
+        text-decoration: none;
+        border: 2px solid transparent;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .nav-btn:hover::before {
+            left: 100%;
+        }
+
+        .nav-btn.secondary {
+            background: white;
+            color: #6c757d;
+            border-color: #e9ecef;
+        }
+
+            .nav-btn.secondary:hover {
+                border-color: #667eea;
+                color: #667eea;
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+
+        .nav-btn.primary {
+            background: var(--primary-gradient);
+            color: white;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+            .nav-btn.primary:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+                color: white;
+            }
+
+        .nav-btn.danger {
+            background: var(--danger-gradient);
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+            .nav-btn.danger:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 10px 25px rgba(255, 107, 107, 0.4);
+                color: white;
+            }
+
+    /* Modals */
+    .delete-modal-enhanced .modal-content,
+    .contact-modal-enhanced .modal-content {
+        border: none;
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        box-shadow: var(--shadow-soft);
+    }
+
+    .delete-icon {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: var(--danger-gradient);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 2rem auto;
+        color: white;
+        font-size: 3rem;
+        animation: dangerPulse 2s ease-in-out infinite;
+        box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+    }
+
+    @@keyframes dangerPulse {
+        0%, 100% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.05);
+        }
+    }
+
+    .delete-modal-enhanced h3 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #2c3e50;
+        margin-bottom: 1rem;
+    }
+
+    .delete-modal-enhanced p {
+        color: #6c757d;
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+    }
+
+    .warning-text {
+        color: #e74c3c !important;
+        font-weight: 600;
+        font-size: 0.95rem !important;
+        margin-bottom: 2.5rem !important;
+    }
+
+    .modal-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+        .modal-actions .btn {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+            .modal-actions .btn:hover {
+                transform: translateY(-2px);
+            }
+
+    .btn-cancel {
+        background: white;
+        color: #6c757d;
+        border-color: #e9ecef;
+    }
+
+        .btn-cancel:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+    .btn-danger {
+        background: var(--danger-gradient);
+        color: white;
+        box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+    }
+
+        .btn-danger:hover {
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.4);
+        }
+
+    /* Contact Modal */
+    .contact-modal-enhanced .modal-header {
+        background: var(--primary-gradient);
+        color: white;
+        border-bottom: none;
+    }
+
+    .contact-modal-enhanced .btn-close {
+        filter: invert(1);
+    }
+
+    .contact-options {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .contact-option {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 1.5rem;
+        border: 2px solid #f8f9fa;
+        border-radius: 15px;
+        text-decoration: none;
+        color: inherit;
+        transition: var(--transition);
+    }
+
+        .contact-option:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+    .contact-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: white;
+    }
+
+        .contact-icon.email {
+            background: var(--primary-gradient);
+        }
+
+        .contact-icon.phone {
+            background: var(--success-gradient);
+        }
+
+    .contact-info h6 {
+        margin: 0 0 0.5rem 0;
+        font-weight: 700;
+        color: #2c3e50;
+    }
+
+    .contact-info p {
+        margin: 0;
+        color: #6c757d;
+        font-size: 0.95rem;
+    }
+
+    /* Animations */
+    @@keyframes slideInLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @@keyframes slideInRight {
+        from {
+            opacity: 0;
+            transform: translateX(50px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @@keyframes slideInUp {
+        from {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Responsive */
+    @@media (max-width: 992px) {
+        .hero-title-enhanced {
+            font-size: 2.5rem;
+        }
+
+        .nav-content {
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .nav-actions {
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .nav-btn {
+            justify-content: center;
+        }
+
+        .avatar-container {
+            width: 150px;
+            height: 150px;
+        }
+
+        .avatar-main {
+            width: 120px;
+            height: 120px;
+            font-size: 3rem;
+        }
+
+        .avatar-ring {
+            width: 140px;
+            height: 140px;
+        }
+
+        .avatar-pulse {
+            width: 150px;
+            height: 150px;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .hero-breadcrumb {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .info-item {
+            flex-direction: column;
+            text-align: center;
+            gap: 1rem;
+        }
+
+        .actions-grid {
+            padding: 1rem;
+        }
+
+        .action-quick {
+            flex-direction: column;
+            text-align: center;
+            gap: 0.8rem;
+            padding: 1.5rem 1rem;
+        }
+
+        .modal-actions {
+            flex-direction: column;
+        }
+
+            .modal-actions .btn {
+                width: 100%;
+            }
+
+        .contact-option {
+            flex-direction: column;
+            text-align: center;
+            gap: 1rem;
+        }
+    }
+
+    /* Print Styles */
+    @@media print {
+        .details-hero-enhanced, .quick-actions-enhanced, .navigation-enhanced {
+            display: none !important;
+        }
+
+        .info-card-enhanced,
+        .academic-card-enhanced {
+            break-inside: avoid;
+            box-shadow: none !important;
+            border: 1px solid #ddd !important;
+        }
+    }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        initializeAnimations();
+        setupInteractions();
+    });
+
+    function initializeAnimations() {
+        // Animar elementos al cargar
+        const animatedElements = document.querySelectorAll('.info-item, .academic-item, .action-quick');
+        animatedElements.forEach((element, index) => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                element.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+                element.style.opacity = '1';
+                element.style.transform = 'translateY(0)';
+            }, index * 100 + 1000);
+        });
+    }
+
+    function setupInteractions() {
+        // Efectos hover mejorados
+        const actionQuicks = document.querySelectorAll('.action-quick');
+        actionQuicks.forEach(action => {
+            action.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px) scale(1.02)';
+            });
+
+            action.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Efectos para info items
+        const infoItems = document.querySelectorAll('.info-item');
+        infoItems.forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px) scale(1.02)';
+            });
+
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    }
+
+    function contactStudent() {
+        const modal = new bootstrap.Modal(document.getElementById('contactModal'));
+        modal.show();
+    }
+
+    function printDetails() {
+        // Ocultar elementos no necesarios para impresión
+        const elementsToHide = document.querySelectorAll('.details-hero-enhanced, .quick-actions-enhanced, .navigation-enhanced');
+        elementsToHide.forEach(el => el.style.display = 'none');
+
+        // Imprimir
+        window.print();
+
+        // Restaurar elementos
+        setTimeout(() => {
+            elementsToHide.forEach(el => el.style.display = '');
+        }, 100);
+    }
+
+    function toggleStatus() {
+        // Aquí iría la lógica para cambiar el estado del estudiante
+        // Por ahora solo mostramos una alerta
+        const isActive = @Model.Estudiante.Activo.ToString().ToLower();
+        const action = isActive ? 'desactivar' : 'activar';
+        const message = `¿Estás seguro de que deseas ${action} a este estudiante?`;
+
+        if (confirm(message)) {
+            // Aquí enviarías la petición al servidor
+            alert(`Funcionalidad para ${action} estudiante - implementar en el backend`);
+        }
+    }
+
+    function confirmDelete() {
+        const modal = new bootstrap.Modal(document.getElementById('deleteModal'));
+        modal.show();
+    }
+
+    // Animación del avatar
+    function animateAvatar() {
+        const avatar = document.querySelector('.avatar-main');
+        if (avatar) {
+            avatar.style.transform = 'translate(-50%, -50%) scale(1.1)';
+            setTimeout(() => {
+                avatar.style.transform = 'translate(-50%, -50%) scale(1)';
+            }, 200);
+        }
+    }
+
+    // Ejecutar animación del avatar cada 5 segundos
+    setInterval(animateAvatar, 5000);
+
+    // Efecto de escritura para el título
+    function typeWriter() {
+        const title = document.querySelector('.hero-title-enhanced');
+        if (title) {
+            const text = title.textContent;
+            title.textContent = '';
+            title.style.opacity = '1';
+
+            for (let i = 0; i < text.length; i++) {
+                setTimeout(() => {
+                    title.textContent += text.charAt(i);
+                }, i * 50);
+            }
+        }
+    }
+
+    // Ejecutar efecto de escritura después de 1 segundo
+    setTimeout(typeWriter, 1000);
+</script>

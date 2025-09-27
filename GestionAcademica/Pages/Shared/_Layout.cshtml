@@ -1,0 +1,762 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Universidad KJD</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f8f9fa;
+        }
+
+        .navbar-custom {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: white !important;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+            .navbar-brand:hover {
+                color: #f8f9fa !important;
+            }
+
+        .navbar-nav .nav-link {
+            color: rgba(255,255,255,0.9) !important;
+            font-weight: 500;
+            padding: 0.8rem 1.2rem !important;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            margin: 0 0.2rem;
+        }
+
+            .navbar-nav .nav-link:hover {
+                background: rgba(255,255,255,0.1);
+                color: white !important;
+                transform: translateY(-1px);
+            }
+
+            .navbar-nav .nav-link.active {
+                background: rgba(255,255,255,0.2);
+                color: white !important;
+            }
+
+        .dropdown-menu {
+            background: white;
+            border: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
+            min-width: 220px;
+        }
+
+        .dropdown-item {
+            padding: 0.8rem 1.5rem;
+            color: #2c3e50;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+            .dropdown-item:hover {
+                background: #f8f9fa;
+                color: var(--primary-color);
+                padding-left: 2rem;
+            }
+
+            .dropdown-item i {
+                width: 20px;
+                margin-right: 0.5rem;
+            }
+
+        .usuario-info {
+            background: rgba(255,255,255,0.1);
+            border-radius: 25px;
+            padding: 0.5rem 1rem;
+            margin-left: 1rem;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+            .usuario-info .nav-link {
+                color: white !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+
+        .rol-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            margin-left: 0.5rem;
+            font-weight: 600;
+        }
+
+        .rol-administrador {
+            background: rgba(220, 53, 69, 0.8);
+            color: white;
+        }
+
+        .rol-docente {
+            background: rgba(40, 167, 69, 0.8);
+            color: white;
+        }
+
+        .main-content {
+            flex: 1;
+            background-color: #f8f9fa;
+            padding: 0;
+            min-height: calc(100vh - 200px);
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            }
+
+        .btn-custom {
+            border-radius: 25px;
+            padding: 0.5rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary-custom {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            color: white;
+        }
+
+            .btn-primary-custom:hover {
+                background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+                transform: translateY(-2px);
+            }
+
+        .table-custom {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+            .table-custom thead {
+                background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+                color: white;
+            }
+
+            .table-custom tbody tr:hover {
+                background-color: rgba(102, 126, 234, 0.1);
+                transform: scale(1.01);
+                transition: all 0.2s ease;
+            }
+
+        .footer {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 3rem 0 2rem 0;
+            margin-top: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .footer::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: radial-gradient(circle at 20% 80%, rgba(255,255,255,0.05) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255,255,255,0.05) 0%, transparent 50%);
+                pointer-events: none;
+            }
+
+        .footer-brand h5 {
+            color: white;
+            font-weight: 700;
+            font-size: 1.4rem;
+        }
+
+        .footer-subtitle {
+            color: white;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: end;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .footer-link {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+            .footer-link:hover {
+                color: white;
+                background: rgba(255,255,255,0.1);
+                transform: translateY(-2px);
+            }
+
+        .footer-info p {
+            color: white;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .footer-version {
+            color: white;
+            font-weight: 400;
+        }
+
+        .footer-divider {
+            border-color: rgba(255,255,255,0.2);
+            margin: 2rem 0 1.5rem 0;
+        }
+
+        .footer-social {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .footer-social-text {
+            color: white;
+            font-weight: 500;
+        }
+
+        .footer-tagline {
+            color: white;
+            opacity: 0.9;
+        }
+
+        .social-link:hover {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .stats-card {
+            background: linear-gradient(45deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+        }
+
+        .navbar-toggler {
+            border: 2px solid rgba(255,255,255,0.3);
+            padding: 0.5rem;
+        }
+
+            .navbar-toggler:focus {
+                box-shadow: 0 0 0 0.2rem rgba(255,255,255,0.25);
+            }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+        /* Animaciones */
+        @@keyframes slideDown {
+            from
+
+        {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        }
+
+        .dropdown-menu.show {
+            animation: slideDown 0.3s ease;
+        }
+
+        /* Responsive improvements */
+        @@media (max-width: 991px) {
+            .usuario-info
+
+        {
+            margin-left: 0;
+            margin-top: 1rem;
+        }
+
+        .navbar-nav {
+            text-align: center;
+        }
+
+            .navbar-nav .nav-item {
+                margin: 0.2rem 0;
+            }
+
+        .footer-links {
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .footer-social {
+            margin-top: 1rem;
+        }
+
+        }
+
+        @@media (max-width: 768px) {
+            .footer
+
+        {
+            padding: 2rem 0 1.5rem 0;
+        }
+
+        .footer-links {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer-brand {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+        <div class="container">
+            <a class="navbar-brand" asp-page="/Home/Index">
+                <i class="fas fa-graduation-cap"></i>
+                Universidad KJD
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-page="/Home/Index">
+                            <i class="fas fa-home me-1"></i>
+                            Inicio
+                        </a>
+                    </li>
+
+                    @if (Context.Session.GetString("DocenteLogueado") != null)
+                    {
+                        var rolDocente = Context.Session.GetString("DocenteRol") ?? "Docente";
+
+                        @* Menú de Administrador *@
+                        if (rolDocente == "Administrador")
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                    <i class="fas fa-users-cog me-1"></i>
+                                    Gestión de Usuarios
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item" asp-page="/Docentes/Index">
+                                            <i class="fas fa-chalkboard-teacher"></i>Gestión de Docentes
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-page="/Estudiantes/Index">
+                                            <i class="fas fa-user-graduate"></i>Gestión de Estudiantes
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                    <i class="fas fa-graduation-cap me-1"></i>
+                                    Gestión Académica
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item" asp-page="/Materias/Index">
+                                            <i class="fas fa-book"></i>Gestión de Materias
+                                        </a>
+                                    </li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <a class="dropdown-item" asp-page="/AsignacionesAdmin/Index">
+                                            <i class="fas fa-user-tie"></i>Asignar Docentes a Materias
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+
+                        @* Menú de Docente *@
+                        if (rolDocente == "Docente")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-page="/Materias/Index">
+                                    <i class="fas fa-book me-1"></i>
+                                    Mis Materias
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-page="/Reportes/Index">
+                                    <i class="fas fa-file-alt me-1"></i>
+                                    Reportes
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-page="/Configuracion/Index">
+                                    <i class="fas fa-cogs me-1"></i>
+                                    Configuración
+                                </a>
+                            </li>
+                        }
+
+                        @* Menú común para ambos roles *@
+                        if (rolDocente == "Administrador")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-page="/Reportes/Index">
+                                    <i class="fas fa-file-alt me-1"></i>
+                                    Reportes
+                                </a>
+                            </li>
+                        }
+                    }
+                </ul>
+
+                <!-- Usuario info o login -->
+                <ul class="navbar-nav">
+                    @if (Context.Session.GetString("DocenteLogueado") != null)
+                    {
+                        var nombreDocente = Context.Session.GetString("DocenteLogueado");
+                        var rolDocente = Context.Session.GetString("DocenteRol") ?? "Docente";
+                        var iconoRol = rolDocente == "Administrador" ? "fas fa-crown" : "fas fa-chalkboard-teacher";
+                        var claseRol = rolDocente == "Administrador" ? "rol-administrador" : "rol-docente";
+
+                        <li class="nav-item">
+                            <div class="usuario-info">
+                                <div class="dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                        <i class="@iconoRol me-2"></i>
+                                        @nombreDocente
+                                        <span class="rol-badge @claseRol">@rolDocente</span>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li>
+                                            <h6 class="dropdown-header">
+                                                <i class="@iconoRol me-2"></i>@nombreDocente
+                                            </h6>
+                                        </li>
+                                        <li>
+                                            <span class="dropdown-item-text">
+                                                <small class="text-muted">Rol: @rolDocente</small>
+                                            </span>
+                                        </li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li>
+                                            <a class="dropdown-item" asp-page="/Perfil/Index">
+                                                <i class="fas fa-user-edit"></i>Mi Perfil
+                                            </a>
+                                        </li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li>
+                                            <a class="dropdown-item text-danger" asp-page="/Logout">
+                                                <i class="fas fa-sign-out-alt"></i>Cerrar Sesión
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="btn btn-outline-light" asp-page="/Login">
+                                <i class="fas fa-sign-in-alt me-2"></i>
+                                Iniciar Sesión
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        @RenderBody()
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="footer-brand">
+                        <h5 class="mb-2">
+                            <i class="fas fa-graduation-cap me-2"></i>
+                            Universidad KJD
+                        </h5>
+                        <p class="footer-subtitle mb-0">Sistema de Gestión Académica</p>
+                        <small class="footer-tagline">Excelencia en educación y tecnología</small>
+                    </div>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="footer-links mb-3">
+                        <a href="#" class="footer-link me-3">
+                            <i class="fas fa-info-circle me-1"></i>
+                            Acerca de
+                        </a>
+                        <a href="#" class="footer-link me-3">
+                            <i class="fas fa-headset me-1"></i>
+                            Soporte
+                        </a>
+                        <a href="#" class="footer-link">
+                            <i class="fas fa-shield-alt me-1"></i>
+                            Privacidad
+                        </a>
+                    </div>
+                    <div class="footer-info">
+                        <p class="mb-1">&copy; @DateTime.Now.Year Universidad KJD. Todos los derechos reservados.</p>
+                        <small class="footer-version">Versión 1.0.2 - Sistema Académico</small>
+                    </div>
+                </div>
+            </div>
+            <hr class="footer-divider my-4">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <div class="footer-social">
+                        <small class="footer-social-text me-3">Síguenos en:</small>
+                        <a href="#" class="social-link me-2" title="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link me-2" title="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link me-2" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link" title="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar dropdowns de Bootstrap
+            var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'));
+            var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
+                return new bootstrap.Dropdown(dropdownToggleEl, {
+                    autoClose: true
+                });
+            });
+
+            // Destacar página activa
+            const currentPath = window.location.pathname.toLowerCase();
+            const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+
+            navLinks.forEach(link => {
+                const aspPage = link.getAttribute('asp-page');
+                if (aspPage) {
+                    const pagePath = aspPage.toLowerCase();
+                    if (currentPath.includes(pagePath.replace('/index', '')) ||
+                        (pagePath === '/home/index' && (currentPath === '/' || currentPath === '/home'))) {
+                        link.classList.add('active');
+                    }
+                }
+            });
+
+            // Destacar dropdown activo
+            const dropdownItems = document.querySelectorAll('.dropdown-item');
+            dropdownItems.forEach(item => {
+                const aspPage = item.getAttribute('asp-page');
+                if (aspPage) {
+                    const pagePath = aspPage.toLowerCase();
+                    if (currentPath.includes(pagePath.replace('/index', ''))) {
+                        const parentDropdown = item.closest('.dropdown').querySelector('.dropdown-toggle');
+                        if (parentDropdown) {
+                            parentDropdown.classList.add('active');
+                        }
+                    }
+                }
+            });
+
+            // Animación de entrada para las cards
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+
+            // Cerrar navbar en móvil después de hacer click
+            document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+                link.addEventListener('click', function() {
+                    const navbarCollapse = document.querySelector('.navbar-collapse');
+                    if (navbarCollapse.classList.contains('show')) {
+                        const bsCollapse = new bootstrap.Collapse(navbarCollapse);
+                        bsCollapse.hide();
+                    }
+                });
+            });
+
+            // Efecto hover mejorado para dropdowns - más fácil de usar
+            document.querySelectorAll('.dropdown').forEach(dropdown => {
+                let hoverTimeout;
+
+                dropdown.addEventListener('mouseenter', function() {
+                    if (window.innerWidth > 991) {
+                        clearTimeout(hoverTimeout);
+                        const dropdownToggle = this.querySelector('.dropdown-toggle');
+                        const dropdownMenu = this.querySelector('.dropdown-menu');
+                        dropdownToggle.setAttribute('aria-expanded', 'true');
+                        dropdownMenu.classList.add('show');
+                    }
+                });
+
+                dropdown.addEventListener('mouseleave', function() {
+                    if (window.innerWidth > 991) {
+                        const dropdownToggle = this.querySelector('.dropdown-toggle');
+                        const dropdownMenu = this.querySelector('.dropdown-menu');
+
+                        // Delay antes de cerrar para dar tiempo al usuario
+                        hoverTimeout = setTimeout(() => {
+                            dropdownToggle.setAttribute('aria-expanded', 'false');
+                            dropdownMenu.classList.remove('show');
+                        }, 300); // 300ms de delay
+                    }
+                });
+
+                // Mantener abierto si el mouse está sobre el menú
+                const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+                if (dropdownMenu) {
+                    dropdownMenu.addEventListener('mouseenter', function() {
+                        clearTimeout(hoverTimeout);
+                    });
+
+                    dropdownMenu.addEventListener('mouseleave', function() {
+                        if (window.innerWidth > 991) {
+                            const dropdownToggle = dropdown.querySelector('.dropdown-toggle');
+                            hoverTimeout = setTimeout(() => {
+                                dropdownToggle.setAttribute('aria-expanded', 'false');
+                                this.classList.remove('show');
+                            }, 200);
+                        }
+                    });
+                }
+            });
+        });
+
+        // Confirmación para eliminar
+        function confirmarEliminar(nombre) {
+            return confirm(`¿Estás seguro de que deseas eliminar al estudiante ${nombre}?`);
+        }
+
+        // Función para mostrar mensajes de éxito/error
+        function mostrarMensaje(mensaje, tipo = 'success') {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${tipo} alert-dismissible fade show position-fixed`;
+            alertDiv.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+            alertDiv.innerHTML = `
+                ${mensaje}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            document.body.appendChild(alertDiv);
+
+            // Auto-remover después de 5 segundos
+            setTimeout(() => {
+                if (alertDiv && alertDiv.parentNode) {
+                    alertDiv.remove();
+                }
+            }, 5000);
+        }
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,617 @@
+﻿@page
+@model GestionAcademica.Pages.Docentes.CreateModel
+@{
+    ViewData["Title"] = "Crear Nuevo Docente";
+}
+
+<!-- Header Section -->
+<div class="create-hero">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <i class="fas fa-user-plus me-2"></i>
+                        Nuevo Docente
+                    </div>
+                    <h1 class="hero-title">
+                        <i class="fas fa-chalkboard-teacher me-3"></i>
+                        Crear Nuevo Docente
+                    </h1>
+                    <p class="hero-subtitle">
+                        Registra un nuevo docente en el sistema y asígnalo automáticamente a la facultad seleccionada.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 text-end">
+                <a asp-page="./Index" class="btn btn-back">
+                    <i class="fas fa-arrow-left me-2"></i>
+                    Volver a Docentes
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Formulario -->
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="form-container">
+                <form method="post" id="docenteForm">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                    <!-- Alert Messages -->
+                    @if (TempData["ErrorMessage"] != null)
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show mb-4">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            @TempData["ErrorMessage"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    }
+
+                    <div class="row g-4">
+                        <!-- Información Personal -->
+                        <div class="col-12">
+                            <div class="form-section">
+                                <div class="section-header">
+                                    <div class="section-icon">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="section-info">
+                                        <h4 class="section-title">Información Personal</h4>
+                                        <p class="section-subtitle">Datos básicos del docente</p>
+                                    </div>
+                                </div>
+
+                                <div class="section-content">
+                                    <div class="row g-4">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="DocenteInput.Nombres" class="form-label">
+                                                    <i class="fas fa-user me-2"></i>Nombres
+                                                </label>
+                                                <input asp-for="DocenteInput.Nombres" class="form-control"
+                                                       placeholder="Ingrese los nombres" maxlength="100" required
+                                                       onkeypress="return validarSoloLetras(event)" 
+                                                       onpaste="return false">
+                                                <span asp-validation-for="DocenteInput.Nombres" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="DocenteInput.Apellidos" class="form-label">
+                                                    <i class="fas fa-user me-2"></i>Apellidos
+                                                </label>
+                                                <input asp-for="DocenteInput.Apellidos" class="form-control"
+                                                       placeholder="Ingrese los apellidos" maxlength="100" required
+                                                       onkeypress="return validarSoloLetras(event)"
+                                                       onpaste="return false">
+                                                <span asp-validation-for="DocenteInput.Apellidos" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Información de Contacto -->
+                        <div class="col-12">
+                            <div class="form-section">
+                                <div class="section-header">
+                                    <div class="section-icon">
+                                        <i class="fas fa-address-book"></i>
+                                    </div>
+                                    <div class="section-info">
+                                        <h4 class="section-title">Información de Contacto</h4>
+                                        <p class="section-subtitle">Email y teléfono del docente</p>
+                                    </div>
+                                </div>
+
+                                <div class="section-content">
+                                    <div class="row g-4">
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <label asp-for="DocenteInput.Email" class="form-label">
+                                                    <i class="fas fa-envelope me-2"></i>Email
+                                                </label>
+                                                <input asp-for="DocenteInput.Email" type="email" class="form-control"
+                                                       placeholder="ejemplo@universidad.edu" maxlength="150" required id="emailInput"
+                                                       onblur="validarEmailBasico(this)">
+                                                <span asp-validation-for="DocenteInput.Email" class="text-danger"></span>
+                                                <div id="emailValidation" class="mt-1"></div>
+                                                <div class="form-text">El email debe ser único en el sistema</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label asp-for="DocenteInput.Telefono" class="form-label">
+                                                    <i class="fas fa-phone me-2"></i>Teléfono
+                                                </label>
+                                                <input asp-for="DocenteInput.Telefono" type="tel" class="form-control"
+                                                       placeholder="2234-5678" maxlength="20"
+                                                       onkeypress="return validarSoloNumeros(event)"
+                                                       onpaste="return false">
+                                                <span asp-validation-for="DocenteInput.Telefono" class="text-danger"></span>
+                                                <div class="form-text">Opcional</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Información Académica y Seguridad -->
+                        <div class="col-12">
+                            <div class="form-section">
+                                <div class="section-header">
+                                    <div class="section-icon">
+                                        <i class="fas fa-university"></i>
+                                    </div>
+                                    <div class="section-info">
+                                        <h4 class="section-title">Información Académica</h4>
+                                        <p class="section-subtitle">Facultad y credenciales de acceso</p>
+                                    </div>
+                                </div>
+
+                                <div class="section-content">
+                                    <div class="row g-4">
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <label asp-for="DocenteInput.FacultadID" class="form-label">
+                                                    <i class="fas fa-building me-2"></i>Facultad
+                                                </label>
+                                                <select asp-for="DocenteInput.FacultadID" asp-items="Model.FacultadesList"
+                                                        class="form-select" required>
+                                                    <option value="">-- Seleccione una facultad --</option>
+                                                </select>
+                                                <span asp-validation-for="DocenteInput.FacultadID" class="text-danger"></span>
+                                                <div class="form-text">El docente será asignado automáticamente a esta facultad</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label asp-for="DocenteInput.Contraseña" class="form-label">
+                                                    <i class="fas fa-lock me-2"></i>Contraseña
+                                                </label>
+                                                <div class="input-group">
+                                                    <input asp-for="DocenteInput.Contraseña" type="password" class="form-control"
+                                                           placeholder="Mínimo 6 caracteres" required id="passwordInput"
+                                                           oninput="validarContraseña(this)">
+                                                    <button type="button" class="btn btn-outline-secondary" id="togglePassword" onclick="cambiarVisibilidadPassword()">
+                                                        <i class="fas fa-eye" id="toggleIcon"></i>
+                                                    </button>
+                                                </div>
+                                                <span asp-validation-for="DocenteInput.Contraseña" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Información del Sistema -->
+                        <div class="col-12">
+                            <div class="info-alert">
+                                <div class="alert-icon">
+                                    <i class="fas fa-info-circle"></i>
+                                </div>
+                                <div class="alert-content">
+                                    <h6 class="alert-heading mb-2">
+                                        <strong>Información importante:</strong>
+                                    </h6>
+                                    <ul class="mb-0">
+                                        <li>El docente será creado con rol de <strong>"Docente"</strong> (no Administrador)</li>
+                                        <li>Se asignará automáticamente a la facultad seleccionada</li>
+                                        <li>El estado inicial será <strong>"Activo"</strong></li>
+                                        <li>El email debe ser único en el sistema</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Botones de acción -->
+                        <div class="col-12">
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-create" id="submitBtn" onclick="return validarTodoElFormulario()">
+                                    <i class="fas fa-user-plus me-2"></i>
+                                    Crear Docente
+                                </button>
+                                <a asp-page="./Index" class="btn btn-cancel">
+                                    <i class="fas fa-times me-2"></i>
+                                    Cancelar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Hero Section */
+    .create-hero {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        color: white;
+        padding: 3rem 0;
+        margin-top: -2rem;
+        border-radius: 0 0 30px 30px;
+        box-shadow: 0 8px 32px rgba(40, 167, 69, 0.3);
+    }
+
+    .hero-badge {
+        display: inline-block;
+        padding: 0.5rem 1.5rem;
+        background: rgba(255,255,255,0.2);
+        border: 1px solid rgba(255,255,255,0.3);
+        border-radius: 50px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        line-height: 1.2;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        line-height: 1.6;
+    }
+
+    .btn-back {
+        background: rgba(255,255,255,0.2);
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255,255,255,0.3);
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 15px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .btn-back:hover {
+        background: rgba(255,255,255,0.3);
+        transform: translateY(-2px);
+        color: white;
+    }
+
+    /* Formulario */
+    .form-container {
+        background: white;
+        border-radius: 20px;
+        padding: 3rem;
+        box-shadow: 0 15px 50px rgba(0,0,0,0.1);
+        border: 1px solid #f0f0f0;
+        animation: slideInUp 0.6s ease-out;
+    }
+
+    .form-section {
+        background: #f8f9fa;
+        border-radius: 15px;
+        padding: 2rem;
+        border-left: 4px solid #28a745;
+        margin-bottom: 2rem;
+    }
+
+    .section-title {
+        color: #2c3e50;
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #e9ecef;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+    }
+
+    .form-label i {
+        color: #28a745;
+        width: 20px;
+    }
+
+    .form-control, .form-select {
+        border: 2px solid #e9ecef;
+        border-radius: 12px;
+        padding: 0.8rem 1rem;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: #28a745;
+        box-shadow: 0 0 0 0.25rem rgba(40, 167, 69, 0.15);
+    }
+
+    .input-group .btn {
+        border: 2px solid #e9ecef;
+        border-left: none;
+        border-radius: 0 12px 12px 0;
+    }
+
+    .form-text {
+        font-size: 0.85rem;
+        color: #6c757d;
+        margin-top: 0.25rem;
+    }
+
+    .text-danger {
+        font-size: 0.85rem;
+        margin-top: 0.25rem;
+    }
+
+    /* Botones de acción */
+    .form-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        padding-top: 2rem;
+        border-top: 2px solid #e9ecef;
+        margin-top: 2rem;
+    }
+
+    .btn-create {
+        background: linear-gradient(45deg, #28a745, #20c997);
+        border: none;
+        color: white;
+        padding: 1rem 2.5rem;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
+    }
+
+    .btn-create:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(40, 167, 69, 0.4);
+    }
+
+    .btn-cancel {
+        background: #6c757d;
+        border: none;
+        color: white;
+        padding: 1rem 2.5rem;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .btn-cancel:hover {
+        background: #5a6268;
+        transform: translateY(-3px);
+        color: white;
+    }
+
+    /* Alert personalizado */
+    .alert-info {
+        background: linear-gradient(135deg, #d1ecf1, #bee5eb);
+        border: 1px solid #b6d4db;
+        border-radius: 15px;
+        padding: 1.5rem;
+    }
+
+    .alert-heading {
+        color: #0c5460;
+        margin-bottom: 1rem;
+    }
+
+    /* Responsive */
+    @@media (max-width: 768px) {
+        .hero-title {
+            font-size: 1.8rem;
+        }
+
+        .form-container {
+            padding: 2rem;
+        }
+
+        .form-actions {
+            flex-direction: column;
+        }
+
+        .btn-create, .btn-cancel {
+            width: 100%;
+        }
+    }
+
+    /* Animaciones */
+    @@keyframes slideInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Efectos adicionales */
+    .form-section:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+    }
+
+    .form-control:hover, .form-select:hover {
+        border-color: #20c997;
+    }
+</style>
+
+<script type="text/javascript">
+function validarSoloLetras(evento) {
+    var codigo = evento.keyCode;
+    var caracter = String.fromCharCode(codigo);
+    
+    if ((codigo >= 65 && codigo <= 90) || 
+        (codigo >= 97 && codigo <= 122) || 
+        codigo == 32 || 
+        codigo == 241 || codigo == 209 || 
+        codigo == 225 || codigo == 193 || 
+        codigo == 233 || codigo == 201 || 
+        codigo == 237 || codigo == 205 || 
+        codigo == 243 || codigo == 211 || 
+        codigo == 250 || codigo == 218) {
+        return true;
+    } else {
+        alert("Solo se permiten letras y espacios");
+        return false;
+    }
+}
+
+function validarSoloNumeros(evento) {
+    var codigo = evento.keyCode;
+    
+    if ((codigo >= 48 && codigo <= 57) || 
+        codigo == 45 || 
+        codigo == 32) {
+        return true;
+    } else {
+        alert("Solo se permiten números, guiones y espacios");
+        return false;
+    }
+}
+
+function validarEmailBasico(input) {
+    var email = input.value;
+    var validacion = document.getElementById('emailValidation');
+    
+    if (email.length > 0) {
+        var tieneArroba = email.indexOf('@@') > 0;
+        var tienePunto = email.indexOf('.') > email.indexOf('@@');
+        
+        if (tieneArroba && tienePunto) {
+            validacion.innerHTML = '<small class="text-success">Email válido</small>';
+            input.classList.remove('is-invalid');
+            input.classList.add('is-valid');
+        } else {
+            validacion.innerHTML = '<small class="text-danger">Email no válido</small>';
+            input.classList.add('is-invalid');
+        }
+    } else {
+        validacion.innerHTML = '';
+        input.classList.remove('is-invalid', 'is-valid');
+    }
+}
+
+function validarContraseña(input) {
+    var password = input.value;
+    
+    if (password.length > 0 && password.length < 6) {
+        input.classList.add('is-invalid');
+        alert("La contraseña debe tener al menos 6 caracteres");
+    } else if (password.length >= 6) {
+        input.classList.remove('is-invalid');
+        input.classList.add('is-valid');
+    } else {
+        input.classList.remove('is-invalid', 'is-valid');
+    }
+}
+
+function cambiarVisibilidadPassword() {
+    var passwordInput = document.getElementById('passwordInput');
+    var toggleButton = document.getElementById('togglePassword');
+    var icono = document.getElementById('toggleIcon');
+    
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        icono.classList.remove('fa-eye');
+        icono.classList.add('fa-eye-slash');
+    } else {
+        passwordInput.type = 'password';
+        icono.classList.remove('fa-eye-slash');
+        icono.classList.add('fa-eye');
+    }
+}
+
+function validarTodoElFormulario() {
+    var inputNombres = document.querySelector('input[name="DocenteInput.Nombres"]');
+    var inputApellidos = document.querySelector('input[name="DocenteInput.Apellidos"]');
+    var inputEmail = document.getElementById('emailInput');
+    var inputPassword = document.getElementById('passwordInput');
+    var selectFacultad = document.querySelector('select[name="DocenteInput.FacultadID"]');
+    
+    var nombres = inputNombres.value.trim();
+    var apellidos = inputApellidos.value.trim();
+    var email = inputEmail.value.trim();
+    var password = inputPassword.value;
+    var facultad = selectFacultad.value;
+    
+    var errores = "";
+    
+    if (nombres === "") {
+        errores += "- Los nombres son requeridos\n";
+    }
+    if (apellidos === "") {
+        errores += "- Los apellidos son requeridos\n";
+    }
+    if (email === "") {
+        errores += "- El email es requerido\n";
+    }
+    if (password === "") {
+        errores += "- La contraseña es requerida\n";
+    }
+    if (password.length > 0 && password.length < 6) {
+        errores += "- La contraseña debe tener al menos 6 caracteres\n";
+    }
+    if (facultad === "") {
+        errores += "- La facultad es requerida\n";
+    }
+    
+    if (errores !== "") {
+        alert("Por favor corrija los siguientes errores:\n\n" + errores);
+        return false;
+    }
+    
+    var submitBtn = document.getElementById('submitBtn');
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Creando...';
+    
+    return true;
+}
+
+// Efectos adicionales para mejorar UX
+document.addEventListener('DOMContentLoaded', function() {
+    const inputs = document.querySelectorAll('.form-control, .form-select');
+    inputs.forEach(input => {
+        input.addEventListener('focus', function() {
+            this.parentElement.style.transform = 'scale(1.02)';
+            this.parentElement.style.transition = 'transform 0.2s ease';
+        });
+
+        input.addEventListener('blur', function() {
+            this.parentElement.style.transform = 'scale(1)';
+        });
+    });
+});
+</script>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

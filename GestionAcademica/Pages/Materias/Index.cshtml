@@ -1,0 +1,489 @@
+﻿@page
+@model GestionAcademica.Pages.Materias.IndexModel
+
+@{
+    ViewData["Title"] = "Gestión de Materias";
+}
+
+<!-- Hero Header -->
+<div class="materias-hero">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <i class="fas fa-book me-2"></i>
+                        Panel de Administración
+                    </div>
+                    <h1 class="hero-title">
+                        <i class="fas fa-book-open me-3"></i>
+                        Gestión de Materias
+                    </h1>
+                    <p class="hero-subtitle">
+                        Administra las materias del sistema y asigna docentes responsables.
+                        <span class="total-count">Total: <strong>@Model.Materias.Count()</strong> materias</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 text-end">
+                <a asp-page="./Create" class="btn btn-create">
+                    <i class="fas fa-plus me-2"></i>
+                    Nueva Materia
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Mensajes -->
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="container mt-4">
+        <div class="alert alert-success alert-dismissible fade show">
+            <i class="fas fa-check-circle me-2"></i>
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="container mt-4">
+        <div class="alert alert-danger alert-dismissible fade show">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    </div>
+}
+
+<!-- Estadísticas rápidas -->
+<div class="container mt-4">
+    <div class="row g-3">
+        <div class="col-lg-3 col-md-6">
+            <div class="stat-card stat-primary">
+                <div class="stat-content">
+                    <div class="stat-number">@Model.Materias.Count()</div>
+                    <div class="stat-label">Total Materias</div>
+                </div>
+                <div class="stat-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="stat-card stat-success">
+                <div class="stat-content">
+                    <div class="stat-number">@Model.Materias.Count(m => m.Activa)</div>
+                    <div class="stat-label">Activas</div>
+                </div>
+                <div class="stat-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="stat-card stat-warning">
+                <div class="stat-content">
+                    <div class="stat-number">@Model.Materias.Count(m => !m.Activa)</div>
+                    <div class="stat-label">Inactivas</div>
+                </div>
+                <div class="stat-icon">
+                    <i class="fas fa-pause-circle"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="stat-card stat-info">
+                <div class="stat-content">
+                    <div class="stat-number">@Model.Materias.Sum(m => m.TotalAsignaciones)</div>
+                    <div class="stat-label">Total Asignaciones</div>
+                </div>
+                <div class="stat-icon">
+                    <i class="fas fa-tasks"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Lista de Materias -->
+<div class="container mt-5">
+    <div class="materias-container">
+        @if (Model.Materias.Any())
+        {
+            <div class="materias-grid">
+                @foreach (var materia in Model.Materias)
+                {
+                    <div class="materia-card @(materia.Activa ? "" : "inactive")">
+                        <div class="materia-header">
+                            <div class="materia-codigo">
+                                @materia.Codigo
+                            </div>
+                            <div class="materia-status">
+                                @if (materia.Activa)
+                                {
+                                    <span class="status-badge active">
+                                        <i class="fas fa-check-circle"></i> Activa
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="status-badge inactive">
+                                        <i class="fas fa-pause-circle"></i> Inactiva
+                                    </span>
+                                }
+                            </div>
+                        </div>
+
+                        <div class="materia-body">
+                            <h4 class="materia-nombre">
+                                @if (string.IsNullOrEmpty(materia.Nombre))
+                                {
+                                    <span class="text-muted">Sin nombre definido</span>
+                                }
+                                else
+                                {
+                                    @materia.Nombre
+                                }
+                            </h4>
+
+                            <div class="materia-info">
+                                <div class="info-item">
+                                    <i class="fas fa-chalkboard-teacher"></i>
+                                    <span>@(materia.Docente?.NombreCompleto ?? "Sin docente asignado")</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-tasks"></i>
+                                    <span>@materia.TotalAsignaciones asignaciones</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>@materia.Creditos créditos</span>
+                                </div>
+                                @if (!string.IsNullOrEmpty(materia.Periodo))
+                                {
+                                    <div class="info-item">
+                                        <i class="fas fa-calendar-alt"></i>
+                                        <span>Período: @materia.Periodo</span>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+                               <div class="materia-actions">
+            <!-- Botón Ver detalles - Todos pueden ver -->
+            <a asp-page="./Details" asp-route-id="@materia.MateriaID"
+               class="action-btn btn-info" title="Ver detalles">
+                <i class="fas fa-eye"></i>
+            </a>
+
+            <!-- Botones solo para ADMINISTRADORES -->
+                            @if (Model.EsAdministrador)
+                            {
+                    <a asp-page="./Edit" asp-route-id="@materia.MateriaID"
+                       class="action-btn btn-primary" title="Editar">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <form method="post" style="display: inline;">
+                        <input type="hidden" name="id" value="@materia.MateriaID" />
+                        <button type="submit" asp-page-handler="ToggleEstado"
+                                class="action-btn btn-warning"
+                                title="@(materia.Activa ? "Desactivar" : "Activar")"
+                                onclick="return confirm('¿Confirmar cambio de estado?')">
+                            <i class="fas fa-@(materia.Activa ? "pause" : "play")"></i>
+                        </button>
+                    </form>
+                    <a asp-page="./Delete" asp-route-id="@materia.MateriaID"
+                       class="action-btn btn-danger" title="Eliminar"
+                       onclick="return confirm('¿Estás seguro de eliminar @materia.Codigo?')">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                            }
+
+            <!-- Botón ASIGNACIONES - Solo para el docente dueño de la materia -->
+                            @if (!Model.EsAdministrador && materia.DocenteID.ToString() == HttpContext.Session.GetString("DocenteID"))
+                            {
+                    <a asp-page="/Asignaciones/Index" asp-route-materiaId="@materia.MateriaID"
+                       class="action-btn btn-assignments" title="Gestionar Asignaciones">
+                        <i class="fas fa-tasks"></i>
+                    </a>
+                            }
+
+            <!-- Botón Estudiantes - Todos pueden gestionar estudiantes -->
+            <a asp-page="./Estudiantes" asp-route-id="@materia.MateriaID" 
+               class="btn btn-sm btn-outline-success" title="Gestionar Estudiantes">
+                <i class="fas fa-users"></i>
+            </a>
+        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="empty-state">
+                <div class="empty-icon">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <h3>No hay materias registradas</h3>
+                <p>Comienza creando la primera materia del sistema.</p>
+                <a asp-page="./Create" class="btn btn-create">
+                    <i class="fas fa-plus me-2"></i>
+                    Crear Primera Materia
+                </a>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+.materias-hero {
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+    color: white;
+    padding: 3rem 0;
+    margin-top: -2rem;
+    border-radius: 0 0 30px 30px;
+}
+
+.hero-badge {
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+.total-count {
+    display: block;
+    margin-top: 0.5rem;
+}
+
+.btn-create {
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-create:hover {
+    background: rgba(255,255,255,0.3);
+    transform: translateY(-2px);
+    color: white;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    border-left: 4px solid var(--accent-color);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.stat-primary { --accent-color: #667eea; }
+.stat-success { --accent-color: #27ae60; }
+.stat-warning { --accent-color: #f39c12; }
+.stat-info { --accent-color: #3498db; }
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    font-weight: 500;
+}
+
+.stat-icon {
+    font-size: 2rem;
+    color: var(--accent-color);
+    opacity: 0.3;
+}
+
+.materias-container {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.materias-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.materia-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 2px solid #f8f9fa;
+}
+
+.materia-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    border-color: #ff9a9e;
+}
+
+.materia-card.inactive {
+    opacity: 0.7;
+    border-color: #dee2e6;
+}
+
+.materia-header {
+    background: linear-gradient(45deg, #ff9a9e, #fecfef);
+    color: white;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.materia-codigo {
+    font-size: 1.2rem;
+    font-weight: 700;
+    background: rgba(255,255,255,0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+}
+
+.status-badge {
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.status-badge.active {
+    background: rgba(39, 174, 96, 0.2);
+    color: #27ae60;
+    border: 1px solid rgba(39, 174, 96, 0.3);
+}
+
+.status-badge.inactive {
+    background: rgba(149, 165, 166, 0.2);
+    color: #95a5a6;
+    border: 1px solid rgba(149, 165, 166, 0.3);
+}
+
+.materia-body {
+    padding: 2rem;
+}
+
+.materia-nombre {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.8rem;
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.info-item i {
+    width: 16px;
+    color: #ff9a9e;
+}
+
+.materia-actions {
+    padding: 1rem 2rem 2rem;
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+}
+
+.action-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-info { background: #3498db; }
+.btn-primary { background: #667eea; }
+.btn-warning { background: #f39c12; }
+.btn-danger { background: #e74c3c; }
+.btn-assignments { background: #9b59b6; }
+
+.action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    color: white;
+}
+
+.btn-assignments:hover {
+    background: #8e44ad;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #7f8c8d;
+}
+
+.empty-icon {
+    font-size: 4rem;
+    color: #ff9a9e;
+    margin-bottom: 2rem;
+}
+
+.empty-state h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+}
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

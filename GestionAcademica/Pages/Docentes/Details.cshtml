@@ -1,0 +1,539 @@
+﻿@page
+@model GestionAcademica.Pages.Docentes.DetailsModel
+@{
+    ViewData["Title"] = "Detalles del Docente";
+}
+
+<div class="container-fluid">
+    <!-- Header Section -->
+    <div class="details-hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <div class="hero-content">
+                        <div class="hero-badge">
+                            <i class="fas fa-eye me-2"></i>
+                            Detalles del Docente
+                        </div>
+                        <h1 class="hero-title">
+                            <div class="avatar-large me-3">
+                                @Model.Docente.Nombres.Substring(0, 1)@Model.Docente.Apellidos.Substring(0, 1)
+                            </div>
+                            @Model.Docente.NombreCompleto
+                        </h1>
+                        <p class="hero-subtitle">
+                            <i class="fas fa-envelope me-2"></i>@Model.Docente.Email
+                            @if (Model.Docente.Facultad != null)
+                            {
+                                <span class="ms-3">
+                                    <i class="fas fa-building me-2"></i>@Model.Docente.Facultad.Nombre
+                                </span>
+                            }
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-end">
+                    <div class="action-buttons">
+                        <a asp-page="./Edit" asp-route-id="@Model.Docente.DocenteID" class="btn btn-primary me-2">
+                            <i class="fas fa-edit me-1"></i>
+                            Editar
+                        </a>
+                        <a asp-page="./Index" class="btn btn-back">
+                            <i class="fas fa-arrow-left me-1"></i>
+                            Volver
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alert Messages -->
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="container mt-4">
+            <div class="alert alert-danger alert-dismissible fade show">
+                <i class="fas fa-exclamation-triangle me-2"></i>
+                @TempData["ErrorMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        </div>
+    }
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="container mt-4">
+            <div class="alert alert-success alert-dismissible fade show">
+                <i class="fas fa-check-circle me-2"></i>
+                @TempData["SuccessMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        </div>
+    }
+
+    <!-- Main Content -->
+    <div class="container mt-5">
+        <div class="row">
+            <!-- Información Personal -->
+            <div class="col-lg-4 mb-4">
+                <div class="info-card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-user me-2"></i>
+                            Información Personal
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="info-row">
+                            <span class="info-label">
+                                <i class="fas fa-id-card me-2"></i>ID:
+                            </span>
+                            <span class="info-value">#@Model.Docente.DocenteID</span>
+                        </div>
+
+                        <div class="info-row">
+                            <span class="info-label">
+                                <i class="fas fa-user me-2"></i>Nombres:
+                            </span>
+                            <span class="info-value">@Model.Docente.Nombres</span>
+                        </div>
+
+                        <div class="info-row">
+                            <span class="info-label">
+                                <i class="fas fa-user me-2"></i>Apellidos:
+                            </span>
+                            <span class="info-value">@Model.Docente.Apellidos</span>
+                        </div>
+
+                        <div class="info-row">
+                            <span class="info-label">
+                                <i class="fas fa-envelope me-2"></i>Email:
+                            </span>
+                            <span class="info-value">
+                                <a href="mailto:@Model.Docente.Email" class="text-decoration-none">
+                                    @Model.Docente.Email
+                                </a>
+                            </span>
+                        </div>
+
+                        <div class="info-row">
+                            <span class="info-label">
+                                <i class="fas fa-phone me-2"></i>Teléfono:
+                            </span>
+                            <span class="info-value">
+                                @if (!string.IsNullOrEmpty(Model.Docente.Telefono))
+                                {
+                                    <a href="tel:@Model.Docente.Telefono" class="text-decoration-none">
+                                        @Model.Docente.Telefono
+                                    </a>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">No registrado</span>
+                                }
+                            </span>
+                        </div>
+
+                        <div class="info-row">
+                            <span class="info-label">
+                                <i class="fas fa-calendar me-2"></i>Registro:
+                            </span>
+                            <span class="info-value">@Model.Docente.FechaRegistro.ToString("dd/MM/yyyy")</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Información Académica -->
+            <div class="col-lg-4 mb-4">
+                <div class="info-card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-graduation-cap me-2"></i>
+                            Información Académica
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="info-row">
+                            <span class="info-label">
+                                <i class="fas fa-building me-2"></i>Facultad:
+                            </span>
+                            <span class="info-value">
+                                @if (Model.Docente.Facultad != null)
+                                {
+                                    <span class="badge bg-primary fs-6">@Model.Docente.Facultad.Nombre</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">Sin asignar</span>
+                                }
+                            </span>
+                        </div>
+
+                        <div class="info-row">
+                            <span class="info-label">
+                                <i class="fas fa-user-shield me-2"></i>Rol:
+                            </span>
+                            <span class="info-value">
+                                @if (Model.Docente.Rol == "Administrador")
+                                {
+                                    <span class="badge bg-danger fs-6">
+                                        <i class="fas fa-crown me-1"></i>
+                                        Administrador
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-info fs-6">
+                                        <i class="fas fa-chalkboard-teacher me-1"></i>
+                                        Docente
+                                    </span>
+                                }
+                            </span>
+                        </div>
+
+                        <div class="info-row">
+                            <span class="info-label">
+                                <i class="fas fa-toggle-on me-2"></i>Estado:
+                            </span>
+                            <span class="info-value">
+                                @if (Model.Docente.Activo)
+                                {
+                                    <span class="badge bg-success fs-6">
+                                        <i class="fas fa-check me-1"></i>
+                                        Activo
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-warning fs-6">
+                                        <i class="fas fa-times me-1"></i>
+                                        Inactivo
+                                    </span>
+                                }
+                            </span>
+                        </div>
+
+                        <div class="info-row">
+                            <span class="info-label">
+                                <i class="fas fa-book me-2"></i>Materias:
+                            </span>
+                            <span class="info-value">
+                                <span class="badge bg-success fs-6">@Model.MateriasAsignadas.Count</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Acciones Rápidas -->
+            <div class="col-lg-4 mb-4">
+                <div class="info-card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-cogs me-2"></i>
+                            Acciones Rápidas
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-grid gap-2">
+                            <a asp-page="./Edit" asp-route-id="@Model.Docente.DocenteID" class="btn btn-primary">
+                                <i class="fas fa-edit me-2"></i>
+                                Editar Información
+                            </a>
+
+                            <form method="post" asp-page-handler="ToggleEstado" asp-route-id="@Model.Docente.DocenteID" class="d-inline">
+                                @if (Model.Docente.Activo)
+                                {
+                                    <button type="submit" class="btn btn-warning w-100"
+                                            onclick="return confirm('¿Estás seguro de que quieres desactivar este docente?')">
+                                        <i class="fas fa-user-slash me-2"></i>
+                                        Desactivar Docente
+                                    </button>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-success w-100"
+                                            onclick="return confirm('¿Estás seguro de que quieres activar este docente?')">
+                                        <i class="fas fa-user-check me-2"></i>
+                                        Activar Docente
+                                    </button>
+                                }
+                            </form>
+
+                            <a href="mailto:@Model.Docente.Email" class="btn btn-outline-primary">
+                                <i class="fas fa-envelope me-2"></i>
+                                Enviar Email
+                            </a>
+
+                            @if (!string.IsNullOrEmpty(Model.Docente.Telefono))
+                            {
+                                <a href="tel:@Model.Docente.Telefono" class="btn btn-outline-success">
+                                    <i class="fas fa-phone me-2"></i>
+                                    Llamar
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Materias Asignadas -->
+        <div class="row">
+            <div class="col-12">
+                <div class="info-card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-books me-2"></i>
+                            Materias Asignadas (@Model.MateriasAsignadas.Count)
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        @if (Model.MateriasAsignadas.Any())
+                        {
+                            <div class="row">
+                                @foreach (var materia in Model.MateriasAsignadas)
+                                {
+                                    <div class="col-lg-4 col-md-6 mb-3">
+                                        <div class="materia-card">
+                                            <div class="materia-header">
+                                                <span class="materia-codigo">@materia.Codigo</span>
+                                                <span class="materia-estado @(materia.Activa ? "activa" : "inactiva")">
+                                                    @(materia.Activa ? "Activa" : "Inactiva")
+                                                </span>
+                                            </div>
+                                            <h6 class="materia-nombre">@materia.Nombre</h6>
+                                            <div class="materia-info">
+                                                <small class="text-muted">
+                                                    <i class="fas fa-graduation-cap me-1"></i>
+                                                    @(materia.Carrera?.Nombre ?? "Sin carrera")
+                                                </small>
+                                                <br>
+                                                <small class="text-muted">
+                                                    <i class="fas fa-star me-1"></i>
+                                                    @materia.Creditos créditos
+                                                </small>
+                                                <br>
+                                                <small class="text-muted">
+                                                    <i class="fas fa-tasks me-1"></i>
+                                                    @materia.Asignaciones.Count asignaciones
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="text-center py-4">
+                                <div class="mb-3">
+                                    <i class="fas fa-book text-muted" style="font-size: 3rem;"></i>
+                                </div>
+                                <h6 class="text-muted">No tiene materias asignadas</h6>
+                                <p class="text-muted">Este docente no tiene materias asignadas actualmente.</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .details-hero {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        color: white;
+        padding: 3rem 0;
+        margin-top: -2rem;
+        border-radius: 0 0 30px 30px;
+    }
+
+    .hero-badge {
+        display: inline-block;
+        padding: 0.5rem 1.5rem;
+        background: rgba(255,255,255,0.2);
+        border: 1px solid rgba(255,255,255,0.3);
+        border-radius: 50px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        line-height: 1.6;
+    }
+
+    .avatar-large {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: 1.8rem;
+        border: 3px solid rgba(255,255,255,0.5);
+    }
+
+    .btn-back {
+        background: rgba(255,255,255,0.2);
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255,255,255,0.3);
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 15px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+        .btn-back:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+            color: white;
+        }
+
+    .info-card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        border: none;
+        overflow: hidden;
+        height: 100%;
+    }
+
+        .info-card .card-header {
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            padding: 1.5rem;
+        }
+
+        .info-card .card-body {
+            padding: 1.5rem;
+        }
+
+    .info-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid #f8f9fa;
+    }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+    .info-label {
+        font-weight: 600;
+        color: #6c757d;
+        display: flex;
+        align-items: center;
+    }
+
+    .info-value {
+        font-weight: 500;
+        color: #2c3e50;
+    }
+
+    .materia-card {
+        background: #f8f9fa;
+        border-radius: 12px;
+        padding: 1.5rem;
+        border-left: 4px solid #28a745;
+        transition: all 0.3s ease;
+    }
+
+        .materia-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+    .materia-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    .materia-codigo {
+        font-weight: bold;
+        color: #28a745;
+        font-size: 1.1rem;
+    }
+
+    .materia-estado {
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+
+        .materia-estado.activa {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .materia-estado.inactiva {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+    .materia-nombre {
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 0.5rem;
+    }
+
+    .materia-info {
+        line-height: 1.6;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+    {
+        font-size: 1.8rem;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .avatar-large {
+        margin-bottom: 1rem;
+    }
+
+    .action-buttons {
+        justify-content: center;
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    .info-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .info-value {
+        margin-top: 0.5rem;
+    }
+
+    }
+</style>

@@ -1,0 +1,507 @@
+﻿@page
+@model GestionAcademica.Pages.Asignaciones.IndexModel
+
+@{
+    ViewData["Title"] = $"Asignaciones - {Model.Materia?.Nombre}";
+}
+
+<!-- Hero Header -->
+<div class="asignaciones-hero">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <i class="fas fa-tasks me-2"></i>
+                        @Model.Materia?.Codigo
+                    </div>
+                    <h1 class="hero-title">
+                        <i class="fas fa-clipboard-list me-3"></i>
+                        Asignaciones de @Model.Materia?.Nombre
+                    </h1>
+                    <p class="hero-subtitle">
+                        Gestiona las evaluaciones y tareas de tu materia.
+                        <span class="docente-info">
+                            <i class="fas fa-user me-1"></i>
+                            Prof. @Model.Materia?.Docente?.NombreCompleto
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 text-end">
+                <a asp-page="./Create" asp-route-materiaId="@Model.MateriaId" class="btn btn-create">
+                    <i class="fas fa-plus me-2"></i>
+                    Nueva Asignación
+                </a>
+                <a asp-page="/Materias/Index" class="btn btn-back ms-2">
+                    <i class="fas fa-arrow-left me-2"></i>
+                    Volver
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Mensajes -->
+@if (TempData["SuccessMessage"] != null)
+{
+        <div class="container mt-4">
+            <div class="alert alert-success alert-dismissible fade show">
+                <i class="fas fa-check-circle me-2"></i>
+            @TempData["SuccessMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+        <div class="container mt-4">
+            <div class="alert alert-danger alert-dismissible fade show">
+                <i class="fas fa-exclamation-triangle me-2"></i>
+            @TempData["ErrorMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        </div>
+}
+
+<!-- Estadísticas de Porcentajes -->
+<div class="container mt-4">
+    <div class="porcentaje-card @(Model.PorcentajeCompleto ? "completo" : (Model.PorcentajeTotal > 100 ? "excedido" : "incompleto"))">
+        <div class="porcentaje-content">
+            <div class="porcentaje-numero">@Model.PorcentajeTotal.ToString("F1")%</div>
+            <div class="porcentaje-label">
+                @if (Model.PorcentajeCompleto)
+                {
+                        <i class="fas fa-check-circle text-success"></i>
+                        <span>Porcentaje Completo</span>
+                }
+                else if (Model.PorcentajeTotal > 100)
+                {
+                        <i class="fas fa-exclamation-triangle text-danger"></i>
+                        <span>Porcentaje Excedido</span>
+                }
+                else
+                {
+                        <i class="fas fa-clock text-warning"></i>
+                        <span>Faltan @((100 - Model.PorcentajeTotal).ToString("F1"))% por asignar</span>
+                }
+            </div>
+        </div>
+        <div class="porcentaje-barra">
+            <div class="barra-progreso" style="width: @(Math.Min(Model.PorcentajeTotal, 100))%"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Lista de Asignaciones -->
+<div class="container mt-4">
+    <div class="asignaciones-container">
+        @if (Model.Asignaciones.Any())
+        {
+                <div class="asignaciones-grid">
+                @foreach (var asignacion in Model.Asignaciones)
+                {
+                            <div class="asignacion-card @(asignacion.Activa ? "" : "inactive")">
+                                <div class="asignacion-header">
+                                    <div class="asignacion-tipo">
+                                        <i class="fas fa-@(GetTipoIcon(asignacion.TipoAsignacion?.Nombre))"></i>
+                                @asignacion.TipoAsignacion?.Nombre
+                                    </div>
+                                    <div class="asignacion-porcentaje">
+                                @asignacion.Porcentaje.ToString("F1")%
+                                    </div>
+                                </div>
+
+                                <div class="asignacion-body">
+                                    <h4 class="asignacion-nombre">@asignacion.Nombre</h4>
+
+                            @if (!string.IsNullOrEmpty(asignacion.Descripcion))
+                            {
+                                            <p class="asignacion-descripcion">@asignacion.Descripcion</p>
+                            }
+
+                                    <div class="asignacion-info">
+                                        <div class="info-item">
+                                            <i class="fas fa-star"></i>
+                                            <span>Nota máxima: @asignacion.NotaMaxima</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <i class="fas fa-calendar-plus"></i>
+                                            <span>Creada: @asignacion.FechaCreacion.ToString("dd/MM/yyyy")</span>
+                                        </div>
+                                @if (asignacion.FechaVencimiento > DateTime.MinValue)
+                                {
+                <div class="info-item">
+                    <i class="fas fa-calendar-times"></i>
+                    <span>Vence: @asignacion.FechaVencimiento.ToString("dd/MM/yyyy")</span>
+                </div>
+                                }
+                                        <div class="info-item">
+                                            <i class="fas fa-@(asignacion.Activa ? "check-circle text-success" : "pause-circle text-warning")"></i>
+                                            <span>@(asignacion.Activa ? "Activa" : "Inactiva")</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="asignacion-actions">
+                                    <a asp-page="./Edit" asp-route-id="@asignacion.AsignacionID" asp-route-materiaId="@Model.MateriaId"
+                                       class="action-btn btn-primary" title="Editar">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                            <a asp-page="/Calificaciones/Index" 
+               asp-route-asignacionId="@asignacion.AsignacionID" 
+               asp-route-materiaId="@Model.MateriaId"
+               class="action-btn btn-calificar" 
+               title="Calificar Estudiantes">
+                <i class="fas fa-star"></i>
+            </a>
+                                    <form method="post" style="display: inline;">
+                                        <input type="hidden" name="id" value="@asignacion.AsignacionID" />
+                                        <input type="hidden" name="materiaId" value="@Model.MateriaId" />
+                                        <button type="submit" asp-page-handler="ToggleEstado"
+                                                class="action-btn btn-warning"
+                                                title="@(asignacion.Activa ? "Desactivar" : "Activar")"
+                                                onclick="return confirm('¿Confirmar cambio de estado?')">
+                                            <i class="fas fa-@(asignacion.Activa ? "pause" : "play")"></i>
+                                        </button>
+                                    </form>
+                                    <a asp-page="./Delete" asp-route-id="@asignacion.AsignacionID" asp-route-materiaId="@Model.MateriaId"
+                                       class="action-btn btn-danger" title="Eliminar"
+                                       onclick="return confirm('¿Estás seguro de eliminar @asignacion.Nombre?')">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </div>
+                            </div>
+                }
+                </div>
+        }
+        else
+        {
+                <div class="empty-state">
+                    <div class="empty-icon">
+                        <i class="fas fa-clipboard-list"></i>
+                    </div>
+                    <h3>No hay asignaciones creadas</h3>
+                    <p>Comienza creando la primera asignación para esta materia.</p>
+                    <a asp-page="./Create" asp-route-materiaId="@Model.MateriaId" class="btn btn-create">
+                        <i class="fas fa-plus me-2"></i>
+                        Crear Primera Asignación
+                    </a>
+                </div>
+        }
+    </div>
+</div>
+
+@functions {
+    string GetTipoIcon(string tipoNombre)
+    {
+        return tipoNombre switch
+        {
+            "Examen Parcial" => "file-alt",
+            "Examen Final" => "graduation-cap",
+            "Tarea" => "tasks",
+            "Proyecto" => "project-diagram",
+            "Quiz" => "question-circle",
+            "Laboratorio" => "flask",
+            "Participación" => "hand-paper",
+            "Ensayo" => "pen-fancy",
+            "Presentación" => "presentation",
+            "Investigación" => "search",
+            _ => "clipboard"
+        };
+    }
+}
+
+<style>
+    /* Hero Section */
+    .asignaciones-hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 3rem 0;
+        margin-top: -2rem;
+        border-radius: 0 0 30px 30px;
+    }
+
+    .hero-badge {
+        display: inline-block;
+        padding: 0.5rem 1.5rem;
+        background: rgba(255,255,255,0.2);
+        border: 1px solid rgba(255,255,255,0.3);
+        border-radius: 50px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        line-height: 1.6;
+    }
+
+    .docente-info {
+        display: block;
+        margin-top: 0.5rem;
+    }
+
+    .btn-create {
+        background: rgba(255,255,255,0.2);
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255,255,255,0.3);
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 15px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .btn-back {
+        background: rgba(255,255,255,0.1);
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255,255,255,0.2);
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 15px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .btn-create:hover, .btn-back:hover {
+        background: rgba(255,255,255,0.3);
+        transform: translateY(-2px);
+        color: white;
+    }
+
+    /* Tarjeta de Porcentaje */
+    .porcentaje-card {
+        background: white;
+        border-radius: 15px;
+        padding: 2rem;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        border-left: 4px solid var(--estado-color);
+    }
+
+    .porcentaje-card.completo {
+        --estado-color: #27ae60;
+    }
+
+    .porcentaje-card.incompleto {
+        --estado-color: #f39c12;
+    }
+
+    .porcentaje-card.excedido {
+        --estado-color: #e74c3c;
+    }
+
+    .porcentaje-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+    }
+
+    .porcentaje-numero {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--estado-color);
+    }
+
+    .porcentaje-label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 600;
+    }
+
+    .porcentaje-barra {
+        height: 8px;
+        background: #ecf0f1;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .barra-progreso {
+        height: 100%;
+        background: var(--estado-color);
+        border-radius: 10px;
+        transition: width 0.3s ease;
+    }
+
+    /* Grid de asignaciones */
+    .asignaciones-container {
+        background: white;
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .asignaciones-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 2rem;
+    }
+
+    .asignacion-card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        overflow: hidden;
+        transition: all 0.3s ease;
+        border: 2px solid #f8f9fa;
+    }
+
+    .asignacion-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        border-color: #667eea;
+    }
+
+    .asignacion-card.inactive {
+        opacity: 0.7;
+        border-color: #dee2e6;
+    }
+
+    .asignacion-header {
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        color: white;
+        padding: 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .asignacion-tipo {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 600;
+    }
+
+    .asignacion-porcentaje {
+        font-size: 1.2rem;
+        font-weight: 700;
+        background: rgba(255,255,255,0.2);
+        padding: 0.5rem 1rem;
+        border-radius: 10px;
+    }
+
+    .asignacion-body {
+        padding: 2rem;
+    }
+
+    .asignacion-nombre {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 1rem;
+    }
+
+    .asignacion-descripcion {
+        color: #7f8c8d;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+    }
+
+    .info-item {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        margin-bottom: 0.8rem;
+        font-size: 0.9rem;
+        color: #6c757d;
+    }
+
+    .info-item i {
+        width: 16px;
+        color: #667eea;
+    }
+
+    .asignacion-actions {
+        padding: 1rem 2rem 2rem;
+        display: flex;
+        gap: 0.8rem;
+        justify-content: center;
+    }
+
+    .action-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        border: none;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+        background: #667eea;
+    }
+
+    .btn-warning {
+        background: #f39c12;
+    }
+
+    .btn-danger {
+        background: #e74c3c;
+    }
+
+    .action-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        color: white;
+    }
+
+    /* Empty State */
+    .empty-state {
+        text-align: center;
+        padding: 4rem 2rem;
+        color: #7f8c8d;
+    }
+
+    .empty-icon {
+        font-size: 4rem;
+        color: #667eea;
+        margin-bottom: 2rem;
+    }
+
+    .empty-state h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: #2c3e50;
+    }
+
+    .btn-calificar {
+    background: #f39c12;
+}
+
+.btn-calificar:hover {
+    background: #e67e22;
+}
+
+    /* Responsive */
+ /*  media (max-width: 768px) {
+    .asignaciones-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .asignacion-actions {
+        justify-content: space-around;
+    }
+}*/
+</style>

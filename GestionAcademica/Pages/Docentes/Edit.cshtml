@@ -1,0 +1,959 @@
+﻿@page
+@model GestionAcademica.Pages.Docentes.EditModel
+@{
+    ViewData["Title"] = "Editar Docente";
+}
+
+<!-- Header Section -->
+<div class="edit-hero">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <i class="fas fa-user-edit me-2"></i>
+                        Editar Docente
+                    </div>
+                    <h1 class="hero-title">
+                        <i class="fas fa-chalkboard-teacher me-3"></i>
+                        Editar Información del Docente
+                    </h1>
+                    <p class="hero-subtitle">
+                        Actualiza la información personal y académica del docente #@Model.DocenteInput.DocenteID
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 text-end">
+                <div class="action-buttons">
+                    <a asp-page="./Details" asp-route-id="@Model.DocenteInput.DocenteID" class="btn btn-info me-2">
+                        <i class="fas fa-eye me-1"></i>
+                        Ver Detalles
+                    </a>
+                    <a asp-page="./Index" class="btn btn-back">
+                        <i class="fas fa-arrow-left me-1"></i>
+                        Volver
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Alert Messages -->
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="container mt-4">
+        <div class="alert alert-danger alert-dismissible fade show">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    </div>
+}
+
+<!-- Main Content -->
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="form-container">
+                <form method="post" id="editDocenteForm">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                    <!-- Campo oculto para el ID y email original -->
+                    <input asp-for="DocenteInput.DocenteID" type="hidden" />
+                    <input asp-for="DocenteInput.EmailOriginal" type="hidden" />
+
+                    <div class="row g-4">
+                        <!-- Información Personal -->
+                        <div class="col-12">
+                            <div class="form-section">
+                                <div class="section-header">
+                                    <div class="section-icon">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="section-info">
+                                        <h4 class="section-title">Información Personal</h4>
+                                        <p class="section-subtitle">Datos básicos del docente</p>
+                                    </div>
+                                </div>
+
+                                <div class="section-content">
+                                    <div class="row g-4">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="DocenteInput.Nombres" class="form-label">
+                                                    <i class="fas fa-user me-2"></i>Nombres
+                                                </label>
+                                                <input asp-for="DocenteInput.Nombres" class="form-control"
+                                                       placeholder="Ingrese los nombres" maxlength="100" required
+                                                       onkeypress="return validarSoloLetras(event)"
+                                                       onpaste="return false">
+                                                <span asp-validation-for="DocenteInput.Nombres" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="DocenteInput.Apellidos" class="form-label">
+                                                    <i class="fas fa-user me-2"></i>Apellidos
+                                                </label>
+                                                <input asp-for="DocenteInput.Apellidos" class="form-control"
+                                                       placeholder="Ingrese los apellidos" maxlength="100" required
+                                                       onkeypress="return validarSoloLetras(event)"
+                                                       onpaste="return false">
+                                                <span asp-validation-for="DocenteInput.Apellidos" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row g-4">
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <label asp-for="DocenteInput.Email" class="form-label">
+                                                    <i class="fas fa-envelope me-2"></i>Email
+                                                </label>
+                                                <input asp-for="DocenteInput.Email" type="email" class="form-control"
+                                                       placeholder="ejemplo@universidad.edu" maxlength="150" required id="emailInput"
+                                                       onblur="validarEmailBasico(this)">
+                                                <span asp-validation-for="DocenteInput.Email" class="text-danger"></span>
+                                                <div id="emailValidation" class="mt-1"></div>
+                                                <div class="form-text">El email debe ser único en el sistema</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label asp-for="DocenteInput.Telefono" class="form-label">
+                                                    <i class="fas fa-phone me-2"></i>Teléfono
+                                                </label>
+                                                <input asp-for="DocenteInput.Telefono" type="tel" class="form-control"
+                                                       placeholder="2234-5678" maxlength="20"
+                                                       onkeypress="return validarSoloNumeros(event)"
+                                                       onpaste="return false">
+                                                <span asp-validation-for="DocenteInput.Telefono" class="text-danger"></span>
+                                                <div class="form-text">Opcional</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Información Académica -->
+                        <div class="col-12">
+                            <div class="form-section">
+                                <div class="section-header">
+                                    <div class="section-icon">
+                                        <i class="fas fa-university"></i>
+                                    </div>
+                                    <div class="section-info">
+                                        <h4 class="section-title">Información Académica</h4>
+                                        <p class="section-subtitle">Facultad y estado del docente</p>
+                                    </div>
+                                </div>
+
+                                <div class="section-content">
+                                    <div class="row g-4">
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <label asp-for="DocenteInput.FacultadID" class="form-label">
+                                                    <i class="fas fa-building me-2"></i>Facultad
+                                                </label>
+                                                <select asp-for="DocenteInput.FacultadID" asp-items="Model.FacultadesList"
+                                                        class="form-select" required>
+                                                    <option value="">-- Seleccione una facultad --</option>
+                                                </select>
+                                                <span asp-validation-for="DocenteInput.FacultadID" class="text-danger"></span>
+                                                <div class="form-text">Facultad a la que pertenece el docente</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label">
+                                                    <i class="fas fa-toggle-on me-2"></i>Estado
+                                                </label>
+                                                <div class="form-check form-switch mt-2">
+                                                    <input asp-for="DocenteInput.Activo" class="form-check-input" type="checkbox"
+                                                           id="activoSwitch" style="transform: scale(1.5);" onchange="actualizarTextoEstado()">
+                                                    <label class="form-check-label ms-3" for="activoSwitch">
+                                                        <span id="estadoTexto">@(Model.DocenteInput.Activo ? "Activo" : "Inactivo")</span>
+                                                    </label>
+                                                </div>
+                                                <div class="form-text">Activa/desactiva el acceso del docente</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Información sobre roles -->
+                                    <div class="info-alert mt-3">
+                                        <div class="alert-icon">
+                                            <i class="fas fa-info-circle"></i>
+                                        </div>
+                                        <div class="alert-content">
+                                            <strong>Nota:</strong> Este docente tiene rol de <strong>"@Model.DocenteInput.Rol"</strong>. 
+                                            Para cambios de rol, contacta al administrador del sistema.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Seguridad -->
+                        <div class="col-12">
+                            <div class="form-section">
+                                <div class="section-header">
+                                    <div class="section-icon">
+                                        <i class="fas fa-shield-alt"></i>
+                                    </div>
+                                    <div class="section-info">
+                                        <h4 class="section-title">Seguridad</h4>
+                                        <p class="section-subtitle">Cambio de contraseña (opcional)</p>
+                                    </div>
+                                </div>
+
+                                <div class="section-content">
+                                    <div class="row g-4">
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <label asp-for="DocenteInput.NuevaContraseña" class="form-label">
+                                                    <i class="fas fa-key me-2"></i>Nueva Contraseña
+                                                </label>
+                                                <div class="input-group">
+                                                    <input asp-for="DocenteInput.NuevaContraseña" type="password" class="form-control"
+                                                           placeholder="Dejar vacío para mantener la actual" id="passwordInput"
+                                                           oninput="validarContraseñaOpcional(this)">
+                                                    <button type="button" class="btn btn-outline-secondary" id="togglePassword" onclick="cambiarVisibilidadPassword()">
+                                                        <i class="fas fa-eye" id="toggleIcon"></i>
+                                                    </button>
+                                                </div>
+                                                <span asp-validation-for="DocenteInput.NuevaContraseña" class="text-danger"></span>
+                                                <div class="form-text">Solo completa si deseas cambiar la contraseña (mínimo 6 caracteres)</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label text-muted">Herramientas</label>
+                                                <div class="d-grid">
+                                                    <button type="button" class="btn btn-outline-success" onclick="generarPasswordSeguro()">
+                                                        <i class="fas fa-magic me-1"></i>
+                                                        Generar Contraseña
+                                                    </button>
+                                                </div>
+                                                <div class="form-text">Genera una contraseña segura automáticamente</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="security-alert">
+                                        <div class="alert-icon">
+                                            <i class="fas fa-exclamation-triangle"></i>
+                                        </div>
+                                        <div class="alert-content">
+                                            <strong>Importante:</strong> Si cambias la contraseña, el docente deberá usar la nueva para su próximo acceso. 
+                                            Asegúrate de comunicársela de manera segura.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Botones de acción -->
+                        <div class="col-12">
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-save" id="submitBtn">
+                                    <i class="fas fa-save me-2"></i>
+                                    Guardar Cambios
+                                </button>
+                                <a asp-page="./Details" asp-route-id="@Model.DocenteInput.DocenteID" class="btn btn-info">
+                                    <i class="fas fa-eye me-2"></i>
+                                    Ver Detalles
+                                </a>
+                                <a asp-page="./Index" class="btn btn-cancel">
+                                    <i class="fas fa-times me-2"></i>
+                                    Cancelar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Hero Section */
+    .edit-hero {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        color: white;
+        padding: 4rem 0;
+        margin-top: 0rem;
+        border-radius: 0 0 50px 50px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 8px 32px rgba(40, 167, 69, 0.3);
+    }
+
+    .edit-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+        opacity: 0.3;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    .hero-badge {
+        display: inline-block;
+        padding: 0.75rem 2rem;
+        background: rgba(255,255,255,0.15);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.2);
+        border-radius: 50px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .hero-title {
+        font-size: 3rem;
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        line-height: 1.1;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+        opacity: 0.9;
+        line-height: 1.6;
+        font-weight: 300;
+    }
+
+    .btn-back {
+        background: rgba(255,255,255,0.15);
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255,255,255,0.3);
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 20px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .btn-back:hover {
+        background: rgba(255,255,255,0.25);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        color: white;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+    /* Formulario */
+    .form-container {
+        background: white;
+        border-radius: 30px;
+        padding: 3rem;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        border: 1px solid #f0f0f0;
+        position: relative;
+        overflow: hidden;
+        animation: slideInUp 0.8s ease-out;
+    }
+
+    .form-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: linear-gradient(90deg, #28a745, #20c997, #17a2b8, #28a745);
+    }
+
+    /* Secciones del formulario */
+    .form-section {
+        background: #fff;
+        border-radius: 20px;
+        border: 1px solid #e9ecef;
+        margin-bottom: 2rem;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        transition: all 0.3s ease;
+    }
+
+    .form-section:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    }
+
+    .section-header {
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        padding: 2rem 2.5rem 1.5rem;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #e9ecef;
+    }
+
+    .section-icon {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #28a745, #20c997);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1.5rem;
+        box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+    }
+
+    .section-icon i {
+        color: white;
+        font-size: 1.5rem;
+    }
+
+    .section-info {
+        flex: 1;
+    }
+
+    .section-title {
+        color: #2c3e50;
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+
+    .section-subtitle {
+        color: #6c757d;
+        font-size: 0.95rem;
+        margin: 0;
+        font-weight: 400;
+    }
+
+    .section-content {
+        padding: 2.5rem;
+    }
+
+    /* Campos del formulario */
+    .form-group {
+        margin-bottom: 2rem;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 0.75rem;
+        display: flex;
+        align-items: center;
+        font-size: 1rem;
+    }
+
+    .form-label i {
+        color: #28a745;
+        width: 20px;
+        margin-right: 0.5rem;
+    }
+
+    .form-control, .form-select {
+        border: 2px solid #e9ecef;
+        border-radius: 15px;
+        padding: 1rem 1.25rem;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        background: #fafbfc;
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: #28a745;
+        box-shadow: 0 0 0 0.25rem rgba(40, 167, 69, 0.15);
+        background: white;
+        transform: translateY(-1px);
+    }
+
+    .form-control:hover, .form-select:hover {
+        border-color: #20c997;
+        background: white;
+    }
+
+    .input-group .btn {
+        border: 2px solid #e9ecef;
+        border-left: none;
+        border-radius: 0 15px 15px 0;
+    }
+
+    .form-check-input:checked {
+        background-color: #28a745;
+        border-color: #28a745;
+    }
+
+    .form-text {
+        font-size: 0.85rem;
+        color: #6c757d;
+        margin-top: 0.5rem;
+        font-style: italic;
+    }
+
+    .text-danger {
+        font-size: 0.85rem;
+        margin-top: 0.5rem;
+    }
+
+    .is-invalid {
+        border-color: #dc3545;
+        box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+    }
+
+    .is-valid {
+        border-color: #28a745 !important;
+        box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25) !important;
+    }
+
+    /* Alerts personalizados */
+    .info-alert, .security-alert {
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin-top: 2rem;
+        display: flex;
+        align-items: center;
+        border: 1px solid;
+    }
+
+    .info-alert {
+        background: linear-gradient(135deg, #d4edda, #c3e6cb);
+        border-color: #28a745;
+    }
+
+    .security-alert {
+        background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+        border-color: #ffc107;
+    }
+
+    .alert-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+        flex-shrink: 0;
+    }
+
+    .info-alert .alert-icon {
+        background: linear-gradient(135deg, #28a745, #20c997);
+    }
+
+    .security-alert .alert-icon {
+        background: linear-gradient(135deg, #ffc107, #fd7e14);
+    }
+
+    .alert-icon i {
+        color: white;
+        font-size: 1.1rem;
+    }
+
+    .alert-content {
+        font-weight: 500;
+    }
+
+    .info-alert .alert-content {
+        color: #155724;
+    }
+
+    .security-alert .alert-content {
+        color: #856404;
+    }
+
+    /* Botones de acción */
+    .form-actions {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        padding-top: 3rem;
+        border-top: 2px solid #f8f9fa;
+        margin-top: 3rem;
+        flex-wrap: wrap;
+    }
+
+    .btn-save {
+        background: linear-gradient(135deg, #28a745, #20c997);
+        border: none;
+        color: white;
+        padding: 1.25rem 3rem;
+        border-radius: 20px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .btn-save:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(40, 167, 69, 0.5);
+        background: linear-gradient(135deg, #218838, #1dd1a1);
+    }
+
+    .btn-info {
+        background: linear-gradient(135deg, #17a2b8, #6f42c1);
+        border: none;
+        color: white;
+        padding: 1.25rem 3rem;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        box-shadow: 0 8px 25px rgba(23, 162, 184, 0.4);
+    }
+
+    .btn-info:hover {
+        background: linear-gradient(135deg, #138496, #5a2d91);
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(23, 162, 184, 0.5);
+        color: white;
+    }
+
+    .btn-cancel {
+        background: linear-gradient(135deg, #6c757d, #495057);
+        border: none;
+        color: white;
+        padding: 1.25rem 3rem;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        box-shadow: 0 8px 25px rgba(108, 117, 125, 0.4);
+    }
+
+    .btn-cancel:hover {
+        background: linear-gradient(135deg, #495057, #343a40);
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(108, 117, 125, 0.5);
+        color: white;
+    }
+
+    /* Responsive */
+    @@media (max-width: 768px) {
+        .hero-title {
+            font-size: 2rem;
+        }
+
+        .form-container {
+            padding: 2rem;
+            border-radius: 20px;
+        }
+
+        .section-header {
+            padding: 1.5rem;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .section-icon {
+            margin-right: 0;
+            margin-bottom: 1rem;
+        }
+
+        .section-content {
+            padding: 1.5rem;
+        }
+
+        .form-actions {
+            flex-direction: column;
+        }
+
+        .btn-save, .btn-info, .btn-cancel {
+            width: 100%;
+        }
+
+        .action-buttons {
+            justify-content: center;
+            width: 100%;
+            margin-top: 1rem;
+        }
+    }
+
+    /* Animaciones */
+    @@keyframes slideInUp {
+        from {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .form-section {
+        animation: fadeInLeft 0.6s ease-out;
+        animation-fill-mode: both;
+    }
+
+    .form-section:nth-child(1) { animation-delay: 0.2s; }
+    .form-section:nth-child(2) { animation-delay: 0.4s; }
+    .form-section:nth-child(3) { animation-delay: 0.6s; }
+
+    @@keyframes fadeInLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+</style>
+
+<script type="text/javascript">
+function validarSoloLetras(evento) {
+    var codigo = evento.keyCode;
+    
+    if ((codigo >= 65 && codigo <= 90) || 
+        (codigo >= 97 && codigo <= 122) || 
+        codigo == 32 || 
+        codigo == 241 || codigo == 209 || 
+        codigo == 225 || codigo == 193 || 
+        codigo == 233 || codigo == 201 || 
+        codigo == 237 || codigo == 205 || 
+        codigo == 243 || codigo == 211 || 
+        codigo == 250 || codigo == 218) {
+        return true;
+    } else {
+        alert("Solo se permiten letras y espacios");
+        return false;
+    }
+}
+
+function validarSoloNumeros(evento) {
+    var codigo = evento.keyCode;
+    
+    if ((codigo >= 48 && codigo <= 57) || 
+        codigo == 45 || 
+        codigo == 32) {
+        return true;
+    } else {
+        alert("Solo se permiten números, guiones y espacios");
+        return false;
+    }
+}
+
+function validarEmailBasico(input) {
+    var email = input.value;
+    var validacion = document.getElementById('emailValidation');
+    
+    if (email.length > 0) {
+        var tieneArroba = email.indexOf('@@') > 0;
+        var tienePunto = email.indexOf('.') > email.indexOf('@@');
+        
+        if (tieneArroba && tienePunto) {
+            validacion.innerHTML = '<small class="text-success">Email válido</small>';
+            input.classList.remove('is-invalid');
+            input.classList.add('is-valid');
+        } else {
+            validacion.innerHTML = '<small class="text-danger">Email no válido</small>';
+            input.classList.add('is-invalid');
+        }
+    } else {
+        validacion.innerHTML = '';
+        input.classList.remove('is-invalid', 'is-valid');
+    }
+}
+
+function validarContraseñaOpcional(input) {
+    var password = input.value;
+    
+    if (password.length > 0) {
+        if (password.length < 6) {
+            input.classList.add('is-invalid');
+        } else {
+            input.classList.remove('is-invalid');
+            input.classList.add('is-valid');
+        }
+    } else {
+        input.classList.remove('is-invalid', 'is-valid');
+    }
+}
+
+function cambiarVisibilidadPassword() {
+    var passwordInput = document.getElementById('passwordInput');
+    var toggleIcon = document.getElementById('toggleIcon');
+    
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        toggleIcon.classList.remove('fa-eye');
+        toggleIcon.classList.add('fa-eye-slash');
+    } else {
+        passwordInput.type = 'password';
+        toggleIcon.classList.remove('fa-eye-slash');
+        toggleIcon.classList.add('fa-eye');
+    }
+}
+
+function actualizarTextoEstado() {
+    var checkbox = document.getElementById('activoSwitch');
+    var textoEstado = document.getElementById('estadoTexto');
+    
+    if (checkbox.checked) {
+        textoEstado.textContent = 'Activo';
+        textoEstado.className = 'text-success fw-bold';
+    } else {
+        textoEstado.textContent = 'Inactivo';
+        textoEstado.className = 'text-danger fw-bold';
+    }
+}
+
+function generarPasswordSeguro() {
+    // Generar una contraseña más segura con diferentes tipos de caracteres
+    var mayusculas = 'ABCDEFGHJKMNPQRSTUVWXYZ';
+    var minusculas = 'abcdefghjkmnpqrstuvwxyz';
+    var numeros = '23456789';
+    var simbolos = '!@@#$%&*';
+    
+    var password = '';
+    
+    // Asegurar al menos un carácter de cada tipo
+    password += mayusculas.charAt(Math.floor(Math.random() * mayusculas.length));
+    password += minusculas.charAt(Math.floor(Math.random() * minusculas.length));
+    password += numeros.charAt(Math.floor(Math.random() * numeros.length));
+    password += simbolos.charAt(Math.floor(Math.random() * simbolos.length));
+    
+    // Completar hasta 10 caracteres con caracteres aleatorios
+    var todosCaracteres = mayusculas + minusculas + numeros + simbolos;
+    for (var i = 4; i < 10; i++) {
+        password += todosCaracteres.charAt(Math.floor(Math.random() * todosCaracteres.length));
+    }
+    
+    // Mezclar la contraseña
+    password = password.split('').sort(() => Math.random() - 0.5).join('');
+    
+    var passwordInput = document.getElementById('passwordInput');
+    passwordInput.value = password;
+    passwordInput.classList.remove('is-invalid');
+    passwordInput.classList.add('is-valid');
+    
+    // Mostrar la contraseña temporalmente
+    passwordInput.type = 'text';
+    document.getElementById('toggleIcon').classList.remove('fa-eye');
+    document.getElementById('toggleIcon').classList.add('fa-eye-slash');
+    
+    alert('Contraseña generada: ' + password + '\n\n⚠️ IMPORTANTE: Asegúrate de comunicársela al docente de manera segura.\n\nLa contraseña se está mostrando temporalmente en el campo.');
+}
+
+function validarTodoElFormularioEditar() {
+    var inputNombres = document.querySelector('input[name="DocenteInput.Nombres"]');
+    var inputApellidos = document.querySelector('input[name="DocenteInput.Apellidos"]');
+    var inputEmail = document.getElementById('emailInput');
+    var inputPassword = document.getElementById('passwordInput');
+    var selectFacultad = document.querySelector('select[name="DocenteInput.FacultadID"]');
+    
+    var nombres = inputNombres.value.trim();
+    var apellidos = inputApellidos.value.trim();
+    var email = inputEmail.value.trim();
+    var password = inputPassword.value;
+    var facultad = selectFacultad.value;
+    
+    var errores = [];
+    
+    if (nombres === "") {
+        errores.push("Los nombres son requeridos");
+    }
+    if (apellidos === "") {
+        errores.push("Los apellidos son requeridos");
+    }
+    if (email === "") {
+        errores.push("El email es requerido");
+    } else if (!validarFormatoEmail(email)) {
+        errores.push("El formato del email no es válido");
+    }
+    if (password.length > 0 && password.length < 6) {
+        errores.push("La contraseña debe tener al menos 6 caracteres");
+    }
+    if (facultad === "") {
+        errores.push("La facultad es requerida");
+    }
+    
+    if (errores.length > 0) {
+        var mensaje = "Por favor corrija los siguientes errores:\n\n";
+        errores.forEach(function(error, index) {
+            mensaje += "• " + error + "\n";
+        });
+        alert(mensaje);
+        return false;
+    }
+    
+    // Confirmar si se está cambiando la contraseña
+    if (password.length > 0) {
+        if (!confirm("¿Estás seguro de que quieres cambiar la contraseña de este docente?\n\nEl docente necesitará usar la nueva contraseña para su próximo acceso.")) {
+            return false;
+        }
+    }
+    
+    // Cambiar el botón pero NO prevenir el envío del formulario
+    var submitBtn = document.getElementById('submitBtn');
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Guardando cambios...';
+    
+    // Permitir que el formulario se envíe normalmente
+    return true;
+}
+
+function validarFormatoEmail(email) {
+    var regex = /^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/;
+    return regex.test(email);
+}
+
+// Inicializar el estado del checkbox al cargar la página
+document.addEventListener('DOMContentLoaded', function() {
+    actualizarTextoEstado();
+    
+    // Validación del formulario en el evento submit
+    const form = document.getElementById('editDocenteForm');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            // Ejecutar validación
+            if (!validarTodoElFormularioEditar()) {
+                e.preventDefault();
+                // Restaurar el botón si hay errores
+                var submitBtn = document.getElementById('submitBtn');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-save me-2"></i>Guardar Cambios';
+            }
+        });
+    }
+    
+    // Efectos adicionales para mejorar UX
+    const inputs = document.querySelectorAll('.form-control, .form-select');
+    inputs.forEach(input => {
+        input.addEventListener('focus', function() {
+            this.parentElement.style.transform = 'scale(1.02)';
+            this.parentElement.style.transition = 'transform 0.2s ease';
+        });
+
+        input.addEventListener('blur', function() {
+            this.parentElement.style.transform = 'scale(1)';
+        });
+    });
+});
+</script>

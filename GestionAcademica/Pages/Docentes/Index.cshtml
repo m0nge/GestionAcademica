@@ -1,0 +1,607 @@
+﻿@page
+@model GestionAcademica.Pages.Docentes.IndexModel
+@{
+    ViewData["Title"] = "Gestión de Docentes";
+}
+
+<div class="container-fluid px-4" style="margin-top: 2rem;">
+    <!-- Header Section -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="header-banner">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <div class="mb-2">
+                            <span class="badge bg-white bg-opacity-20 px-3 py-2">
+                                <i class="fas fa-chalkboard-teacher me-2"></i>
+                                Panel de Administración
+                            </span>
+                        </div>
+                        <h1 class="text-white mb-2 display-6 fw-bold">
+                            <i class="fas fa-users me-3"></i>
+                            Gestión de Docentes
+                        </h1>
+                        <p class="text-white text-opacity-75 mb-3 fs-6">Administra el personal docente del sistema y asigna responsabilidades</p>
+                        <p class="text-white text-opacity-75 mb-0">Total: @Model.Docentes.Count docentes</p>
+                    </div>
+                    <div>
+                        <a asp-page="Create" class="btn btn-white me-3">
+                            <i class="fas fa-plus me-2"></i>
+                            Nuevo Docente
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alert Messages -->
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show mb-4">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show mb-4">
+            <i class="fas fa-check-circle me-2"></i>
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- Statistics Cards -->
+    <div class="row mb-5 g-4">
+        <div class="col-lg-3 col-md-6">
+            <div class="card h-100 stats-card-modern">
+                <div class="card-body d-flex align-items-center py-4">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-1 text-primary fw-bold fs-2">@Model.Docentes.Count</h3>
+                        <p class="text-muted mb-0">Total Docentes</p>
+                    </div>
+                    <div class="ms-3">
+                        <div class="icon-bg bg-primary bg-opacity-10 p-3 rounded-circle">
+                            <i class="fas fa-users text-primary fs-4"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="card h-100 stats-card-modern">
+                <div class="card-body d-flex align-items-center py-4">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-1 text-success fw-bold fs-2">@Model.Docentes.Count(d => d.Activo)</h3>
+                        <p class="text-muted mb-0">Activos</p>
+                    </div>
+                    <div class="ms-3">
+                        <div class="icon-bg bg-success bg-opacity-10 p-3 rounded-circle">
+                            <i class="fas fa-user-check text-success fs-4"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="card h-100 stats-card-modern">
+                <div class="card-body d-flex align-items-center py-4">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-1 text-warning fw-bold fs-2">@Model.Docentes.Count(d => !d.Activo)</h3>
+                        <p class="text-muted mb-0">Inactivos</p>
+                    </div>
+                    <div class="ms-3">
+                        <div class="icon-bg bg-warning bg-opacity-10 p-3 rounded-circle">
+                            <i class="fas fa-user-times text-warning fs-4"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="card h-100 stats-card-modern">
+                <div class="card-body d-flex align-items-center py-4">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-1 text-info fw-bold fs-2">@Model.Docentes.Count(d => d.Rol == "Administrador")</h3>
+                        <p class="text-muted mb-0">Administradores</p>
+                    </div>
+                    <div class="ms-3">
+                        <div class="icon-bg bg-info bg-opacity-10 p-3 rounded-circle">
+                            <i class="fas fa-user-shield text-info fs-4"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search and Filters Section -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm bg-white">
+                <div class="card-body py-3">
+                    <div class="row align-items-center g-3">
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0">
+                                    <i class="fas fa-search text-muted"></i>
+                                </span>
+                                <input type="text"
+                                       id="searchInput"
+                                       class="form-control border-start-0"
+                                       placeholder="Buscar por nombre, email, teléfono...">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <select id="facultadFilter" class="form-select">
+                                <option value="">Todas las Facultades</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select id="estadoFilter" class="form-select">
+                                <option value="">Todos los Estados</option>
+                                <option value="activo">Solo Activos</option>
+                                <option value="inactivo">Solo Inactivos</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Docentes por Facultad -->
+    <div class="card border-0 shadow-sm bg-white">
+        <div class="card-header bg-white py-4 border-bottom">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    <i class="fas fa-list me-2 text-primary"></i>
+                    Lista de Docentes por Facultad
+                </h5>
+                <small class="text-muted" id="resultCount">
+                    Mostrando <span id="visibleCount">0</span> de <span id="totalCount">@Model.Docentes.Count</span> docentes
+                </small>
+            </div>
+        </div>
+        <div class="card-body p-0">
+            @if (Model.Docentes.Any())
+            {
+                var docentesPorFacultad = Model.Docentes.GroupBy(d => d.Facultad?.Nombre ?? "Sin Facultad");
+
+                @foreach (var grupo in docentesPorFacultad.OrderBy(g => g.Key))
+                {
+                    <div class="facultad-group mb-0" data-facultad="@grupo.Key">
+                        <div class="facultad-header">
+                            <h6 class="mb-0">
+                                <i class="fas fa-building me-2 text-primary"></i>
+                                @grupo.Key
+                                <span class="badge bg-primary ms-2 facultad-count">@grupo.Count() docentes</span>
+                            </h6>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th class="py-3">Nombre Completo</th>
+                                        <th class="py-3">Email</th>
+                                        <th class="py-3">Teléfono</th>
+                                        <th class="py-3">Rol</th>
+                                        <th class="py-3">Estado</th>
+                                        <th class="py-3">Fecha Registro</th>
+                                        <th class="py-3">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var docente in grupo.OrderBy(d => d.Apellidos).ThenBy(d => d.Nombres))
+                                    {
+                                        <tr class="docente-row"
+                                            data-nombre="@docente.NombreCompleto.ToLower()"
+                                            data-email="@docente.Email.ToLower()"
+                                            data-telefono="@(docente.Telefono?.ToLower() ?? "")"
+                                            data-estado="@(docente.Activo ? "activo" : "inactivo")"
+                                            data-facultad="@grupo.Key">
+                                            <td class="py-3">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="avatar-circle me-3">
+                                                        @docente.Nombres.Substring(0, 1)@docente.Apellidos.Substring(0, 1)
+                                                    </div>
+                                                    <div>
+                                                        <strong class="text-dark">@docente.NombreCompleto</strong>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="py-3">
+                                                <i class="fas fa-envelope text-muted me-2"></i>
+                                                <span class="text-dark">@docente.Email</span>
+                                            </td>
+                                            <td class="py-3">
+                                                @if (!string.IsNullOrEmpty(docente.Telefono))
+                                                {
+                                                    <i class="fas fa-phone text-muted me-2"></i>
+                                                    <span class="text-dark">@docente.Telefono</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-muted">N/A</span>
+                                                }
+                                            </td>
+                                            <td class="py-3">
+                                                @if (docente.Rol == "Administrador")
+                                                {
+                                                    <span class="badge bg-danger px-3 py-2">
+                                                        <i class="fas fa-user-shield me-1"></i>
+                                                        Administrador
+                                                    </span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-info px-3 py-2">
+                                                        <i class="fas fa-chalkboard-teacher me-1"></i>
+                                                        Docente
+                                                    </span>
+                                                }
+                                            </td>
+                                            <td class="py-3">
+                                                @if (docente.Activo)
+                                                {
+                                                    <span class="badge bg-success px-3 py-2">
+                                                        <i class="fas fa-check me-1"></i>
+                                                        Activo
+                                                    </span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-warning px-3 py-2">
+                                                        <i class="fas fa-times me-1"></i>
+                                                        Inactivo
+                                                    </span>
+                                                }
+                                            </td>
+                                            <td class="py-3">
+                                                <small class="text-muted">
+                                                    @docente.FechaRegistro.ToString("dd/MM/yyyy")
+                                                </small>
+                                            </td>
+                                            <td class="py-3">
+                                                <div class="btn-group" role="group">
+                                                    <a asp-page="./Details" asp-route-id="@docente.DocenteID"
+                                                       class="btn btn-sm btn-outline-info me-1" title="Ver detalles">
+                                                        <i class="fas fa-eye"></i>
+                                                    </a>
+
+                                                    @if (docente.DocenteID != 2)
+                                                    {
+                                                        <a asp-page="./Edit" asp-route-id="@docente.DocenteID"
+                                                           class="btn btn-sm btn-outline-primary me-1" title="Editar">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <a asp-page="./Delete" asp-route-id="@docente.DocenteID"
+                                                           class="btn btn-sm btn-outline-danger" title="@(docente.Activo ? "Desactivar" : "Activar")">
+                                                            <i class="fas @(docente.Activo ? "fa-user-slash" : "fa-user-check")"></i>
+                                                        </a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="badge bg-warning text-dark px-3 py-2">
+                                                            <i class="fas fa-shield-alt me-1"></i>
+                                                            Protegido
+                                                        </span>
+                                                    }
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="text-center py-5">
+                    <div class="mb-4">
+                        <i class="fas fa-users text-muted" style="font-size: 4rem;"></i>
+                    </div>
+                    <h5 class="text-muted mb-3">No hay docentes registrados</h5>
+                    <p class="text-muted mb-4">Comienza agregando el primer docente al sistema</p>
+                    <a asp-page="Create" class="btn btn-success btn-lg">
+                        <i class="fas fa-plus me-2"></i>
+                        Crear Primer Docente
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript para búsqueda y filtros -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('searchInput');
+        const facultadFilter = document.getElementById('facultadFilter');
+        const estadoFilter = document.getElementById('estadoFilter');
+        const docenteRows = document.querySelectorAll('.docente-row');
+        const facultadGroups = document.querySelectorAll('.facultad-group');
+        const visibleCountSpan = document.getElementById('visibleCount');
+        const totalCountSpan = document.getElementById('totalCount');
+
+        // Llenar el filtro de facultades
+        const facultades = new Set();
+        facultadGroups.forEach(group => {
+            const facultadName = group.dataset.facultad;
+            if (facultadName) {
+                facultades.add(facultadName);
+            }
+        });
+
+        facultades.forEach(facultad => {
+            const option = document.createElement('option');
+            option.value = facultad;
+            option.textContent = facultad;
+            facultadFilter.appendChild(option);
+        });
+
+        function updateCounts() {
+            const visibleRows = document.querySelectorAll('.docente-row:not([style*="display: none"])');
+            visibleCountSpan.textContent = visibleRows.length;
+
+            // Actualizar contadores por facultad
+            facultadGroups.forEach(group => {
+                const visibleRowsInGroup = group.querySelectorAll('.docente-row:not([style*="display: none"])');
+                const countBadge = group.querySelector('.facultad-count');
+                if (countBadge) {
+                    countBadge.textContent = `${visibleRowsInGroup.length} docentes`;
+                }
+            });
+        }
+
+        function filterDocentes() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const selectedFacultad = facultadFilter.value;
+            const selectedEstado = estadoFilter.value;
+
+            docenteRows.forEach(row => {
+                const nombre = row.dataset.nombre;
+                const email = row.dataset.email;
+                const telefono = row.dataset.telefono;
+                const estado = row.dataset.estado;
+                const facultad = row.dataset.facultad;
+
+                const matchesSearch = !searchTerm ||
+                    nombre.includes(searchTerm) ||
+                    email.includes(searchTerm) ||
+                    telefono.includes(searchTerm);
+
+                const matchesFacultad = !selectedFacultad || facultad === selectedFacultad;
+                const matchesEstado = !selectedEstado || estado === selectedEstado;
+
+                const isVisible = matchesSearch && matchesFacultad && matchesEstado;
+                row.style.display = isVisible ? '' : 'none';
+            });
+
+            // Ocultar grupos de facultades que no tienen docentes visibles
+            facultadGroups.forEach(group => {
+                const visibleRowsInGroup = group.querySelectorAll('.docente-row:not([style*="display: none"])');
+                group.style.display = visibleRowsInGroup.length > 0 ? '' : 'none';
+            });
+
+            updateCounts();
+        }
+
+        // Event listeners
+        searchInput.addEventListener('input', filterDocentes);
+        facultadFilter.addEventListener('change', filterDocentes);
+        estadoFilter.addEventListener('change', filterDocentes);
+
+        // Inicializar contador
+        updateCounts();
+    });
+</script>
+
+<style>
+    .avatar-circle {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background: linear-gradient(45deg, #007bff, #0056b3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: 0.85rem;
+        flex-shrink: 0;
+    }
+
+    /* Header Banner Verde */
+    .header-banner {
+        background: linear-gradient(135deg, #28a745, #20c997);
+        border-radius: 20px;
+        padding: 3rem 2.5rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 8px 32px rgba(40, 167, 69, 0.3);
+    }
+
+    .btn-white {
+        background: white;
+        border: 2px solid white;
+        color: #28a745;
+        font-weight: 600;
+        padding: 0.75rem 1.5rem;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+    }
+
+        .btn-white:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            color: #28a745;
+        }
+
+    /* Stats Cards Modernas */
+    .stats-card-modern {
+        background: white;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        overflow: hidden;
+        position: relative;
+    }
+
+        .stats-card-modern::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            background: linear-gradient(to bottom, #007bff, #0056b3);
+            transition: width 0.3s ease;
+        }
+
+        .stats-card-modern:nth-child(2)::before {
+            background: linear-gradient(to bottom, #28a745, #20c997);
+        }
+
+        .stats-card-modern:nth-child(3)::before {
+            background: linear-gradient(to bottom, #ffc107, #e0a800);
+        }
+
+        .stats-card-modern:nth-child(4)::before {
+            background: linear-gradient(to bottom, #17a2b8, #138496);
+        }
+
+        .stats-card-modern:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+            .stats-card-modern:hover::before {
+                width: 8px;
+            }
+
+    .card {
+        transition: all 0.3s ease;
+        margin-bottom: 1rem;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: rgba(0, 123, 255, 0.08);
+        transform: scale(1.01);
+        transition: all 0.2s ease;
+    }
+
+    .btn-group .btn {
+        margin-right: 4px;
+        padding: 0.375rem 0.75rem;
+    }
+
+        .btn-group .btn:last-child {
+            margin-right: 0;
+        }
+
+    /* Estilos mejorados para agrupación por facultades */
+    .facultad-group {
+        border-bottom: 2px solid #e9ecef;
+        margin-bottom: 2rem;
+    }
+
+        .facultad-group:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+    .facultad-header {
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        padding: 1.25rem 2rem;
+        border-bottom: 1px solid #dee2e6;
+        border-left: 4px solid #007bff;
+    }
+
+    .facultad-group .table td {
+        border-top: 1px solid #f1f3f4;
+        vertical-align: middle;
+    }
+
+    .facultad-group .table thead th {
+        background-color: rgba(0, 123, 255, 0.05);
+        border-bottom: 2px solid #e9ecef;
+        font-weight: 600;
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: #495057;
+    }
+
+    /* Estilos para la búsqueda */
+    .input-group-text {
+        border: 1px solid #ced4da;
+    }
+
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+
+    .form-select:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+
+    /* Espaciado mejorado */
+    .container-fluid {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
+    .badge {
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+
+    /* Responsive */
+    @@media (max-width: 768px) {
+        .container-fluid
+
+    {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .facultad-header {
+        padding: 1rem 1.5rem;
+    }
+
+    .btn-group {
+        flex-direction: column;
+    }
+
+        .btn-group .btn {
+            margin-right: 0;
+            margin-bottom: 2px;
+        }
+
+    }
+
+    /* Animaciones sutiles */
+    .docente-row {
+        transition: all 0.2s ease;
+    }
+
+    .faculty-count {
+        transition: all 0.3s ease;
+    }
+
+    /* Ocultar elementos con animación */
+    .docente-row[style*="display: none"] {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+</style>

@@ -1,0 +1,187 @@
+﻿@page
+@model GestionAcademica.Pages.Home.IndexModel
+
+@{
+    ViewData["Title"] = "Inicio - Sistema de Gestión Académica";
+}
+
+<div class="dashboard-hero">
+    <div class="container">
+        <div class="text-center">
+            <h1 class="hero-title">
+                <i class="fas fa-graduation-cap me-3"></i>
+                Sistema de Gestión Académica
+            </h1>
+            <p class="hero-subtitle">Bienvenido, @Model.DocenteNombre</p>
+            <p class="text-light">Rol: @Model.DocenteRol</p>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12 text-center mb-4">
+            <h2>¿Qué deseas hacer?</h2>
+            <p class="text-muted">Selecciona una opción para comenzar</p>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- Gestión de Estudiantes - SOLO PARA ADMINISTRADORES -->
+        @if (Model.EsAdministrador)
+        {
+            <div class="col-lg-4 col-md-6">
+                <div class="menu-card">
+                    <div class="menu-icon bg-primary">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h4>Gestión de Estudiantes</h4>
+                    <p>Administra y consulta información de estudiantes (@Model.TotalEstudiantes total)</p>
+                    <div class="d-grid gap-2">
+                        <a asp-page="/Estudiantes/Index" class="btn btn-primary">Ver Estudiantes</a>
+                        <a asp-page="/Estudiantes/Create" class="btn btn-outline-primary">Nuevo Estudiante</a>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <!-- Materias del Docente - Solo para ver -->
+        @if (!Model.EsAdministrador)
+        {
+            <div class="col-lg-4 col-md-6">
+                <div class="menu-card">
+                    <div class="menu-icon bg-info">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h4>Mis Materias</h4>
+                    <p>Ver las materias asignadas a mi facultad</p>
+                    <div class="d-grid gap-2">
+                        <a asp-page="/Materias/Index" class="btn btn-info">Ver Mis Materias</a>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <!-- Gestión de Docentes - Solo para Administradores -->
+        @if (Model.EsAdministrador)
+        {
+            <div class="col-lg-4 col-md-6">
+                <div class="menu-card">
+                    <div class="menu-icon bg-success">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h4>Gestión de Docentes</h4>
+                    <p>Administra el personal docente (@Model.TotalDocentes total) - Solo Administradores</p>
+                    <div class="d-grid gap-2">
+                        <a asp-page="/Docentes/Index" class="btn btn-success">Ver Docentes</a>
+                        <a asp-page="/Docentes/Create" class="btn btn-outline-success">Nuevo Docente</a>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <!-- Gestión de Materias - Solo para Administradores -->
+        @if (Model.EsAdministrador)
+        {
+            <div class="col-lg-4 col-md-6">
+                <div class="menu-card">
+                    <div class="menu-icon bg-warning">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h4>Gestión de Materias</h4>
+                    <p>Administra materias y asigna docentes (Solo Administradores)</p>
+                    <div class="d-grid gap-2">
+                        <a asp-page="/Materias/Index" class="btn btn-warning">Ver Materias</a>
+                        <a asp-page="/Materias/Create" class="btn btn-outline-warning">Nueva Materia</a>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <!-- Reportes -->
+        <div class="col-lg-4 col-md-6">
+            <div class="menu-card">
+                <div class="menu-icon bg-info">
+                    <i class="fas fa-chart-bar"></i>
+                </div>
+                <h4>Reportes</h4>
+                <p>Genera reportes y estadísticas</p>
+                <div class="d-grid gap-2">
+<a asp-page="/Reportes/Index" class="btn btn-info">Ver Reportes</a>               
+                </div>
+            </div>
+        </div>
+
+        <!-- Configuración -->
+        <!-- Configuración -->
+<div class="col-lg-4 col-md-6">
+    <div class="menu-card">
+        <div class="menu-icon bg-secondary">
+            <i class="fas fa-cog"></i>
+        </div>
+        <h4>Configuración</h4>
+        <p>Ajustes del sistema y perfil</p>
+        <div class="d-grid gap-2">
+            <a asp-page="/Configuracion/Index" class="btn btn-secondary">Configuración</a>
+            <a asp-page="/Logout" class="btn btn-outline-danger">Cerrar Sesión</a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .dashboard-hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 3rem 0;
+        margin-top: -2rem;
+        border-radius: 0 0 30px 30px;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+        opacity: 0.9;
+    }
+
+    .menu-card {
+        background: white;
+        border-radius: 15px;
+        padding: 2rem;
+        text-align: center;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        height: 100%;
+    }
+
+    .menu-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    .menu-icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.5rem;
+        font-size: 2rem;
+        color: white;
+    }
+
+    .menu-card h4 {
+        color: #2c3e50;
+        margin-bottom: 1rem;
+    }
+
+    .menu-card p {
+        color: #6c757d;
+        margin-bottom: 2rem;
+    }
+</style>

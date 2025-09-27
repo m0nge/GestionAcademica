@@ -1,0 +1,393 @@
+﻿@page
+@model GestionAcademica.Pages.Asignaciones.CreateModel
+
+@{
+    ViewData["Title"] = $"Nueva Asignación - {Model.Materia?.Nombre}";
+}
+
+<!-- Hero Header -->
+<div class="create-hero">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <i class="fas fa-plus me-2"></i>
+                        @Model.Materia?.Codigo
+                    </div>
+                    <h1 class="hero-title">
+                        <i class="fas fa-clipboard-list me-3"></i>
+                        Nueva Asignación
+                    </h1>
+                    <p class="hero-subtitle">
+                        Crear una nueva evaluación para <strong>@Model.Materia?.Nombre</strong>
+                        <span class="porcentaje-info">
+                            <i class="fas fa-percentage me-1"></i>
+                            Disponible: <strong>@Model.PorcentajeDisponible.ToString("F1")%</strong>
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 text-end">
+                <a asp-page="./Index" asp-route-materiaId="@Model.MateriaId" class="btn btn-back">
+                    <i class="fas fa-arrow-left me-2"></i>
+                    Volver a Asignaciones
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Mensajes -->
+@if (TempData["ErrorMessage"] != null)
+{
+        <div class="container mt-4">
+            <div class="alert alert-danger alert-dismissible fade show">
+                <i class="fas fa-exclamation-triangle me-2"></i>
+            @TempData["ErrorMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        </div>
+}
+
+<!-- Formulario -->
+<div class="container mt-4">
+    <div class="form-container">
+        <form method="post">
+            <input type="hidden" asp-for="Asignacion.MateriaID" />
+
+            <div class="row">
+                <!-- Columna Izquierda -->
+                <div class="col-lg-6">
+                    <div class="form-section">
+                        <h4><i class="fas fa-info-circle me-2"></i>Información Básica</h4>
+
+                        <!-- Nombre -->
+                        <div class="form-group">
+                            <label asp-for="Asignacion.Nombre" class="form-label">
+                                <i class="fas fa-tag me-1"></i>
+                                Nombre de la Asignación
+                            </label>
+                            <input asp-for="Asignacion.Nombre" class="form-control" 
+                                   placeholder="Ej: Primer Parcial, Tarea #1, Proyecto Final" />
+                            <span asp-validation-for="Asignacion.Nombre" class="text-danger"></span>
+                        </div>
+
+                        <!-- Tipo de Asignación -->
+                        <div class="form-group">
+                            <label asp-for="Asignacion.TipoAsignacionID" class="form-label">
+                                <i class="fas fa-list me-1"></i>
+                                Tipo de Asignación
+                            </label>
+                            <select asp-for="Asignacion.TipoAsignacionID" 
+                                    asp-items="Model.TiposAsignacion"
+                                    class="form-select">
+                                <option value="">-- Seleccionar tipo --</option>
+                            </select>
+                            <span asp-validation-for="Asignacion.TipoAsignacionID" class="text-danger"></span>
+                        </div>
+
+                        <!-- Descripción -->
+                        <div class="form-group">
+                            <label asp-for="Asignacion.Descripcion" class="form-label">
+                                <i class="fas fa-align-left me-1"></i>
+                                Descripción <span class="text-muted">(Opcional)</span>
+                            </label>
+                            <textarea asp-for="Asignacion.Descripcion" 
+                                      class="form-control" 
+                                      rows="4" 
+                                      placeholder="Describe los objetivos, contenido o instrucciones de la asignación..."></textarea>
+                            <span asp-validation-for="Asignacion.Descripcion" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna Derecha -->
+                <div class="col-lg-6">
+                    <div class="form-section">
+                        <h4><i class="fas fa-cog me-2"></i>Configuración</h4>
+
+                        <!-- Porcentaje -->
+                        <div class="form-group">
+                            <label asp-for="Asignacion.Porcentaje" class="form-label">
+                                <i class="fas fa-percentage me-1"></i>
+                                Porcentaje de Evaluación
+                                <span class="disponible-badge">Disponible: @Model.PorcentajeDisponible.ToString("F1")%</span>
+                            </label>
+                            <div class="input-group">
+                                <input asp-for="Asignacion.Porcentaje" 
+                                       type="number" 
+                                       step="0.1" 
+                                       min="0.1" 
+                                       max="@Model.PorcentajeDisponible" 
+                                       class="form-control" 
+                                       placeholder="0.0" />
+                                <span class="input-group-text">%</span>
+                            </div>
+                            <span asp-validation-for="Asignacion.Porcentaje" class="text-danger"></span>
+                            <div class="form-text">
+                                <i class="fas fa-info-circle"></i>
+                                El porcentaje total de todas las asignaciones debe sumar 100%
+                            </div>
+                        </div>
+
+                        <!-- Nota Máxima -->
+                        <div class="form-group">
+                            <label asp-for="Asignacion.NotaMaxima" class="form-label">
+                                <i class="fas fa-star me-1"></i>
+                                Nota Máxima
+                            </label>
+                            <div class="input-group">
+                                <input asp-for="Asignacion.NotaMaxima" 
+                                       type="number" 
+                                       step="0.1" 
+                                       min="1" 
+                                       max="100" 
+                                       class="form-control" />
+                                <span class="input-group-text">pts</span>
+                            </div>
+                            <span asp-validation-for="Asignacion.NotaMaxima" class="text-danger"></span>
+                        </div>
+
+                        <!-- Fecha de Vencimiento -->
+                        <div class="form-group">
+                            <label asp-for="Asignacion.FechaVencimiento" class="form-label">
+                                <i class="fas fa-calendar-times me-1"></i>
+                                Fecha de Vencimiento
+                            </label>
+                            <input asp-for="Asignacion.FechaVencimiento" 
+                                   type="datetime-local" 
+                                   class="form-control" />
+                            <span asp-validation-for="Asignacion.FechaVencimiento" class="text-danger"></span>
+                        </div>
+
+                        <!-- Estado -->
+                        <div class="form-group">
+                            <div class="form-check form-switch">
+                                <input asp-for="Asignacion.Activa" 
+                                       type="checkbox" 
+                                       class="form-check-input" 
+                                       id="activaSwitch" />
+                                <label class="form-check-label" for="activaSwitch">
+                                    <i class="fas fa-toggle-on me-1"></i>
+                                    Asignación Activa
+                                </label>
+                            </div>
+                            <div class="form-text">
+                                Las asignaciones inactivas no se mostrarán a los estudiantes
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones de Acción -->
+            <div class="form-actions">
+                <button type="submit" class="btn btn-create-submit">
+                    <i class="fas fa-save me-2"></i>
+                    Crear Asignación
+                </button>
+                <a asp-page="./Index" asp-route-materiaId="@Model.MateriaId" class="btn btn-cancel">
+                    <i class="fas fa-times me-2"></i>
+                    Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    /* Hero Section */
+    .create-hero {
+        background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
+        color: white;
+        padding: 3rem 0;
+        margin-top: -2rem;
+        border-radius: 0 0 30px 30px;
+    }
+
+    .hero-badge {
+        display: inline-block;
+        padding: 0.5rem 1.5rem;
+        background: rgba(255,255,255,0.2);
+        border: 1px solid rgba(255,255,255,0.3);
+        border-radius: 50px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        line-height: 1.6;
+    }
+
+    .porcentaje-info {
+        display: block;
+        margin-top: 0.5rem;
+    }
+
+    .btn-back {
+        background: rgba(255,255,255,0.2);
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255,255,255,0.3);
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 15px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .btn-back:hover {
+        background: rgba(255,255,255,0.3);
+        transform: translateY(-2px);
+        color: white;
+    }
+
+    /* Form Container */
+    .form-container {
+        background: white;
+        border-radius: 20px;
+        padding: 3rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        margin-bottom: 3rem;
+    }
+
+    .form-section {
+        background: #f8f9fa;
+        border-radius: 15px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        border-left: 4px solid #56ab2f;
+    }
+
+    .form-section h4 {
+        color: #2c3e50;
+        margin-bottom: 1.5rem;
+        font-weight: 600;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+    }
+
+    .form-control, .form-select {
+        border: 2px solid #e9ecef;
+        border-radius: 10px;
+        padding: 0.8rem 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: #56ab2f;
+        box-shadow: 0 0 0 0.2rem rgba(86, 171, 47, 0.25);
+    }
+
+    .disponible-badge {
+        background: rgba(86, 171, 47, 0.1);
+        color: #56ab2f;
+        padding: 0.2rem 0.8rem;
+        border-radius: 50px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-left: auto;
+    }
+
+    .input-group-text {
+        background: #56ab2f;
+        color: white;
+        border: 2px solid #56ab2f;
+        font-weight: 600;
+    }
+
+    .form-check-input:checked {
+        background-color: #56ab2f;
+        border-color: #56ab2f;
+    }
+
+    .form-text {
+        color: #6c757d;
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+    }
+
+    /* Action Buttons */
+    .form-actions {
+        text-align: center;
+        padding-top: 2rem;
+        border-top: 2px solid #f1f3f4;
+        margin-top: 2rem;
+    }
+
+    .btn-create-submit {
+        background: linear-gradient(45deg, #56ab2f, #a8e6cf);
+        color: white;
+        border: none;
+        padding: 1rem 3rem;
+        border-radius: 15px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        margin-right: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .btn-create-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(86, 171, 47, 0.3);
+        color: white;
+    }
+
+    .btn-cancel {
+        background: #6c757d;
+        color: white;
+        border: none;
+        padding: 1rem 3rem;
+        border-radius: 15px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .btn-cancel:hover {
+        background: #5a6268;
+        transform: translateY(-2px);
+        color: white;
+    }
+
+    /* Responsive */
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .form-container {
+        padding: 2rem;
+    }
+
+    .form-section {
+        padding: 1.5rem;
+    }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

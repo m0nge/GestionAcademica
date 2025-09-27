@@ -1,0 +1,587 @@
+﻿@page
+@model GestionAcademica.Pages.Calificaciones.IndexModel
+
+@{
+    ViewData["Title"] = $"Calificar - {Model.Asignacion?.Nombre}";
+}
+
+<!-- Hero Header -->
+<div class="calificaciones-hero">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <i class="fas fa-star me-2"></i>
+                        @Model.Materia?.Codigo
+                    </div>
+                    <h1 class="hero-title">
+                        <i class="fas fa-clipboard-check me-3"></i>
+                        Calificar Estudiantes
+                    </h1>
+                    <p class="hero-subtitle">
+                        <strong>@Model.Asignacion?.Nombre</strong> - @Model.Materia?.Nombre
+                        <span class="asignacion-info">
+                            <i class="fas fa-percentage me-1"></i>
+                            @Model.Asignacion?.Porcentaje.ToString("F1")% | 
+                            <i class="fas fa-star me-1"></i>
+                            Nota máxima: @Model.Asignacion?.NotaMaxima pts
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 text-end">
+                <a asp-page="/Asignaciones/Index" asp-route-materiaId="@Model.MateriaId" class="btn btn-back">
+                    <i class="fas fa-arrow-left me-2"></i>
+                    Volver a Asignaciones
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Mensajes -->
+@if (TempData["SuccessMessage"] != null)
+{
+        <div class="container mt-4">
+            <div class="alert alert-success alert-dismissible fade show">
+                <i class="fas fa-check-circle me-2"></i>
+            @TempData["SuccessMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+        <div class="container mt-4">
+            <div class="alert alert-danger alert-dismissible fade show">
+                <i class="fas fa-exclamation-triangle me-2"></i>
+            @TempData["ErrorMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        </div>
+}
+
+<!-- Información de la Asignación -->
+<div class="container mt-4">
+    <div class="info-summary">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="info-stat">
+                    <div class="stat-value">@Model.EstudiantesCalificaciones.Count</div>
+                    <div class="stat-label">Total Estudiantes</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="info-stat">
+                    <div class="stat-value">@Model.EstudiantesCalificaciones.Count(ec => ec.TieneCalificacion)</div>
+                    <div class="stat-label">Calificados</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="info-stat">
+                    <div class="stat-value">@Model.EstudiantesCalificaciones.Count(ec => !ec.TieneCalificacion)</div>
+                    <div class="stat-label">Pendientes</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="info-stat">
+                    <div class="stat-value">
+                        @if (Model.EstudiantesCalificaciones.Any(ec => ec.TieneCalificacion))
+                        {
+                            @Model.EstudiantesCalificaciones.Where(ec => ec.TieneCalificacion).Average(ec => ec.Calificacion!.Nota).ToString("F1")
+                        }
+                        else
+                        {
+                                <span>--</span>
+                        }
+                    </div>
+                    <div class="stat-label">Promedio</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Matriz de Calificaciones -->
+<div class="container mt-4">
+    <div class="calificaciones-container">
+        @if (Model.EstudiantesCalificaciones.Any())
+        {
+                <form method="post" id="calificacionesForm">
+                    <input type="hidden" asp-for="AsignacionId" />
+                    <input type="hidden" asp-for="MateriaId" />
+
+                    <div class="table-header">
+                        <h4>
+                            <i class="fas fa-users me-2"></i>
+                            Matriz de Calificaciones
+                        </h4>
+                        <div class="table-actions">
+                            <button type="button" class="btn btn-outline-warning btn-sm" onclick="limpiarTodo()">
+                                <i class="fas fa-eraser me-1"></i>
+                                Limpiar Todo
+                            </button>
+                            <button type="button" class="btn btn-outline-info btn-sm" onclick="aplicarNotaATodos()">
+                                <i class="fas fa-copy me-1"></i>
+                                Aplicar a Todos
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table calificaciones-table">
+                            <thead>
+                                <tr>
+                                    <th width="120">Carnet</th>
+                                    <th>Estudiante</th>
+                                       <th width="150">Nota (0-@Model.Asignacion?.NotaMaxima)</th>
+                                    <th width="200">Observaciones</th>
+                                    <th width="100">Estado</th>
+                                    <th width="80">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @for (int i = 0; i < Model.EstudiantesCalificaciones.Count; i++)
+                            {
+                                var estudianteCalif = Model.EstudiantesCalificaciones[i];
+                                        <tr class="@(estudianteCalif.TieneCalificacion ? "calificado" : "pendiente")">
+                                            <td>
+                                                <strong>@estudianteCalif.Estudiante.Carnet</strong>
+                                            </td>
+                                            <td>
+                                                <div class="estudiante-info">
+                                                    <div class="estudiante-nombre">
+                                                @estudianteCalif.Estudiante.NombreCompleto
+                                                    </div>
+                                                    <div class="estudiante-email">
+                                                @estudianteCalif.Estudiante.Email
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <input type="hidden" asp-for="Calificaciones[i].EstudianteID" value="@estudianteCalif.Estudiante.EstudianteID" />
+                                                <input type="hidden" asp-for="Calificaciones[i].AsignacionID" value="@Model.AsignacionId" />
+                                                <input type="hidden" asp-for="Calificaciones[i].CalificacionID" value="@(estudianteCalif.Calificacion?.CalificacionID ?? 0)" />
+
+                                                <div class="nota-input-group">
+                                                    <input asp-for="Calificaciones[i].Nota" 
+                                                           type="number" 
+                                                           step="0.1" 
+                                                           min="0" 
+                                                           max="@Model.Asignacion?.NotaMaxima" 
+                                                           class="form-control nota-input" 
+                                                           onchange="actualizarEstado(this)" />
+                                                    <span class="input-group-text">pts</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <textarea asp-for="Calificaciones[i].Observaciones" 
+                                                          class="form-control observaciones-input" 
+                                                          rows="2" 
+                                                          placeholder="Comentarios opcionales..."></textarea>
+                                            </td>
+                                            <td>
+                                                <span class="estado-badge" id="estado_@i">
+                                            @if (estudianteCalif.TieneCalificacion)
+                                            {
+                                                            <span class="badge bg-success">
+                                                                <i class="fas fa-check"></i> Calificado
+                                                            </span>
+                                            }
+                                            else
+                                            {
+                                                            <span class="badge bg-warning">
+                                                                <i class="fas fa-clock"></i> Pendiente
+                                                            </span>
+                                            }
+                                                </span>
+                                            </td>
+                                            <td>
+                                        @if (estudianteCalif.TieneCalificacion)
+                                        {
+                                                        <form method="post" style="display: inline;" asp-page-handler="EliminarCalificacion">
+                                                            <input type="hidden" name="calificacionId" value="@estudianteCalif.Calificacion!.CalificacionID" />
+                                                            <input type="hidden" name="asignacionId" value="@Model.AsignacionId" />
+                                                            <input type="hidden" name="materiaId" value="@Model.MateriaId" />
+                                                            <button type="submit" 
+                                                                    class="btn btn-outline-danger btn-sm" 
+                                                                    title="Eliminar calificación"
+                                                                    onclick="return confirm('¿Eliminar la calificación de @estudianteCalif.Estudiante.NombreCompleto?')">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                        </form>
+                                        }
+                                            </td>
+                                        </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Botones de Acción -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-save-grades">
+                            <i class="fas fa-save me-2"></i>
+                            Guardar Calificaciones
+                        </button>
+                        <button type="reset" class="btn btn-reset">
+                            <i class="fas fa-undo me-2"></i>
+                            Restablecer
+                        </button>
+                    </div>
+                </form>
+        }
+        else
+        {
+                <div class="empty-state">
+                    <div class="empty-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h3>No hay estudiantes inscritos</h3>
+                    <p>Esta materia no tiene estudiantes inscritos para calificar.</p>
+                    <a asp-page="/Asignaciones/Index" asp-route-materiaId="@Model.MateriaId" class="btn btn-primary">
+                        <i class="fas fa-arrow-left me-2"></i>
+                        Volver a Asignaciones
+                    </a>
+                </div>
+        }
+    </div>
+</div>
+
+<style>
+    /* Hero Section */
+    .calificaciones-hero {
+        background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+        color: white;
+        padding: 3rem 0;
+        margin-top: -2rem;
+        border-radius: 0 0 30px 30px;
+    }
+
+    .hero-badge {
+        display: inline-block;
+        padding: 0.5rem 1.5rem;
+        background: rgba(255,255,255,0.2);
+        border: 1px solid rgba(255,255,255,0.3);
+        border-radius: 50px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        line-height: 1.6;
+    }
+
+    .asignacion-info {
+        display: block;
+        margin-top: 0.5rem;
+    }
+
+    .btn-back {
+        background: rgba(255,255,255,0.2);
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255,255,255,0.3);
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 15px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .btn-back:hover {
+        background: rgba(255,255,255,0.3);
+        transform: translateY(-2px);
+        color: white;
+    }
+
+    /* Info Summary */
+    .info-summary {
+        background: white;
+        border-radius: 15px;
+        padding: 2rem;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        border-left: 4px solid #f39c12;
+    }
+
+    .info-stat {
+        text-align: center;
+        padding: 1rem;
+    }
+
+    .stat-value {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #f39c12;
+        margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+        font-size: 0.9rem;
+        color: #7f8c8d;
+        font-weight: 500;
+    }
+
+    /* Calificaciones Container */
+    .calificaciones-container {
+        background: white;
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        margin-bottom: 3rem;
+    }
+
+    .table-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid #f1f3f4;
+    }
+
+    .table-header h4 {
+        color: #2c3e50;
+        font-weight: 600;
+        margin-bottom: 0;
+    }
+
+    .table-actions {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    /* Tabla */
+    .calificaciones-table {
+        margin-bottom: 0;
+    }
+
+    .calificaciones-table th {
+        background: #f8f9fa;
+        border: none;
+        font-weight: 600;
+        color: #2c3e50;
+        padding: 1rem 0.8rem;
+        vertical-align: middle;
+    }
+
+    .calificaciones-table td {
+        padding: 1rem 0.8rem;
+        vertical-align: middle;
+        border: 1px solid #f1f3f4;
+    }
+
+    .calificaciones-table tr.calificado {
+        background: rgba(39, 174, 96, 0.05);
+    }
+
+    .calificaciones-table tr.pendiente {
+        background: rgba(241, 196, 15, 0.05);
+    }
+
+    .estudiante-info {
+        line-height: 1.4;
+    }
+
+    .estudiante-nombre {
+        font-weight: 600;
+        color: #2c3e50;
+    }
+
+    .estudiante-email {
+        font-size: 0.85rem;
+        color: #6c757d;
+    }
+
+   .nota-input-group {
+    display: flex;
+    max-width: 150px;
+    width: 100%;
+}
+
+    .nota-input {
+        border: 2px solid #e9ecef;
+        border-radius: 8px 0 0 8px;
+        text-align: center;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .nota-input:focus {
+        border-color: #f39c12;
+        box-shadow: 0 0 0 0.2rem rgba(243, 156, 18, 0.25);
+    }
+
+    .input-group-text {
+        background: #f39c12;
+        color: white;
+        border: 2px solid #f39c12;
+        border-radius: 0 8px 8px 0;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+
+    .observaciones-input {
+        border: 2px solid #e9ecef;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        resize: vertical;
+        min-height: 60px;
+    }
+
+    .observaciones-input:focus {
+        border-color: #f39c12;
+        box-shadow: 0 0 0 0.2rem rgba(243, 156, 18, 0.25);
+    }
+
+    .estado-badge .badge {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    /* Action Buttons */
+    .form-actions {
+        text-align: center;
+        padding-top: 2rem;
+        border-top: 2px solid #f1f3f4;
+        margin-top: 2rem;
+    }
+
+    .btn-save-grades {
+        background: linear-gradient(45deg, #f39c12, #e67e22);
+        color: white;
+        border: none;
+        padding: 1rem 3rem;
+        border-radius: 15px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        margin-right: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .btn-save-grades:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(243, 156, 18, 0.3);
+        color: white;
+    }
+
+    .btn-reset {
+        background: #6c757d;
+        color: white;
+        border: none;
+        padding: 1rem 3rem;
+        border-radius: 15px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .btn-reset:hover {
+        background: #5a6268;
+        transform: translateY(-2px);
+        color: white;
+    }
+
+    /* Empty State */
+    .empty-state {
+        text-align: center;
+        padding: 4rem 2rem;
+        color: #7f8c8d;
+    }
+
+    .empty-icon {
+        font-size: 4rem;
+        color: #f39c12;
+        margin-bottom: 2rem;
+    }
+
+    .empty-state h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: #2c3e50;
+    }
+
+    /* Responsive */
+   
+</style>
+
+<script>
+    function actualizarEstado(input) {
+        const row = input.closest('tr');
+        const estadoBadge = row.querySelector('.estado-badge');
+
+        if (parseFloat(input.value) > 0) {
+            row.classList.remove('pendiente');
+            row.classList.add('calificado');
+            estadoBadge.innerHTML = '<span class="badge bg-success"><i class="fas fa-check"></i> Calificado</span>';
+        } else {
+            row.classList.remove('calificado');
+            row.classList.add('pendiente');
+            estadoBadge.innerHTML = '<span class="badge bg-warning"><i class="fas fa-clock"></i> Pendiente</span>';
+        }
+    }
+
+    function limpiarTodo() {
+        if (confirm('¿Estás seguro de limpiar todas las calificaciones?')) {
+            const notaInputs = document.querySelectorAll('.nota-input');
+            const observacionesInputs = document.querySelectorAll('.observaciones-input');
+
+            notaInputs.forEach(input => {
+                input.value = '0';
+                actualizarEstado(input);
+            });
+
+            observacionesInputs.forEach(input => {
+                input.value = '';
+            });
+        }
+    }
+
+    function aplicarNotaATodos() {
+        const nota = prompt('¿Qué nota aplicar a todos los estudiantes?', '');
+        if (nota !== null && !isNaN(nota) && nota >= 0 && nota <= @Model.Asignacion?.NotaMaxima) {
+            const notaInputs = document.querySelectorAll('.nota-input');
+            notaInputs.forEach(input => {
+                input.value = nota;
+                actualizarEstado(input);
+            });
+        } else if (nota !== null) {
+            alert('Nota inválida. Debe estar entre 0 y @Model.Asignacion?.NotaMaxima');
+        }
+    }
+
+    // Validación de envío del formulario
+    document.getElementById('calificacionesForm').addEventListener('submit', function(e) {
+        const notaInputs = document.querySelectorAll('.nota-input');
+        let hayCalificaciones = false;
+
+        notaInputs.forEach(input => {
+            if (parseFloat(input.value) > 0) {
+                hayCalificaciones = true;
+            }
+        });
+
+        if (!hayCalificaciones) {
+            e.preventDefault();
+            alert('Debe ingresar al menos una calificación antes de guardar.');
+        }
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

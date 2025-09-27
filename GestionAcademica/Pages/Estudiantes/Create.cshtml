@@ -1,0 +1,1062 @@
+﻿@page
+@model GestionAcademica.Pages.Estudiantes.CreateModel
+
+@{
+    ViewData["Title"] = "Nuevo Estudiante";
+}
+
+<!-- Hero Header Mejorado -->
+<div class="create-hero-enhanced">
+    <div class="hero-bg-pattern"></div>
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <div class="hero-content-enhanced">
+                    <div class="hero-badge">
+                        <i class="fas fa-sparkles me-2"></i>
+                        Nuevo Registro
+                    </div>
+                    <h1 class="hero-title-enhanced">
+                        <i class="fas fa-user-plus me-3"></i>
+                        Registrar Nuevo Estudiante
+                    </h1>
+                    <p class="hero-subtitle-enhanced">
+                        Complete el formulario con la información del estudiante.
+                        Todos los campos marcados con <span class="text-warning fw-bold">*</span> son obligatorios.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-shield-check"></i>
+                            <span>Formulario Seguro</span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-university"></i>
+                            <span>Asignación de Carrera</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 text-center">
+                <div class="hero-illustration-enhanced">
+                    <div class="floating-elements">
+                        <div class="floating-card main-card">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="floating-card small-card card-1">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="floating-card small-card card-2">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="floating-card small-card card-3">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Formulario Principal Mejorado -->
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-xl-10">
+            <div class="form-wizard-enhanced">
+                <!-- Header del Wizard -->
+                <div class="wizard-header-enhanced">
+                    <div class="wizard-progress">
+                        <div class="progress-line"></div>
+                        <div class="wizard-step-enhanced active">
+                            <div class="step-circle">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <div class="step-info">
+                                <span class="step-title">Completar Información</span>
+                                <span class="step-desc">Datos del estudiante</span>
+                            </div>
+                        </div>
+                        <div class="wizard-step-enhanced">
+                            <div class="step-circle">
+                                <i class="fas fa-check-double"></i>
+                            </div>
+                            <div class="step-info">
+                                <span class="step-title">Listo para Guardar</span>
+                                <span class="step-desc">Confirmar y guardar</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <form method="post" class="enhanced-form">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger enhanced-alert" role="alert"></div>
+
+                    <!-- Secciones del Formulario -->
+                    <div class="form-content-enhanced">
+
+                        <!-- Sección 1: Identificación -->
+                        <div class="form-section-enhanced">
+                            <div class="section-header-enhanced">
+                                <div class="section-icon">
+                                    <i class="fas fa-id-card"></i>
+                                </div>
+                                <div class="section-info">
+                                    <h3>Información de Identificación</h3>
+                                    <p>Datos únicos que identifican al estudiante en el sistema</p>
+                                </div>
+                            </div>
+
+                            <div class="row g-4">
+                                <!-- Carnet -->
+                                <div class="col-md-6">
+                                    <div class="enhanced-field">
+                                        <div class="field-wrapper">
+                                            <input asp-for="Estudiante.Carnet" class="form-control enhanced-input"
+                                                   placeholder="Ej: 2024001" maxlength="20" required>
+                                            <label asp-for="Estudiante.Carnet" class="enhanced-label">
+                                                <i class="fas fa-id-card me-2"></i>Carnet Estudiantil *
+                                            </label>
+                                            <div class="field-border"></div>
+                                        </div>
+                                        <span asp-validation-for="Estudiante.Carnet" class="field-error-enhanced"></span>
+                                        <div class="field-hint-enhanced">
+                                            <i class="fas fa-info-circle me-1"></i>
+                                            Mínimo 6 caracteres, debe ser único
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Email -->
+                                <div class="col-md-6">
+                                    <div class="enhanced-field">
+                                        <div class="field-wrapper">
+                                            <input asp-for="Estudiante.Email" class="form-control enhanced-input"
+                                                   placeholder="estudiante@ejemplo.com" type="email" required>
+                                            <label asp-for="Estudiante.Email" class="enhanced-label">
+                                                <i class="fas fa-envelope me-2"></i>Correo Electrónico *
+                                            </label>
+                                            <div class="field-border"></div>
+                                        </div>
+                                        <span asp-validation-for="Estudiante.Email" class="field-error-enhanced"></span>
+                                        <div class="field-hint-enhanced">
+                                            <i class="fas fa-info-circle me-1"></i>
+                                            Debe ser un email válido y único
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sección 2: Información Personal -->
+                        <div class="form-section-enhanced">
+                            <div class="section-header-enhanced">
+                                <div class="section-icon">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="section-info">
+                                    <h3>Información Personal</h3>
+                                    <p>Datos personales y de contacto del estudiante</p>
+                                </div>
+                            </div>
+
+                            <div class="row g-4">
+                                <!-- Nombres -->
+                                <div class="col-md-6">
+                                    <div class="enhanced-field">
+                                        <div class="field-wrapper">
+                                            <input asp-for="Estudiante.Nombres" class="form-control enhanced-input"
+                                                   placeholder="Nombres completos" maxlength="100" required>
+                                            <label asp-for="Estudiante.Nombres" class="enhanced-label">
+                                                <i class="fas fa-user me-2"></i>Nombres *
+                                            </label>
+                                            <div class="field-border"></div>
+                                        </div>
+                                        <span asp-validation-for="Estudiante.Nombres" class="field-error-enhanced"></span>
+                                        <div class="field-hint-enhanced">
+                                            <i class="fas fa-info-circle me-1"></i>
+                                            Solo letras y espacios
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Apellidos -->
+                                <div class="col-md-6">
+                                    <div class="enhanced-field">
+                                        <div class="field-wrapper">
+                                            <input asp-for="Estudiante.Apellidos" class="form-control enhanced-input"
+                                                   placeholder="Apellidos completos" maxlength="100" required>
+                                            <label asp-for="Estudiante.Apellidos" class="enhanced-label">
+                                                <i class="fas fa-user me-2"></i>Apellidos *
+                                            </label>
+                                            <div class="field-border"></div>
+                                        </div>
+                                        <span asp-validation-for="Estudiante.Apellidos" class="field-error-enhanced"></span>
+                                        <div class="field-hint-enhanced">
+                                            <i class="fas fa-info-circle me-1"></i>
+                                            Solo letras y espacios
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Fecha de Nacimiento -->
+                                <div class="col-md-6">
+                                    <div class="enhanced-field">
+                                        <div class="field-wrapper">
+                                            <input asp-for="Estudiante.FechaNacimiento" class="form-control enhanced-input"
+                                                   type="date" max="2009-12-31" min="1900-01-01" required>
+                                            <label asp-for="Estudiante.FechaNacimiento" class="enhanced-label">
+                                                <i class="fas fa-calendar me-2"></i>Fecha de Nacimiento *
+                                            </label>
+                                            <div class="field-border"></div>
+                                        </div>
+                                        <span asp-validation-for="Estudiante.FechaNacimiento" class="field-error-enhanced"></span>
+                                        <div class="field-hint-enhanced">
+                                            <i class="fas fa-info-circle me-1"></i>
+                                            Entre 1900 y 2009 (mínimo 16 años)
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Teléfono -->
+                                <div class="col-md-6">
+                                    <div class="enhanced-field">
+                                        <div class="field-wrapper">
+                                            <input asp-for="Estudiante.Telefono" class="form-control enhanced-input"
+                                                   placeholder="0000-0000" maxlength="9" required>
+                                            <label asp-for="Estudiante.Telefono" class="enhanced-label">
+                                                <i class="fas fa-phone me-2"></i>Teléfono *
+                                            </label>
+                                            <div class="field-border"></div>
+                                        </div>
+                                        <span asp-validation-for="Estudiante.Telefono" class="field-error-enhanced"></span>
+                                        <div class="field-hint-enhanced">
+                                            <i class="fas fa-info-circle me-1"></i>
+                                            Formato: 0000-0000
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sección 3: Información Académica -->
+                        <div class="form-section-enhanced">
+                            <div class="section-header-enhanced">
+                                <div class="section-icon">
+                                    <i class="fas fa-university"></i>
+                                </div>
+                                <div class="section-info">
+                                    <h3>Información Académica</h3>
+                                    <p>Selecciona la facultad y carrera del estudiante</p>
+                                </div>
+                            </div>
+
+                            <div class="row g-4">
+                                <!-- Facultad -->
+                                <div class="col-md-6">
+                                    <div class="enhanced-field">
+                                        <div class="field-wrapper">
+                                            <select id="facultadSelect" class="form-control enhanced-input"
+                                                    onchange="cargarCarrerasPorFacultad()" required>
+                                                <option value="">Seleccionar Facultad</option>
+                                                @if (Model.FacultadSelectList != null)
+                                                {
+                                                    @foreach (var facultad in Model.FacultadSelectList)
+                                                    {
+                                                        <option value="@facultad.Value">@facultad.Text</option>
+                                                    }
+                                                }
+                                            </select>
+                                            <label for="facultadSelect" class="enhanced-label">
+                                                <i class="fas fa-building me-2"></i>Facultad *
+                                            </label>
+                                            <div class="field-border"></div>
+                                        </div>
+                                        <div class="field-hint-enhanced">
+                                            <i class="fas fa-info-circle me-1"></i>
+                                            Selecciona primero la facultad
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Carrera -->
+                                <div class="col-md-6">
+                                    <div class="enhanced-field">
+                                        <div class="field-wrapper">
+                                            <select asp-for="Estudiante.CarreraID" id="carreraSelect"
+                                                    class="form-control enhanced-input" required disabled>
+                                                <option value="">Primero selecciona una facultad</option>
+                                            </select>
+                                            <label asp-for="Estudiante.CarreraID" class="enhanced-label">
+                                                <i class="fas fa-graduation-cap me-2"></i>Carrera *
+                                            </label>
+                                            <div class="field-border"></div>
+                                        </div>
+                                        <span asp-validation-for="Estudiante.CarreraID" class="field-error-enhanced"></span>
+                                        <div class="field-hint-enhanced">
+                                            <i class="fas fa-info-circle me-1"></i>
+                                            Depende de la facultad seleccionada
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sección 4: Configuración -->
+                        <div class="form-section-enhanced">
+                            <div class="section-header-enhanced">
+                                <div class="section-icon">
+                                    <i class="fas fa-cog"></i>
+                                </div>
+                                <div class="section-info">
+                                    <h3>Configuración</h3>
+                                    <p>Estado inicial del estudiante en el sistema</p>
+                                </div>
+                            </div>
+
+                            <div class="row g-4">
+                                <div class="col-12">
+                                    <div class="enhanced-switch-card">
+                                        <div class="switch-container">
+                                            <div class="enhanced-switch">
+                                                <input asp-for="Estudiante.Activo" type="checkbox"
+                                                       class="switch-input" id="activoSwitch" checked>
+                                                <label class="switch-label" for="activoSwitch">
+                                                    <span class="switch-slider">
+                                                        <span class="switch-icon-off">
+                                                            <i class="fas fa-times"></i>
+                                                        </span>
+                                                        <span class="switch-icon-on">
+                                                            <i class="fas fa-check"></i>
+                                                        </span>
+                                                    </span>
+                                                </label>
+                                            </div>
+                                            <div class="switch-content">
+                                                <h5>Estudiante Activo</h5>
+                                                <p>Determina si el estudiante puede acceder al sistema y ser incluido en reportes</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Acciones del Formulario -->
+                    <div class="form-actions-enhanced">
+                        <div class="actions-wrapper">
+                            <a asp-page="./Index" class="btn btn-cancel-enhanced">
+                                <i class="fas fa-arrow-left me-2"></i>
+                                <span>Cancelar</span>
+                            </a>
+                            <button type="submit" class="btn btn-submit-enhanced">
+                                <i class="fas fa-save me-2"></i>
+                                <span>Guardar Estudiante</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Variables CSS */
+    :root {
+        --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --secondary-gradient: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
+        --success-gradient: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+        --shadow-soft: 0 10px 40px rgba(0,0,0,0.1);
+        --shadow-hover: 0 20px 60px rgba(0,0,0,0.15);
+        --border-radius: 20px;
+        --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Hero Section Mejorado */
+    .create-hero-enhanced {
+        background: var(--primary-gradient);
+        color: white;
+        padding: 4rem 0;
+        margin-top: -2rem;
+        border-radius: 0 0 40px 40px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero-bg-pattern {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 40% 80%, rgba(255,255,255,0.1) 0%, transparent 50%);
+        animation: patternMove 20s linear infinite;
+    }
+
+    @@keyframes patternMove {
+        0% {
+            transform: translateX(0) translateY(0);
+        }
+
+        100% {
+            transform: translateX(-100px) translateY(-100px);
+        }
+    }
+
+    .hero-content-enhanced {
+        position: relative;
+        z-index: 2;
+    }
+
+    .hero-badge {
+        display: inline-block;
+        padding: 0.5rem 1.5rem;
+        background: rgba(255,255,255,0.2);
+        border: 1px solid rgba(255,255,255,0.3);
+        border-radius: 50px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        animation: fadeInUp 0.6s ease-out;
+    }
+
+    .hero-title-enhanced {
+        font-size: 3rem;
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        animation: fadeInUp 0.6s ease-out 0.2s both;
+        text-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+
+    .hero-subtitle-enhanced {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        opacity: 0.95;
+        line-height: 1.7;
+        animation: fadeInUp 0.6s ease-out 0.4s both;
+    }
+
+    .hero-stats {
+        display: flex;
+        gap: 2rem;
+        animation: fadeInUp 0.6s ease-out 0.6s both;
+    }
+
+    .stat-item {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        padding: 1rem 1.5rem;
+        background: rgba(255,255,255,0.15);
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.2);
+    }
+
+        .stat-item i {
+            font-size: 1.2rem;
+            color: #4facfe;
+        }
+
+    /* Ilustración Hero */
+    .hero-illustration-enhanced {
+        position: relative;
+        z-index: 2;
+    }
+
+    .floating-elements {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        margin: 0 auto;
+    }
+
+    .floating-card {
+        position: absolute;
+        background: rgba(255,255,255,0.15);
+        backdrop-filter: blur(15px);
+        border: 2px solid rgba(255,255,255,0.2);
+        border-radius: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .main-card {
+        width: 120px;
+        height: 120px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 3rem;
+        animation: floatMain 4s ease-in-out infinite;
+    }
+
+    .small-card {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+
+    .card-1 {
+        top: 10%;
+        right: 10%;
+        animation: floatSmall 3s ease-in-out infinite;
+    }
+
+    .card-2 {
+        bottom: 20%;
+        left: 5%;
+        animation: floatSmall 3s ease-in-out infinite 1s;
+    }
+
+    .card-3 {
+        top: 30%;
+        left: -10%;
+        animation: floatSmall 3s ease-in-out infinite 2s;
+    }
+
+    @@keyframes floatMain {
+        0%, 100% {
+            transform: translate(-50%, -50%) translateY(0px) rotate(0deg);
+        }
+
+        50% {
+            transform: translate(-50%, -50%) translateY(-20px) rotate(5deg);
+        }
+    }
+
+    @@keyframes floatSmall {
+        0%, 100% {
+            transform: translateY(0px) rotate(0deg);
+        }
+
+        50% {
+            transform: translateY(-15px) rotate(10deg);
+        }
+    }
+
+    @@keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Form Wizard */
+    .form-wizard-enhanced {
+        background: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow-soft);
+        overflow: hidden;
+        margin-bottom: 3rem;
+        border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .wizard-header-enhanced {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        padding: 2rem;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .wizard-progress {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 3rem;
+        position: relative;
+    }
+
+    .progress-line {
+        position: absolute;
+        top: 25px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 200px;
+        height: 3px;
+        background: #e9ecef;
+        border-radius: 2px;
+        z-index: 1;
+    }
+
+        .progress-line::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background: var(--primary-gradient);
+            border-radius: 2px;
+        }
+
+    .wizard-step-enhanced {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        position: relative;
+        z-index: 2;
+    }
+
+    .step-circle {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: #e9ecef;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        color: #6c757d;
+        transition: var(--transition);
+        border: 3px solid #e9ecef;
+    }
+
+    .wizard-step-enhanced.active .step-circle {
+        background: var(--primary-gradient);
+        color: white;
+        border-color: white;
+        box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    .step-info {
+        text-align: center;
+    }
+
+    .step-title {
+        display: block;
+        font-weight: 600;
+        color: #2c3e50;
+        font-size: 1rem;
+    }
+
+    .step-desc {
+        display: block;
+        font-size: 0.8rem;
+        color: #6c757d;
+        margin-top: 0.2rem;
+    }
+
+    /* Formulario */
+    .form-content-enhanced {
+        padding: 2.5rem;
+    }
+
+    .form-section-enhanced {
+        margin-bottom: 2.5rem;
+        padding-bottom: 2rem;
+        border-bottom: 2px solid #f8f9fa;
+    }
+
+        .form-section-enhanced:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+    .section-header-enhanced {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .section-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 15px;
+        background: var(--primary-gradient);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.3rem;
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    }
+
+    .section-info h3 {
+        margin: 0 0 0.5rem 0;
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #2c3e50;
+    }
+
+    .section-info p {
+        margin: 0;
+        color: #6c757d;
+        font-size: 0.95rem;
+    }
+
+    /* Campos */
+    .enhanced-field {
+        margin-bottom: 1.5rem;
+    }
+
+    .field-wrapper {
+        position: relative;
+    }
+
+    .enhanced-input {
+        width: 100%;
+        padding: 1rem;
+        border: 2px solid #e9ecef;
+        border-radius: 12px;
+        font-size: 1rem;
+        background: white;
+        transition: var(--transition);
+        outline: none;
+    }
+
+        .enhanced-input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.3rem rgba(102, 126, 234, 0.15);
+            transform: translateY(-2px);
+        }
+
+    .enhanced-label {
+        position: absolute;
+        top: -28px;
+        left: 8px;
+        transform: scale(0.85);
+        background: white;
+        padding: 0 0.5rem;
+        color: #667eea;
+        transition: var(--transition);
+        pointer-events: none;
+        font-size: 1rem;
+        font-weight: 500;
+        z-index: 3;
+    }
+
+    /* Solo mostrar transición en focus, no posición inicial */
+    .enhanced-input:focus + .enhanced-label {
+        color: #667eea;
+    }
+
+    .field-border {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: var(--primary-gradient);
+        border-radius: 0 0 12px 12px;
+        transform: scaleX(0);
+        transition: var(--transition);
+    }
+
+    .enhanced-input:focus ~ .field-border {
+        transform: scaleX(1);
+    }
+
+    .field-hint-enhanced {
+        margin-top: 0.5rem;
+        font-size: 0.8rem;
+        color: #6c757d;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .field-error-enhanced {
+        color: #e74c3c;
+        font-size: 0.8rem;
+        margin-top: 0.5rem;
+        display: block;
+        font-weight: 500;
+    }
+
+    /* Switch */
+    .enhanced-switch-card {
+        background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+        border-radius: var(--border-radius);
+        padding: 2rem;
+        border: 2px solid transparent;
+        transition: var(--transition);
+    }
+
+        .enhanced-switch-card:hover {
+            border-color: #667eea;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+    .switch-container {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .enhanced-switch {
+        position: relative;
+    }
+
+    .switch-input {
+        display: none;
+    }
+
+    .switch-label {
+        display: block;
+        width: 70px;
+        height: 38px;
+        background: #ddd;
+        border-radius: 38px;
+        cursor: pointer;
+        transition: var(--transition);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .switch-slider {
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        width: 30px;
+        height: 30px;
+        background: white;
+        border-radius: 50%;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .switch-icon-off,
+    .switch-icon-on {
+        position: absolute;
+        transition: var(--transition);
+    }
+
+    .switch-icon-off {
+        opacity: 1;
+        color: #e74c3c;
+    }
+
+    .switch-icon-on {
+        opacity: 0;
+        color: #27ae60;
+    }
+
+    .switch-input:checked + .switch-label {
+        background: var(--success-gradient);
+    }
+
+        .switch-input:checked + .switch-label .switch-slider {
+            transform: translateX(32px);
+        }
+
+        .switch-input:checked + .switch-label .switch-icon-off {
+            opacity: 0;
+        }
+
+        .switch-input:checked + .switch-label .switch-icon-on {
+            opacity: 1;
+        }
+
+    .switch-content h5 {
+        margin: 0 0 0.5rem 0;
+        color: #2c3e50;
+        font-weight: 700;
+        font-size: 1.2rem;
+    }
+
+    .switch-content p {
+        margin: 0;
+        color: #6c757d;
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    /* Acciones del Formulario */
+    .form-actions-enhanced {
+        background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+        padding: 2rem;
+        border-top: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .actions-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .btn-cancel-enhanced {
+        background: white;
+        border: 2px solid #e9ecef;
+        color: #6c757d;
+        padding: 1rem 2rem;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: 600;
+        transition: var(--transition);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+        .btn-cancel-enhanced:hover {
+            border-color: #667eea;
+            color: #667eea;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+    .btn-submit-enhanced {
+        background: var(--primary-gradient);
+        border: none;
+        color: white;
+        padding: 1rem 2.5rem;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: 700;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    }
+
+        .btn-submit-enhanced:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+
+    /* Alert */
+    .enhanced-alert {
+        border: none;
+        border-radius: 12px;
+        padding: 1rem 1.5rem;
+        margin-bottom: 1.5rem;
+        border-left: 4px solid #e74c3c;
+        background: rgba(231, 76, 60, 0.1);
+    }
+
+    /* Responsive */
+    @@media (max-width: 768px) {
+        .hero-title-enhanced {
+            font-size: 2.2rem;
+        }
+
+        .hero-stats {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-content-enhanced {
+            padding: 1.5rem;
+        }
+
+        .form-actions-enhanced {
+            padding: 1.5rem;
+        }
+
+        .actions-wrapper {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .btn-cancel-enhanced,
+        .btn-submit-enhanced {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .section-header-enhanced {
+            flex-direction: column;
+            text-align: center;
+            gap: 1rem;
+        }
+
+        .switch-container {
+            flex-direction: column;
+            text-align: center;
+            gap: 1.5rem;
+        }
+
+        .floating-elements {
+            width: 150px;
+            height: 150px;
+        }
+
+        .main-card {
+            width: 90px;
+            height: 90px;
+            font-size: 2rem;
+        }
+
+        .small-card {
+            width: 40px;
+            height: 40px;
+            font-size: 1rem;
+        }
+    }
+</style>
+
+<script>
+    // 🌐 FUNCIÓN PARA CARGAR CARRERAS POR FACULTAD USANDO AJAX REAL
+    async function cargarCarrerasPorFacultad() {
+        const facultadSelect = document.getElementById('facultadSelect');
+        const carreraSelect = document.getElementById('carreraSelect');
+        const facultadId = facultadSelect.value;
+
+        // Limpiar carreras
+        carreraSelect.innerHTML = '<option value="">Seleccionar Carrera</option>';
+
+        if (!facultadId) {
+            carreraSelect.disabled = true;
+            carreraSelect.innerHTML = '<option value="">Primero selecciona una facultad</option>';
+            return;
+        }
+
+        try {
+            // Mostrar loading
+            carreraSelect.innerHTML = '<option value="">Cargando carreras...</option>';
+            carreraSelect.disabled = true;
+
+            // 🚀 HACER PETICIÓN AJAX REAL A TU SERVIDOR
+            const response = await fetch(`?handler=CarrerasPorFacultad&facultadId=${facultadId}`);
+
+            if (response.ok) {
+                const carreras = await response.json();
+
+                // Limpiar y llenar select con datos reales
+                carreraSelect.innerHTML = '<option value="">Seleccionar Carrera</option>';
+
+                if (carreras.length > 0) {
+                    carreras.forEach(carrera => {
+                        const option = document.createElement('option');
+                        option.value = carrera.value;
+                        option.textContent = carrera.text;
+                        carreraSelect.appendChild(option);
+                    });
+                    carreraSelect.disabled = false;
+                } else {
+                    carreraSelect.innerHTML = '<option value="">No hay carreras disponibles</option>';
+                    carreraSelect.disabled = true;
+                }
+            } else {
+                throw new Error('Error en la respuesta del servidor');
+            }
+        } catch (error) {
+            console.error('Error cargando carreras:', error);
+            carreraSelect.innerHTML = '<option value="">Error cargando carreras - Intenta de nuevo</option>';
+            carreraSelect.disabled = true;
+
+            // Mostrar mensaje de error al usuario
+            alert('Error al cargar las carreras. Por favor, recarga la página e intenta de nuevo.');
+        }
+    }
+</script>

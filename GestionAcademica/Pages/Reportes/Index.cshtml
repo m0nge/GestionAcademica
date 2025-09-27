@@ -1,0 +1,1302 @@
+﻿@page
+@model GestionAcademica.Pages.Reportes.IndexModel
+
+@{
+    ViewData["Title"] = "Reportes y Estadísticas";
+}
+
+<!-- Hero Header -->
+<div class="reportes-hero">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <i class="fas fa-chart-line me-2"></i>
+                        @(Model.EsAdministrador ? "Panel Administrativo" : "Panel Docente")
+                    </div>
+                    <h1 class="hero-title">
+                        <i class="fas fa-chart-bar me-3"></i>
+                        Dashboard Académico
+                    </h1>
+                    <p class="hero-subtitle">
+                        Sistema de análisis interactivo y reportes académicos - Universidad KJD
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 text-end">
+                <a asp-page="/Home/Index" class="btn btn-back">
+                    <i class="fas fa-arrow-left me-2"></i>
+                    Volver al Inicio
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Estadísticas Generales -->
+<div class="container">
+    <div class="section-spacing">
+        <div class="section-title-container">
+            <h3 class="section-main-title">
+                <i class="fas fa-tachometer-alt me-3"></i>
+                Estadísticas Generales
+            </h3>
+            <p class="section-subtitle">Resumen ejecutivo del rendimiento académico</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card-enhanced">
+                    <div class="stat-icon bg-primary">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number">@Model.TotalEstudiantes</div>
+                        <div class="stat-label">@(Model.EsAdministrador ? "Total Estudiantes" : "Mis Estudiantes")</div>
+                        <div class="stat-trend">
+                            <i class="fas fa-users text-info"></i>
+                            <span>Activos en el sistema</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card-enhanced">
+                    <div class="stat-icon bg-success">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number">@Model.PromedioGeneral.ToString("F1")</div>
+                        <div class="stat-label">Promedio General</div>
+                        <div class="stat-trend">
+                            <i class="fas fa-chart-line text-success"></i>
+                            <span>Calificaciones registradas</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card-enhanced">
+                    <div class="stat-icon bg-warning">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number">@Model.TotalAsignaciones</div>
+                        <div class="stat-label">Total Asignaciones</div>
+                        <div class="stat-trend">
+                            <i class="fas fa-clipboard-list text-warning"></i>
+                            <span>@Model.TotalCalificaciones calificaciones</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Dashboard de Gráficos -->
+@if (Model.MateriasDelDocente.Any(m => m.TotalEstudiantes > 0))
+{
+    <div class="container">
+        <div class="section-spacing">
+            <div class="section-title-container">
+                <h3 class="section-main-title">
+                    <i class="fas fa-chart-pie me-3"></i>
+                    Análisis Visual por Materia
+                </h3>
+                <p class="section-subtitle">Gráficos interactivos del rendimiento estudiantil</p>
+            </div>
+
+            <!-- Selector de Materia -->
+            <div class="materia-selector-wrapper">
+                <div class="materia-selector-card">
+                    <div class="selector-header">
+                        <div class="selector-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <div class="selector-content">
+                            <h5>Seleccionar Materia para Análisis</h5>
+                            <select id="materiaSelector" class="form-select" onchange="actualizarGraficos()">
+                                <option value="">-- Elige una materia para ver los gráficos --</option>
+                                @foreach (var materiaData in Model.MateriasDelDocente.Where(m => m.TotalEstudiantes > 0))
+                                {
+                                    <option value="@materiaData.Materia.MateriaID">
+                                        [@materiaData.Materia.Codigo] @materiaData.Materia.Nombre
+                                    </option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gráficos Dashboard -->
+            <div id="graficosContainer" class="charts-section" style="display: none;">
+                <div class="charts-grid">
+                    <!-- Gráfico de Barras -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <div class="chart-title">
+                                <i class="fas fa-chart-bar me-2"></i>
+                                <span>Promedio por Estudiante</span>
+                            </div>
+                            <span class="chart-badge" id="badge1">Análisis Individual</span>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="barChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Gráfico de Pastel -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <div class="chart-title">
+                                <i class="fas fa-chart-pie me-2"></i>
+                                <span>Estado de Estudiantes</span>
+                            </div>
+                            <span class="chart-badge" id="badge2">Distribución</span>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="pieChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Gráfico de Líneas -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <div class="chart-title">
+                                <i class="fas fa-chart-line me-2"></i>
+                                <span>Progreso del Curso</span>
+                            </div>
+                            <span class="chart-badge" id="badge3">% Avance</span>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="lineChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Generador de Boletas por Materia -->
+<div class="container">
+    <div class="section-spacing">
+        <div class="section-title-container">
+            <h3 class="section-main-title">
+                <i class="fas fa-file-pdf me-3"></i>
+                Boletas de Notas por Materia
+            </h3>
+            <p class="section-subtitle">
+                @(Model.EsAdministrador ? "Gestiona reportes y análisis de todas las materias" : "Herramientas para tus materias asignadas")
+            </p>
+        </div>
+
+        <div class="boletas-section">
+            @if (Model.MateriasDelDocente.Any())
+            {
+                <div class="materias-grid">
+                    @foreach (var materiaConEstudiantes in Model.MateriasDelDocente)
+                    {
+                        <div class="materia-card">
+                            <!-- Header de la Materia -->
+                            <div class="materia-header">
+                                <div class="materia-icon">
+                                    <i class="fas fa-book-open"></i>
+                                </div>
+                                <div class="materia-info">
+                                    <h5 class="materia-nombre">
+                                        <span class="materia-codigo">[@materiaConEstudiantes.Materia.Codigo]</span>
+                                        @materiaConEstudiantes.Materia.Nombre
+                                    </h5>
+                                    <div class="materia-details">
+                                        <div class="detail-item">
+                                            <i class="fas fa-user me-1"></i>
+                                            @materiaConEstudiantes.Materia.Docente?.NombreCompleto
+                                        </div>
+                                        <div class="detail-item">
+                                            <i class="fas fa-calendar me-1"></i>
+                                            @materiaConEstudiantes.Materia.Periodo
+                                        </div>
+                                        <div class="detail-item">
+                                            <i class="fas fa-graduation-cap me-1"></i>
+                                            @(materiaConEstudiantes.Materia.Carrera?.Nombre ?? "Sin carrera")
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="estudiantes-badge">
+                                    <div class="badge-number">@materiaConEstudiantes.TotalEstudiantes</div>
+                                    <div class="badge-text">Estudiantes</div>
+                                </div>
+                            </div>
+
+                            <!-- Selector de Estudiante -->
+                            <div class="estudiante-selector">
+                                <label class="form-label">
+                                    <i class="fas fa-user-graduate me-2"></i>
+                                    Seleccionar Estudiante
+                                </label>
+                                <select class="form-select estudiante-select"
+                                        data-materia-id="@materiaConEstudiantes.Materia.MateriaID"
+                                        onchange="actualizarBotonesEstudiante(this)">
+                                    <option value="">-- Seleccionar Estudiante --</option>
+                                    @foreach (var estudiante in materiaConEstudiantes.EstudiantesInscritos)
+                                    {
+                                        <option value="@estudiante.EstudianteID"
+                                                data-carnet="@estudiante.Carnet"
+                                                data-nombre="@estudiante.NombreCompleto">
+                                            @estudiante.Carnet - @estudiante.NombreCompleto
+                                        </option>
+                                    }
+                                </select>
+                            </div>
+
+                            <!-- Botones de Acción -->
+                            <div class="action-buttons">
+                                <button class="btn btn-primary btn-ver-boleta"
+                                        onclick="verBoletaMateria(this)"
+                                        data-materia-id="@materiaConEstudiantes.Materia.MateriaID"
+                                        disabled>
+                                    <i class="fas fa-eye me-2"></i>
+                                    Ver Boleta
+                                </button>
+                                <button class="btn btn-success btn-descargar-pdf"
+                                        onclick="descargarBoletaMateria(this)"
+                                        data-materia-id="@materiaConEstudiantes.Materia.MateriaID"
+                                        disabled>
+                                    <i class="fas fa-download me-2"></i>
+                                    Descargar PDF
+                                </button>
+                            </div>
+
+                            @if (materiaConEstudiantes.TotalEstudiantes > 0)
+                            {
+                                <!-- Acciones Adicionales -->
+                                <div class="additional-actions">
+                                    <button class="btn btn-outline-primary btn-sm"
+                                            onclick="mostrarGraficosMateria(@materiaConEstudiantes.Materia.MateriaID)">
+                                        <i class="fas fa-chart-pie me-1"></i>
+                                        Ver Análisis Visual
+                                    </button>
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="empty-state">
+                    <div class="empty-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h5>No hay materias asignadas</h5>
+                    <p>
+                        @if (Model.EsAdministrador)
+                        {
+                            <span>No hay materias registradas en el sistema.</span>
+                        }
+                        else
+                        {
+                            <span>No tienes materias asignadas. Contacta al administrador.</span>
+                        }
+                    </p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Variables CSS para consistencia */
+    :root {
+        --primary-color: #667eea;
+        --primary-dark: #5a67d8;
+        --success-color: #28a745;
+        --warning-color: #ffc107;
+        --info-color: #17a2b8;
+        --light-bg: #f8f9fa;
+        --border-color: #e9ecef;
+        --text-dark: #2c3e50;
+        --text-muted: #6c757d;
+        --shadow-light: 0 4px 20px rgba(0,0,0,0.08);
+        --shadow-medium: 0 8px 30px rgba(0,0,0,0.12);
+        --shadow-heavy: 0 15px 40px rgba(0,0,0,0.15);
+        --border-radius: 20px;
+        --transition: all 0.3s ease;
+    }
+
+    /* Hero Section */
+    .reportes-hero {
+        background: linear-gradient(135deg, var(--primary-color) 0%, #764ba2 100%);
+        color: white;
+        padding: 4rem 0;
+        margin-top: 0rem;
+        border-radius: 0 0 50px 50px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: var(--shadow-medium);
+    }
+
+        .reportes-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    .hero-badge {
+        display: inline-block;
+        padding: 0.75rem 2rem;
+        background: rgba(255,255,255,0.15);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.2);
+        border-radius: 50px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .hero-title {
+        font-size: 3rem;
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        line-height: 1.1;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+        opacity: 0.9;
+        line-height: 1.6;
+        font-weight: 300;
+    }
+
+    .btn-back {
+        background: rgba(255,255,255,0.15);
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255,255,255,0.3);
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: var(--border-radius);
+        font-weight: 600;
+        text-decoration: none;
+        transition: var(--transition);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+        .btn-back:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            color: white;
+        }
+
+    /* Espaciado de Secciones */
+    .section-spacing {
+        padding: 4rem 0;
+    }
+
+    .section-title-container {
+        text-align: center;
+        margin-bottom: 3rem;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .section-main-title {
+        color: var(--text-dark);
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .section-main-title i {
+            color: var(--primary-color);
+        }
+
+    .section-subtitle {
+        color: var(--text-muted);
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    /* Estadísticas Mejoradas */
+    .stat-card-enhanced {
+        background: white;
+        border-radius: var(--border-radius);
+        padding: 2rem;
+        box-shadow: var(--shadow-light);
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        border: 1px solid var(--border-color);
+        height: 100%;
+    }
+
+        .stat-card-enhanced:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-heavy);
+            border-color: var(--primary-color);
+        }
+
+    .stat-icon {
+        width: 70px;
+        height: 70px;
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.8rem;
+        flex-shrink: 0;
+    }
+
+    .stat-content {
+        flex: 1;
+    }
+
+    .stat-number {
+        font-size: 2.2rem;
+        font-weight: 800;
+        color: var(--text-dark);
+        line-height: 1;
+        margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+        font-size: 1rem;
+        color: var(--text-muted);
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+    }
+
+    .stat-trend {
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--text-muted);
+    }
+
+    /* Selector de Materia Mejorado */
+    .materia-selector-wrapper {
+        margin-bottom: 3rem;
+    }
+
+    .materia-selector-card {
+        background: white;
+        border-radius: var(--border-radius);
+        padding: 2rem;
+        box-shadow: var(--shadow-light);
+        border: 1px solid var(--border-color);
+    }
+
+    .selector-header {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .selector-icon {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, var(--primary-color), #764ba2);
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        flex-shrink: 0;
+    }
+
+    .selector-content {
+        flex: 1;
+    }
+
+        .selector-content h5 {
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+    .form-select {
+        border: 2px solid var(--border-color);
+        border-radius: 15px;
+        padding: 1rem 1.25rem;
+        font-size: 1rem;
+        transition: var(--transition);
+        background: #fafbfc;
+    }
+
+        .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(102, 126, 234, 0.15);
+            background: white;
+        }
+
+    /* Gráficos Reorganizados */
+    .charts-section {
+        margin-top: 2rem;
+    }
+
+    .charts-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .chart-card {
+        background: white;
+        border-radius: var(--border-radius);
+        padding: 2rem;
+        box-shadow: var(--shadow-light);
+        transition: var(--transition);
+        border: 1px solid var(--border-color);
+    }
+
+        .chart-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-heavy);
+            border-color: var(--primary-color);
+        }
+
+    .chart-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid var(--light-bg);
+    }
+
+    .chart-title {
+        display: flex;
+        align-items: center;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text-dark);
+    }
+
+        .chart-title i {
+            color: var(--primary-color);
+        }
+
+    .chart-badge {
+        background: linear-gradient(135deg, var(--primary-color), #764ba2);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+
+    .chart-container {
+        position: relative;
+        height: 350px;
+    }
+
+    /* Sección de Boletas Mejorada */
+    .boletas-section {
+        background: white;
+        border-radius: var(--border-radius);
+        padding: 3rem;
+        box-shadow: var(--shadow-light);
+        border: 1px solid var(--border-color);
+    }
+
+    .materias-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+        gap: 2rem;
+    }
+
+    .materia-card {
+        border: 2px solid var(--border-color);
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        transition: var(--transition);
+        background: white;
+    }
+
+        .materia-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: var(--shadow-medium);
+            transform: translateY(-3px);
+        }
+
+    .materia-header {
+        background: linear-gradient(135deg, var(--primary-color), #764ba2);
+        color: white;
+        padding: 2rem;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .materia-icon {
+        width: 70px;
+        height: 70px;
+        background: rgba(255,255,255,0.15);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+        flex-shrink: 0;
+    }
+
+    .materia-info {
+        flex: 1;
+    }
+
+    .materia-nombre {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        line-height: 1.3;
+    }
+
+    .materia-codigo {
+        background: rgba(255,255,255,0.2);
+        padding: 0.3rem 0.8rem;
+        border-radius: 12px;
+        font-size: 0.9rem;
+        font-weight: 700;
+        margin-right: 0.8rem;
+    }
+
+    .materia-details {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .detail-item {
+        font-size: 0.9rem;
+        opacity: 0.9;
+        display: flex;
+        align-items: center;
+    }
+
+    .estudiantes-badge {
+        text-align: center;
+        background: rgba(255,255,255,0.15);
+        padding: 1rem;
+        border-radius: 15px;
+        min-width: 90px;
+    }
+
+    .badge-number {
+        font-size: 1.8rem;
+        font-weight: 800;
+        line-height: 1;
+        margin-bottom: 0.3rem;
+    }
+
+    .badge-text {
+        font-size: 0.8rem;
+        opacity: 0.9;
+        font-weight: 600;
+    }
+
+    .estudiante-selector {
+        padding: 2rem;
+        background: var(--light-bg);
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: var(--text-dark);
+        margin-bottom: 0.8rem;
+        display: flex;
+        align-items: center;
+    }
+
+    .action-buttons {
+        padding: 1.5rem 2rem;
+        display: flex;
+        gap: 1rem;
+        background: white;
+    }
+
+    .btn-ver-boleta, .btn-descargar-pdf {
+        flex: 1;
+        padding: 1rem 1.5rem;
+        border-radius: 12px;
+        font-weight: 600;
+        transition: var(--transition);
+        border: none;
+    }
+
+    .btn-ver-boleta {
+        background: var(--primary-color);
+        color: white;
+    }
+
+        .btn-ver-boleta:hover:not(:disabled) {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            color: white;
+        }
+
+    .btn-descargar-pdf {
+        background: var(--success-color);
+        color: white;
+    }
+
+        .btn-descargar-pdf:hover:not(:disabled) {
+            background: #218838;
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .btn-ver-boleta:disabled, .btn-descargar-pdf:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+    .additional-actions {
+        padding: 1rem 2rem 2rem;
+        background: var(--light-bg);
+        border-top: 1px solid var(--border-color);
+    }
+
+        .additional-actions .btn {
+            font-size: 0.9rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 10px;
+        }
+
+    .empty-state {
+        text-align: center;
+        padding: 4rem 2rem;
+        color: var(--text-muted);
+    }
+
+    .empty-icon {
+        font-size: 4rem;
+        color: var(--primary-color);
+        margin-bottom: 2rem;
+    }
+
+    .empty-state h5 {
+        color: var(--text-dark);
+        margin-bottom: 1rem;
+        font-weight: 600;
+    }
+
+    /* Colores de iconos */
+    .bg-primary {
+        background: #007bff !important;
+    }
+
+    .bg-success {
+        background: var(--success-color) !important;
+    }
+
+    .bg-warning {
+        background: var(--warning-color) !important;
+    }
+
+    .bg-info {
+        background: var(--info-color) !important;
+    }
+
+    /* Responsive */
+    @@media (max-width: 1200px) {
+        .charts-grid
+
+    {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    }
+
+    }
+
+    @@media (max-width: 768px) {
+        .hero-title
+
+    {
+        font-size: 2rem;
+    }
+
+    .section-main-title {
+        font-size: 2rem;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .materias-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .materia-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+    }
+
+    .selector-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .section-spacing {
+        padding: 2rem 0;
+    }
+
+    .boletas-section {
+        padding: 2rem;
+    }
+
+    .chart-container {
+        height: 300px;
+    }
+
+    }
+
+    /* Animaciones */
+    @@keyframes slideInUp {
+        from
+
+    {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    }
+
+    .stat-card-enhanced, .chart-card, .materia-card {
+        animation: slideInUp 0.6s ease-out;
+        animation-fill-mode: both;
+    }
+
+        .stat-card-enhanced:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .stat-card-enhanced:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .stat-card-enhanced:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .chart-card:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .chart-card:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .chart-card:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Variables globales
+    let barChart, pieChart, lineChart;
+    let datosGraficos = @Html.Raw(Model.DatosGraficosJson);
+
+    // Función principal para actualizar gráficos
+    function actualizarGraficos() {
+        const selector = document.getElementById('materiaSelector');
+        const container = document.getElementById('graficosContainer');
+        const materiaId = parseInt(selector.value);
+
+        if (!materiaId) {
+            container.style.display = 'none';
+            return;
+        }
+
+        container.style.display = 'block';
+
+        // Encontrar datos de la materia seleccionada
+        const datos = datosGraficos.find(d => d.materiaID === materiaId);
+        if (!datos) {
+            console.log('No se encontraron datos para la materia:', materiaId);
+            return;
+        }
+
+        // Actualizar badges con información real
+        document.getElementById('badge1').textContent = datos.materiaCodigo;
+        document.getElementById('badge2').textContent = `${datos.estudiantesPromedios.length} estudiantes`;
+        document.getElementById('badge3').textContent = 'Progreso Actual';
+
+        // Destruir gráficos existentes
+        if (barChart) { barChart.destroy(); barChart = null; }
+        if (pieChart) { pieChart.destroy(); pieChart = null; }
+        if (lineChart) { lineChart.destroy(); lineChart = null; }
+
+        // Crear nuevos gráficos con datos ordenados
+        crearGraficoBarras(datos.estudiantesPromedios);
+        crearGraficoPastel(datos.distribucion);
+        crearGraficoLineas(datos.progreso);
+
+        // Scroll suave a los gráficos
+        setTimeout(() => {
+            container.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }, 100);
+    }
+
+    function crearGraficoBarras(estudiantes) {
+        const ctx = document.getElementById('barChart').getContext('2d');
+
+        if (!estudiantes || estudiantes.length === 0) {
+            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+            ctx.fillStyle = '#666';
+            ctx.font = '16px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('No hay datos disponibles', ctx.canvas.width/2, ctx.canvas.height/2);
+            return;
+        }
+
+        const labels = estudiantes.map(e => e.estudianteNombre);
+        const data = estudiantes.map(e => parseFloat(e.promedio));
+
+        // Colores según el promedio
+        const backgroundColors = data.map(promedio => {
+            if (promedio >= 8) return '#28a745';
+            if (promedio >= 6) return '#ffc107';
+            if (promedio >= 4) return '#fd7e14';
+            return '#dc3545';
+        });
+
+        barChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Promedio',
+                    data: data,
+                    backgroundColor: backgroundColors,
+                    borderColor: backgroundColors,
+                    borderWidth: 1,
+                    borderRadius: 8,
+                    borderSkipped: false,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: 'rgba(0,0,0,0.8)',
+                        titleColor: 'white',
+                        bodyColor: 'white',
+                        cornerRadius: 8,
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                return tooltipItems[0].label;
+                            },
+                            label: function(context) {
+                                return `Promedio: ${context.parsed.y.toFixed(1)}/10`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 10,
+                        grid: {
+                            color: 'rgba(0,0,0,0.1)',
+                            lineWidth: 1
+                        },
+                        ticks: {
+                            stepSize: 2,
+                            callback: function(value) {
+                                return value.toFixed(0);
+                            }
+                        }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: {
+                            maxRotation: 45,
+                            minRotation: 0,
+                            font: { size: 11 }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    function crearGraficoPastel(distribucion) {
+        const ctx = document.getElementById('pieChart').getContext('2d');
+
+        if (!distribucion) {
+            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+            ctx.fillStyle = '#666';
+            ctx.font = '16px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('No hay datos disponibles', ctx.canvas.width/2, ctx.canvas.height/2);
+            return;
+        }
+
+        const data = [
+            distribucion.aprobados || 0,
+            distribucion.enCurso || 0,
+            distribucion.reprobados || 0
+        ];
+
+        const labels = ['Aprobados (≥6)', 'En Curso (1-5.9)', 'Reprobados (<1)'];
+        const colores = ['#28a745', '#ffc107', '#dc3545'];
+
+        // Solo mostrar categorías con datos
+        const datosValidos = [];
+        const labelsValidos = [];
+        const coloresValidos = [];
+
+        data.forEach((valor, index) => {
+            if (valor > 0) {
+                datosValidos.push(valor);
+                labelsValidos.push(labels[index]);
+                coloresValidos.push(colores[index]);
+            }
+        });
+
+        if (datosValidos.length === 0) {
+            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+            ctx.fillStyle = '#666';
+            ctx.font = '16px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('No hay estudiantes calificados', ctx.canvas.width/2, ctx.canvas.height/2);
+            return;
+        }
+
+        pieChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: labelsValidos,
+                datasets: [{
+                    data: datosValidos,
+                    backgroundColor: coloresValidos,
+                    borderWidth: 4,
+                    borderColor: '#fff',
+                    hoverBorderWidth: 6,
+                    hoverBackgroundColor: coloresValidos.map(color => color + 'DD')
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '60%',
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            usePointStyle: true,
+                            font: { size: 12 },
+                            generateLabels: function(chart) {
+                                const data = chart.data;
+                                return data.labels.map((label, i) => ({
+                                    text: `${label}: ${data.datasets[0].data[i]}`,
+                                    fillStyle: data.datasets[0].backgroundColor[i],
+                                    pointStyle: 'circle'
+                                }));
+                            }
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0,0,0,0.8)',
+                        titleColor: 'white',
+                        bodyColor: 'white',
+                        cornerRadius: 8,
+                        callbacks: {
+                            label: function(context) {
+                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                const percentage = ((context.parsed / total) * 100).toFixed(1);
+                                return `${context.label}: ${context.parsed} estudiantes (${percentage}%)`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    function crearGraficoLineas(progreso) {
+        const ctx = document.getElementById('lineChart').getContext('2d');
+
+        if (!progreso || progreso.length === 0) {
+            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+            ctx.fillStyle = '#666';
+            ctx.font = '16px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('No hay datos de progreso', ctx.canvas.width/2, ctx.canvas.height/2);
+            return;
+        }
+
+        const labels = progreso.map(p => p.semana);
+        const data = progreso.map(p => parseFloat(p.porcentaje));
+
+        lineChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Progreso del Curso',
+                    data: data,
+                    borderColor: '#667eea',
+                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                    borderWidth: 4,
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: '#667eea',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 3,
+                    pointRadius: 6,
+                    pointHoverRadius: 8,
+                    pointHoverBackgroundColor: '#5a67d8'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: 'rgba(0,0,0,0.8)',
+                        titleColor: 'white',
+                        bodyColor: 'white',
+                        cornerRadius: 8,
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                return tooltipItems[0].label;
+                            },
+                            label: function(context) {
+                                return `Progreso: ${context.parsed.y}%`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        grid: {
+                            color: 'rgba(0,0,0,0.1)',
+                            lineWidth: 1
+                        },
+                        ticks: {
+                            stepSize: 25,
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { font: { size: 11 } }
+                    }
+                }
+            }
+        });
+    }
+
+    // Funciones para las acciones
+    function actualizarBotonesEstudiante(selectElement) {
+        const card = selectElement.closest('.materia-card');
+        const btnVerBoleta = card.querySelector('.btn-ver-boleta');
+        const btnDescargarPDF = card.querySelector('.btn-descargar-pdf');
+
+        if (selectElement.value) {
+            btnVerBoleta.disabled = false;
+            btnDescargarPDF.disabled = false;
+        } else {
+            btnVerBoleta.disabled = true;
+            btnDescargarPDF.disabled = true;
+        }
+    }
+
+    function verBoletaMateria(button) {
+        const card = button.closest('.materia-card');
+        const select = card.querySelector('.estudiante-select');
+        const estudianteId = select.value;
+
+        if (estudianteId) {
+            window.open(`/Reportes/BoletaNotas?estudianteId=${estudianteId}`, '_blank');
+        }
+    }
+
+    function descargarBoletaMateria(button) {
+        const card = button.closest('.materia-card');
+        const select = card.querySelector('.estudiante-select');
+        const estudianteId = select.value;
+
+        if (estudianteId) {
+            window.open(`/Reportes/BoletaNotas?estudianteId=${estudianteId}&formato=pdf`, '_blank');
+        }
+    }
+
+    function mostrarGraficosMateria(materiaId) {
+        const selector = document.getElementById('materiaSelector');
+        selector.value = materiaId;
+        actualizarGraficos();
+    }
+
+    // Inicialización
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('📊 Reportes cargados correctamente');
+        console.log('Datos de gráficos:', datosGraficos);
+
+        if (typeof Chart === 'undefined') {
+            console.error('Chart.js no está disponible');
+        } else {
+            console.log('Chart.js versión:', Chart.version);
+        }
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

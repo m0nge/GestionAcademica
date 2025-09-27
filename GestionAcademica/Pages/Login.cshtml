@@ -1,0 +1,170 @@
+﻿@page
+@model GestionAcademica.Pages.LoginModel
+@{
+    ViewData["Title"] = "Iniciar Sesión";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Sistema de Gestión Académica</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            padding: 3rem;
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo-icon {
+            font-size: 4rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .role-option {
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+            .role-option:hover, .role-option.selected {
+                border-color: #667eea;
+                background: rgba(102, 126, 234, 0.1);
+            }
+
+            .role-option input[type="radio"] {
+                margin-right: 10px;
+            }
+
+        .btn-login {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border: none;
+            border-radius: 12px;
+            padding: 1rem;
+            color: white;
+            width: 100%;
+            font-weight: 600;
+        }
+
+            .btn-login:hover {
+                background: linear-gradient(45deg, #5a67d8, #6b46c1);
+            }
+
+        .form-control {
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <!-- Logo Section -->
+        <div class="logo-section">
+            <div class="logo-icon">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h1>Gestión Académica</h1>
+            <p>Selecciona tu tipo de usuario</p>
+        </div>
+
+        <!-- Alert Messages -->
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger">
+                <i class="fas fa-exclamation-triangle me-2"></i>
+                @TempData["ErrorMessage"]
+            </div>
+        }
+
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle me-2"></i>
+                @TempData["SuccessMessage"]
+            </div>
+        }
+
+        <!-- Login Form -->
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+            <!-- Selector de Rol -->
+            <div class="mb-3">
+                <label class="role-option">
+                    <input type="radio" name="TipoUsuario" value="Administrador" asp-for="TipoUsuario" required>
+                    <strong><i class="fas fa-user-shield me-2"></i>Administrador</strong><br>
+                    <small class="text-muted">Acceso completo al sistema</small>
+                </label>
+
+                <label class="role-option">
+                    <input type="radio" name="TipoUsuario" value="Docente" asp-for="TipoUsuario" required>
+                    <strong><i class="fas fa-chalkboard-teacher me-2"></i>Docente</strong><br>
+                    <small class="text-muted">Gestión de estudiantes y cursos</small>
+                </label>
+                <span asp-validation-for="TipoUsuario" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <input asp-for="Email" class="form-control" type="email"
+                       placeholder="Correo Electrónico" required>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <input asp-for="Password" class="form-control" type="password"
+                       placeholder="Contraseña" required>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-login">
+                <i class="fas fa-sign-in-alt me-2"></i>
+                Iniciar Sesión
+            </button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Manejar selección de rol
+        document.querySelectorAll('input[name="TipoUsuario"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                document.querySelectorAll('.role-option').forEach(option => {
+                    option.classList.remove('selected');
+                });
+                this.closest('.role-option').classList.add('selected');
+            });
+        });
+    </script>
+</body>
+</html>

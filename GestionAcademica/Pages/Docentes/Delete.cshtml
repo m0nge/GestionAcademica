@@ -1,0 +1,453 @@
+﻿@page
+@model GestionAcademica.Pages.Docentes.DeleteModel
+@{
+    ViewData["Title"] = Model.Docente.Activo ? "Desactivar Docente" : "Activar Docente";
+}
+
+<div class="container-fluid">
+    <!-- Header Section -->
+    <div class="@(Model.Docente.Activo ? "delete-hero" : "activate-hero")">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <div class="hero-content">
+                        <div class="hero-badge">
+                            <i class="fas @(Model.Docente.Activo ? "fa-user-slash" : "fa-user-check") me-2"></i>
+                            @(Model.Docente.Activo ? "Desactivar" : "Activar") Docente
+                        </div>
+                        <h1 class="hero-title">
+                            <div class="avatar-large me-3">
+                                @Model.Docente.Nombres.Substring(0, 1)@Model.Docente.Apellidos.Substring(0, 1)
+                            </div>
+                            @Model.Docente.NombreCompleto
+                        </h1>
+                        <p class="hero-subtitle">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            @if (Model.Docente.Activo)
+                            {
+                                <text>¿Estás seguro de que quieres desactivar este docente?</text>
+                            }
+                            else
+                            {
+                                <text>¿Estás seguro de que quieres activar este docente?</text>
+                            }
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-end">
+                    <a asp-page="./Index" class="btn btn-back">
+                        <i class="fas fa-arrow-left me-1"></i>
+                        Cancelar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <!-- Información del Docente -->
+                <div class="info-card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-user me-2"></i>
+                            Información del Docente
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="info-row">
+                                    <span class="info-label">
+                                        <i class="fas fa-id-card me-2"></i>ID:
+                                    </span>
+                                    <span class="info-value">#@Model.Docente.DocenteID</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">
+                                        <i class="fas fa-envelope me-2"></i>Email:
+                                    </span>
+                                    <span class="info-value">@Model.Docente.Email</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">
+                                        <i class="fas fa-phone me-2"></i>Teléfono:
+                                    </span>
+                                    <span class="info-value">@(Model.Docente.Telefono ?? "N/A")</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-row">
+                                    <span class="info-label">
+                                        <i class="fas fa-building me-2"></i>Facultad:
+                                    </span>
+                                    <span class="info-value">
+                                        @if (Model.Docente.Facultad != null)
+                                        {
+                                            <span class="badge bg-primary">@Model.Docente.Facultad.Nombre</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-secondary">Sin asignar</span>
+                                        }
+                                    </span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">
+                                        <i class="fas fa-user-shield me-2"></i>Rol:
+                                    </span>
+                                    <span class="info-value">
+                                        <span class="badge @(Model.Docente.Rol == "Administrador" ? "bg-danger" : "bg-info")">
+                                            @Model.Docente.Rol
+                                        </span>
+                                    </span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">
+                                        <i class="fas fa-calendar me-2"></i>Registro:
+                                    </span>
+                                    <span class="info-value">@Model.Docente.FechaRegistro.ToString("dd/MM/yyyy")</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Materias Afectadas -->
+                @if (Model.MateriasAfectadas.Any())
+                {
+                    <div class="info-card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">
+                                <i class="fas fa-exclamation-triangle me-2 text-warning"></i>
+                                Materias Afectadas (@Model.MateriasAfectadas.Count)
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            @if (Model.Docente.Activo)
+                            {
+                                <div class="alert alert-warning">
+                                    <i class="fas fa-info-circle me-2"></i>
+                                    <strong>Atención:</strong> Al desactivar este docente, las siguientes materias quedarán temporalmente sin docente activo asignado:
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="alert alert-info">
+                                    <i class="fas fa-info-circle me-2"></i>
+                                    <strong>Información:</strong> Al activar este docente, volverá a tener acceso a las siguientes materias:
+                                </div>
+                            }
+
+                            <div class="row">
+                                @foreach (var materia in Model.MateriasAfectadas)
+                                {
+                                    <div class="col-md-6 mb-2">
+                                        <div class="materia-item">
+                                            <span class="materia-codigo">@materia.Codigo</span>
+                                            <span class="materia-nombre">@materia.Nombre</span>
+                                            <small class="text-muted d-block">
+                                                @(materia.Carrera?.Nombre ?? "Sin carrera") • @materia.Creditos créditos
+                                            </small>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <!-- Consecuencias de la Acción -->
+                <div class="info-card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-list-check me-2"></i>
+                            ¿Qué sucederá con esta acción?
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        @if (Model.Docente.Activo)
+                        {
+                            <div class="consequences-list">
+                                <div class="consequence-item negative">
+                                    <i class="fas fa-times-circle me-2"></i>
+                                    El docente <strong>no podrá acceder</strong> al sistema
+                                </div>
+                                <div class="consequence-item negative">
+                                    <i class="fas fa-times-circle me-2"></i>
+                                    No aparecerá en la lista de docentes disponibles para asignar materias
+                                </div>
+                                <div class="consequence-item positive">
+                                    <i class="fas fa-check-circle me-2"></i>
+                                    Todos sus datos <strong>se mantendrán seguros</strong> en el sistema
+                                </div>
+                                <div class="consequence-item positive">
+                                    <i class="fas fa-check-circle me-2"></i>
+                                    Sus materias asignadas se conservarán para cuando se reactive
+                                </div>
+                                <div class="consequence-item positive">
+                                    <i class="fas fa-check-circle me-2"></i>
+                                    Podrá ser reactivado en cualquier momento
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="consequences-list">
+                                <div class="consequence-item positive">
+                                    <i class="fas fa-check-circle me-2"></i>
+                                    El docente <strong>recuperará el acceso</strong> completo al sistema
+                                </div>
+                                <div class="consequence-item positive">
+                                    <i class="fas fa-check-circle me-2"></i>
+                                    Volverá a aparecer disponible para asignar nuevas materias
+                                </div>
+                                <div class="consequence-item positive">
+                                    <i class="fas fa-check-circle me-2"></i>
+                                    Mantendrá todas sus materias previamente asignadas
+                                </div>
+                                <div class="consequence-item positive">
+                                    <i class="fas fa-check-circle me-2"></i>
+                                    Podrá acceder con sus credenciales existentes
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <!-- Botones de Confirmación -->
+                <div class="action-section">
+                    <div class="d-flex justify-content-center gap-3">
+                        <a asp-page="./Index" class="btn btn-secondary btn-lg">
+                            <i class="fas fa-arrow-left me-2"></i>
+                            Cancelar
+                        </a>
+
+                        <a asp-page="./Details" asp-route-id="@Model.Docente.DocenteID" class="btn btn-info btn-lg">
+                            <i class="fas fa-eye me-2"></i>
+                            Ver Detalles
+                        </a>
+
+                        <form method="post" class="d-inline">
+                            @if (Model.Docente.Activo)
+                            {
+                                <button type="submit" class="btn btn-danger btn-lg">
+                                    <i class="fas fa-user-slash me-2"></i>
+                                    Desactivar Docente
+                                </button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn btn-success btn-lg">
+                                    <i class="fas fa-user-check me-2"></i>
+                                    Activar Docente
+                                </button>
+                            }
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .delete-hero {
+        background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+        color: white;
+        padding: 3rem 0;
+        margin-top: -2rem;
+        border-radius: 0 0 30px 30px;
+    }
+
+    .activate-hero {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        color: white;
+        padding: 3rem 0;
+        margin-top: -2rem;
+        border-radius: 0 0 30px 30px;
+    }
+
+    .hero-badge {
+        display: inline-block;
+        padding: 0.5rem 1.5rem;
+        background: rgba(255,255,255,0.2);
+        border: 1px solid rgba(255,255,255,0.3);
+        border-radius: 50px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+        opacity: 0.9;
+        line-height: 1.6;
+    }
+
+    .avatar-large {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: 1.8rem;
+        border: 3px solid rgba(255,255,255,0.5);
+    }
+
+    .btn-back {
+        background: rgba(255,255,255,0.2);
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255,255,255,0.3);
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 15px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+        .btn-back:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+            color: white;
+        }
+
+    .info-card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        border: none;
+        overflow: hidden;
+    }
+
+        .info-card .card-header {
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            padding: 1.5rem;
+        }
+
+        .info-card .card-body {
+            padding: 1.5rem;
+        }
+
+    .info-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid #f8f9fa;
+    }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+    .info-label {
+        font-weight: 600;
+        color: #6c757d;
+        display: flex;
+        align-items: center;
+    }
+
+    .info-value {
+        font-weight: 500;
+        color: #2c3e50;
+    }
+
+    .materia-item {
+        background: #f8f9fa;
+        padding: 1rem;
+        border-radius: 8px;
+        border-left: 4px solid #007bff;
+    }
+
+    .materia-codigo {
+        font-weight: bold;
+        color: #007bff;
+        margin-right: 0.5rem;
+    }
+
+    .materia-nombre {
+        font-weight: 500;
+        color: #2c3e50;
+    }
+
+    .consequences-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .consequence-item {
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+        border-radius: 8px;
+        font-weight: 500;
+    }
+
+        .consequence-item.positive {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .consequence-item.negative {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+    .action-section {
+        background: #f8f9fa;
+        padding: 2rem;
+        border-radius: 15px;
+        text-align: center;
+    }
+
+    .btn-lg {
+        padding: 0.75rem 1.5rem;
+        font-size: 1.1rem;
+        border-radius: 12px;
+        font-weight: 600;
+    }
+
+    {
+        font-size: 1.8rem;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .avatar-large {
+        margin-bottom: 1rem;
+    }
+
+    .action-section .d-flex {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .info-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .info-value {
+        margin-top: 0.5rem;
+    }
+
+    }
+</style>

@@ -1,0 +1,786 @@
+﻿@page
+@model GestionAcademica.Pages.Materias.DetailsModel
+@{
+    ViewData["Title"] = "Detalles de Materia";
+}
+
+<!-- Header Section -->
+<div class="details-hero">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <i class="fas fa-info-circle me-2"></i>
+                        Detalles de Materia
+                    </div>
+                    <h1 class="hero-title">
+                        <i class="fas fa-book-open me-3"></i>
+                        @Model.Materia.Codigo - @Model.Materia.Nombre
+                    </h1>
+                    <p class="hero-subtitle">
+                        Información completa y estadísticas de la materia
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 text-end">
+                <div class="action-buttons">
+                    @if (ViewContext.HttpContext.Session.GetString("DocenteRol") == "Administrador")
+                    {
+                        <a asp-page="./Edit" asp-route-id="@Model.Materia.MateriaID" class="btn btn-edit me-2">
+                            <i class="fas fa-edit me-1"></i>
+                            Editar
+                        </a>
+                    }
+                    <a asp-page="./Index" class="btn btn-back">
+                        <i class="fas fa-arrow-left me-1"></i>
+                        Volver
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="container mt-5">
+    <div class="row g-4">
+        <!-- Información Principal -->
+        <div class="col-lg-8">
+            <div class="info-container">
+                <div class="row g-4">
+                    <!-- Información Básica -->
+                    <div class="col-12">
+                        <div class="info-section">
+                            <div class="section-header">
+                                <div class="section-icon">
+                                    <i class="fas fa-info-circle"></i>
+                                </div>
+                                <div class="section-info">
+                                    <h4 class="section-title">Información Básica</h4>
+                                    <p class="section-subtitle">Datos fundamentales de la materia</p>
+                                </div>
+                            </div>
+
+                            <div class="section-content">
+                                <div class="row g-3">
+                                    <div class="col-md-3">
+                                        <div class="detail-item">
+                                            <label class="detail-label">
+                                                <i class="fas fa-hashtag me-2"></i>Código
+                                            </label>
+                                            <div class="detail-value">@Model.Materia.Codigo</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="detail-item">
+                                            <label class="detail-label">
+                                                <i class="fas fa-book me-2"></i>Nombre de la Materia
+                                            </label>
+                                            <div class="detail-value">@Model.Materia.Nombre</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <div class="detail-item">
+                                            <label class="detail-label">
+                                                <i class="fas fa-star me-2"></i>Créditos
+                                            </label>
+                                            <div class="detail-value">
+                                                <span class="badge bg-primary fs-6 px-3 py-2">@Model.Materia.Creditos créditos</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="detail-item">
+                                            <label class="detail-label">
+                                                <i class="fas fa-calendar me-2"></i>Período
+                                            </label>
+                                            <div class="detail-value">@Model.Materia.Periodo</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="detail-item">
+                                            <label class="detail-label">
+                                                <i class="fas fa-toggle-on me-2"></i>Estado
+                                            </label>
+                                            <div class="detail-value">
+                                                @if (Model.Materia.Activa)
+                                                {
+                                                    <span class="badge bg-success fs-6 px-3 py-2">
+                                                        <i class="fas fa-check me-1"></i>Activa
+                                                    </span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-warning fs-6 px-3 py-2">
+                                                        <i class="fas fa-pause me-1"></i>Inactiva
+                                                    </span>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Información Académica -->
+                    <div class="col-12">
+                        <div class="info-section">
+                            <div class="section-header">
+                                <div class="section-icon">
+                                    <i class="fas fa-university"></i>
+                                </div>
+                                <div class="section-info">
+                                    <h4 class="section-title">Información Académica</h4>
+                                    <p class="section-subtitle">Carrera y docente responsable</p>
+                                </div>
+                            </div>
+
+                            <div class="section-content">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="detail-item">
+                                            <label class="detail-label">
+                                                <i class="fas fa-graduation-cap me-2"></i>Carrera
+                                            </label>
+                                            <div class="detail-value">
+                                                @if (Model.Materia.Carrera != null)
+                                                {
+                                                    <div class="carrera-info">
+                                                        <strong>@Model.Materia.Carrera.Nombre</strong>
+                                                        @if (Model.Materia.Carrera.Facultad != null)
+                                                        {
+                                                            <br>
+                                                    
+                                                            <small class="text-muted">
+                                                                <i class="fas fa-building me-1"></i>@Model.Materia.Carrera.Facultad.Nombre
+                                                            </small>
+                                                        }
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-muted">No asignada</span>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="detail-item">
+                                            <label class="detail-label">
+                                                <i class="fas fa-chalkboard-teacher me-2"></i>Docente Responsable
+                                            </label>
+                                            <div class="detail-value">
+                                                @if (Model.Materia.Docente != null)
+                                                {
+                                                    <div class="docente-info">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="avatar-circle me-3">
+                                                                @Model.Materia.Docente.Nombres.Substring(0, 1)@Model.Materia.Docente.Apellidos.Substring(0, 1)
+                                                            </div>
+                                                            <div>
+                                                                <strong>@Model.Materia.Docente.NombreCompleto</strong>
+                                                                <br><small class="text-muted">
+                                                                    <i class="fas fa-envelope me-1"></i>@Model.Materia.Docente.Email
+                                                                </small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-muted">No asignado</span>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Asignaciones - Solo para Docentes -->
+                    @if (ViewContext.HttpContext.Session.GetString("DocenteRol") == "Docente")
+                    {
+                        @if (Model.AsignacionesRecientes.Any())
+                        {
+                            <div class="col-12">
+                                <div class="info-section">
+                                    <div class="section-header">
+                                        <div class="section-icon">
+                                            <i class="fas fa-users"></i>
+                                        </div>
+                                        <div class="section-info">
+                                            <h4 class="section-title">Asignaciones</h4>
+                                            <p class="section-subtitle">Información sobre asignaciones de esta materia</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="section-content">
+                                        <div class="alert alert-info">
+                                            <i class="fas fa-info-circle me-2"></i>
+                                            <strong>@Model.AsignacionesRecientes.Count</strong> asignaciones encontradas para esta materia.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-12">
+                                <div class="info-section">
+                                    <div class="section-header">
+                                        <div class="section-icon">
+                                            <i class="fas fa-users"></i>
+                                        </div>
+                                        <div class="section-info">
+                                            <h4 class="section-title">Asignaciones</h4>
+                                            <p class="section-subtitle">No hay asignaciones para esta materia</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="section-content">
+                                        <div class="text-center py-4">
+                                            <i class="fas fa-users text-muted" style="font-size: 3rem;"></i>
+                                            <h5 class="text-muted mt-3">Sin asignaciones</h5>
+                                            <p class="text-muted">Esta materia no tiene estudiantes asignados aún.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel Lateral -->
+        <div class="col-lg-4">
+            <div class="sidebar-container">
+                <!-- Estadísticas Rápidas -->
+                <div class="stats-widget">
+                    <h5 class="widget-title">
+                        <i class="fas fa-chart-bar me-2"></i>Estadísticas
+                    </h5>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-icon bg-primary">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-number">@Model.AsignacionesRecientes.Count</span>
+                                <span class="stat-label">Estudiantes Asignados</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon bg-success">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-number">@Model.Materia.Creditos</span>
+                                <span class="stat-label">Créditos</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Información del Sistema -->
+                <div class="system-info-widget">
+                    <h5 class="widget-title">
+                        <i class="fas fa-info-circle me-2"></i>Información del Sistema
+                    </h5>
+                    <div class="info-list">
+                        <div class="info-item">
+                            <label>ID de Materia:</label>
+                            <span>#@Model.Materia.MateriaID</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Código:</label>
+                            <span>@Model.Materia.Codigo</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Estado:</label>
+                            <span>
+                                @if (Model.Materia.Activa)
+                                {
+                                    <span class="badge bg-success text-white fw-bold">Activa</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-warning text-dark fw-bold">Inactiva</span>
+                                }
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Acciones Rápidas -->
+                @if (ViewContext.HttpContext.Session.GetString("DocenteRol") == "Administrador")
+                {
+                    <div class="actions-widget">
+                        <h5 class="widget-title">
+                            <i class="fas fa-cogs me-2"></i>Acciones Rápidas
+                        </h5>
+                        <div class="action-buttons-vertical">
+                            <a asp-page="./Edit" asp-route-id="@Model.Materia.MateriaID" class="btn btn-primary btn-sm w-100 mb-2">
+                                <i class="fas fa-edit me-2"></i>Editar Materia
+                            </a>
+                            <a asp-page="./Index" class="btn btn-secondary btn-sm w-100">
+                                <i class="fas fa-list me-2"></i>Lista de Materias
+                            </a>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <!-- Solo docentes pueden ver asignaciones -->
+                    <div class="actions-widget">
+                        <h5 class="widget-title">
+                            <i class="fas fa-cogs me-2"></i>Acciones Disponibles
+                        </h5>
+                        <div class="action-buttons-vertical">
+                            <a asp-page="/Asignaciones/Index" asp-route-materiaId="@Model.Materia.MateriaID" class="btn btn-success btn-sm w-100 mb-2">
+                                <i class="fas fa-users me-2"></i>Gestionar Asignaciones
+                            </a>
+                            <a asp-page="./Index" class="btn btn-secondary btn-sm w-100">
+                                <i class="fas fa-list me-2"></i>Lista de Materias
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Hero Section */
+    .details-hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 4rem 0;
+        margin-top: 0rem;
+        border-radius: 0 0 50px 50px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+    }
+
+        .details-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    .hero-badge {
+        display: inline-block;
+        padding: 0.75rem 2rem;
+        background: rgba(255,255,255,0.15);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.2);
+        border-radius: 50px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        line-height: 1.1;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+        opacity: 0.9;
+        line-height: 1.6;
+        font-weight: 300;
+    }
+
+    .btn-back {
+        background: rgba(255,255,255,0.15);
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255,255,255,0.3);
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 20px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+        .btn-back:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            color: white;
+        }
+
+    .btn-edit {
+        background: rgba(255,255,255,0.9);
+        border: 2px solid rgba(255,255,255,0.3);
+        color: #667eea;
+        padding: 1rem 2rem;
+        border-radius: 20px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+        .btn-edit:hover {
+            background: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            color: #667eea;
+        }
+
+    .action-buttons {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+    /* Contenedores principales */
+    .info-container, .sidebar-container {
+        animation: slideInUp 0.8s ease-out;
+    }
+
+    /* Secciones de información */
+    .info-section {
+        background: #fff;
+        border-radius: 20px;
+        border: 1px solid #e9ecef;
+        margin-bottom: 2rem;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        transition: all 0.3s ease;
+    }
+
+        .info-section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+
+    .section-header {
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        padding: 2rem 2.5rem 1.5rem;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #e9ecef;
+    }
+
+    .section-icon {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1.5rem;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    }
+
+        .section-icon i {
+            color: white;
+            font-size: 1.5rem;
+        }
+
+    .section-info {
+        flex: 1;
+    }
+
+    .section-title {
+        color: #2c3e50;
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+
+    .section-subtitle {
+        color: #6c757d;
+        font-size: 0.95rem;
+        margin: 0;
+        font-weight: 400;
+    }
+
+    .section-content {
+        padding: 2.5rem;
+    }
+
+    /* Items de detalle */
+    .detail-item {
+        margin-bottom: 1.5rem;
+    }
+
+    .detail-label {
+        font-weight: 600;
+        color: #495057;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+        .detail-label i {
+            color: #667eea;
+            width: 16px;
+        }
+
+    .detail-value {
+        font-size: 1rem;
+        color: #2c3e50;
+        font-weight: 500;
+    }
+
+    /* Avatares */
+    .avatar-circle {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: 0.85rem;
+        flex-shrink: 0;
+    }
+
+    .avatar-circle-small {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        background: linear-gradient(45deg, #28a745, #20c997);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: 0.75rem;
+        flex-shrink: 0;
+    }
+
+    /* Widgets de la barra lateral */
+    .stats-widget, .system-info-widget, .actions-widget {
+        background: white;
+        border-radius: 20px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        border: 1px solid #e9ecef;
+    }
+
+    .widget-title {
+        color: #2c3e50;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+    }
+
+        .widget-title i {
+            color: #667eea;
+        }
+
+    /* Grid de estadísticas */
+    .stats-grid {
+        display: grid;
+        gap: 1rem;
+    }
+
+    .stat-item {
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: 15px;
+        border-left: 4px solid #667eea;
+    }
+
+    .stat-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+    }
+
+        .stat-icon i {
+            color: white;
+            font-size: 1.2rem;
+        }
+
+    .stat-number {
+        display: block;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #2c3e50;
+    }
+
+    .stat-label {
+        font-size: 0.85rem;
+        color: #6c757d;
+    }
+
+    /* Lista de información del sistema */
+    .info-list {
+        space-y: 1rem;
+    }
+
+    .info-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid #f1f3f4;
+    }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-item label {
+            font-weight: 600;
+            color: #495057;
+            margin: 0;
+        }
+
+        .info-item span {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+    /* Botones de acciones verticales */
+    .action-buttons-vertical .btn {
+        border-radius: 12px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+        .action-buttons-vertical .btn:hover {
+            transform: translateY(-2px);
+        }
+
+    /* Tabla de asignaciones */
+    .table {
+        margin-bottom: 0;
+    }
+
+        .table th {
+            border-top: none;
+            font-weight: 600;
+            color: #495057;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+    .table-hover tbody tr:hover {
+        background-color: rgba(102, 126, 234, 0.05);
+    }
+
+    /* Responsive */
+    @@media (max-width: 768px) {
+        .hero-title
+
+    {
+        font-size: 1.8rem;
+    }
+
+    .section-header {
+        padding: 1.5rem;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .section-icon {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+
+    .section-content {
+        padding: 1.5rem;
+    }
+
+    .action-buttons {
+        justify-content: center;
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    }
+
+    /* Animaciones */
+    @@keyframes slideInUp {
+        from
+
+    {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    }
+
+    .info-section {
+        animation: fadeInLeft 0.6s ease-out;
+        animation-fill-mode: both;
+    }
+
+        .info-section:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .info-section:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .info-section:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+    @@keyframes fadeInLeft {
+        from
+
+    {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    }
+</style>
